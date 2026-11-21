@@ -1,0 +1,34 @@
+[package]
+name = "dryspell-engine"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+description = "Dryspell pricing and solvency engine (Arbitrum Stylus)"
+
+# Versions are pinned exactly. The Stylus SDK pulls in alloy crates whose
+# mismatched versions cause WASM link/panic problems, so they move together.
+[dependencies]
+alloy-primitives = "=1.7.3"
+alloy-sol-types = "=1.7.3"
+stylus-sdk = "=0.10.10"
+
+[dev-dependencies]
+serde_json = "=1.0.145"
+stylus-sdk = { version = "=0.10.10", features = ["stylus-test"] }
+
+[lib]
+crate-type = ["lib", "cdylib"]
+
+[features]
+default = ["mini-alloc"]
+export-abi = ["stylus-sdk/export-abi"]
+debug = ["stylus-sdk/debug"]
+contract-client-gen = []
+mini-alloc = ["stylus-sdk/mini-alloc"]
+
+[profile.release]
+codegen-units = 1
+strip = true
+lto = true
+panic = "abort"
+opt-level = "z"
