@@ -15,3 +15,7 @@ Status: under construction. Full documentation lands with the first deployment.
 | `web` | React + TypeScript + Vite front end (static, GitHub Pages) |
 | `mcp` | Model Context Protocol server (runs locally) |
 | `data` | Weather-data scripts and generated exceedance tables |
+
+## Data sources
+
+Dryspell is priced from real daily rainfall, 1991-2025, for 12 locations across West Africa, East Africa, South Asia and Southeast Asia, from two independent sources: Open-Meteo (ECMWF ERA5, CC BY 4.0, free non-commercial tier) and NASA POWER (cite service and access date). Terms, attribution, method and limits are in [data/README.md](data/README.md).

@@ -2,5 +2,16 @@
   "name": "@dryspell/data",
   "private": true,
   "version": "0.1.0",
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  },
+  "scripts": {
+    "pull": "tsx scripts/fetch.ts",
+    "build": "tsx scripts/build.ts",
+    "test": "tsx --test scripts/*.test.ts",
+    "check": "tsc -p tsconfig.json"
+  }
 }

@@ -1,0 +1,79 @@
+{
+  "accessed": "2026-11-21",
+  "start": "1991-01-01",
+  "end": "2025-12-31",
+  "locations": [
+    {
+      "id": "kano",
+      "days": 12784,
+      "missingEra5": 0,
+      "missingPower": 0
+    },
+    {
+      "id": "niamey",
+      "days": 12784,
+      "missingEra5": 0,
+      "missingPower": 0
+    },
+    {
+      "id": "tamale",
+      "days": 12784,
+      "missingEra5": 0,
+      "missingPower": 0
+    },
+    {
+      "id": "garissa",
+      "days": 12784,
+      "missingEra5": 0,
+      "missingPower": 0
+    },
+    {
+      "id": "dodoma",
+      "days": 12784,
+      "missingEra5": 0,
+      "missingPower": 0
+    },
+    {
+      "id": "gulu",
+      "days": 12784,
+      "missingEra5": 0,
+      "missingPower": 0
+    },
+    {
+      "id": "jodhpur",
+      "days": 12784,
+      "missingEra5": 0,
+      "missingPower": 0
+    },
+    {
+      "id": "latur",
+      "days": 12784,
+      "missingEra5": 0,
+      "missingPower": 0
+    },
+    {
+      "id": "sylhet",
+      "days": 12784,
+      "missingEra5": 0,
+      "missingPower": 0
+    },
+    {
+      "id": "khonkaen",
+      "days": 12784,
+      "missingEra5": 0,
+      "missingPower": 0
+    },
+    {
+      "id": "cantho",
+      "days": 12784,
+      "missingEra5": 0,
+      "missingPower": 0
+    },
+    {
+      "id": "iloilo",
+      "days": 12784,
+      "missingEra5": 0,
+      "missingPower": 0
+    }
+  ]
+}
