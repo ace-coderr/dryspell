@@ -1,0 +1,14 @@
+{
+  "name": "dryspell",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Parametric weather cover on Arbitrum: priced on-chain, paid out automatically.",
+  "license": "MIT",
+  "packageManager": "pnpm@9.15.9",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "web:dev": "pnpm --filter @dryspell/web dev",
+    "web:build": "pnpm --filter @dryspell/web build",
+    "mcp:build": "pnpm --filter @dryspell/mcp build"
+  }
+}
