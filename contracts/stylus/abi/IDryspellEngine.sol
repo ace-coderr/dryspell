@@ -7,6 +7,8 @@
 pragma solidity ^0.8.23;
 
 interface IDryspellEngine {
+    function engineKind() external view returns (string memory);
+
     function owner() external view returns (address);
 
     function pendingOwner() external view returns (address);

@@ -17,7 +17,7 @@ The Stylus tooling does not compile on native Windows (`cargo-stylus` uses Unix-
 
 ```
 cd contracts/stylus
-cargo test --lib                 # 35 tests, including every real offered table
+cargo test --lib                 # 36 tests, including every real offered table and the Solidity parity vectors
 cargo stylus check --endpoint https://sepolia-rollup.arbitrum.io/rpc
 ```
 
@@ -26,3 +26,5 @@ Dependencies are pinned exactly (`stylus-sdk =0.10.10`, `alloy-* =1.7.3`) and `C
 ## Status of on-chain activation
 
 `cargo stylus check` builds the WASM (30 KB, 2 fragments) but the chain-side activation simulation is refused: on 2026-11-21 the ArbWasm precompile on Arbitrum Sepolia, Arbitrum One and the Robinhood Chain testnet all report `activationGas = 2^64 - 1`, the owner-controlled pause value, and the untouched `cargo stylus new` Counter template is refused the same way. See the repository README for how this affects deployment.
+
+Because of this, a Solidity fallback engine with the identical ABI lives in `contracts/solidity` and the Rust code generates the test vectors that pin the two together (`DRYSPELL_WRITE_VECTORS=1 cargo test --lib parity_vectors`). `node contracts/check-abi-parity.mjs` checks that both expose the same selectors. Activation is re-tested before deployment; the Stylus engine is deployed only if a public RPC accepts it.

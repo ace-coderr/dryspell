@@ -21,7 +21,7 @@
 #![cfg_attr(not(any(test, feature = "export-abi")), no_main)]
 extern crate alloc;
 
-use alloc::vec::Vec;
+use alloc::{string::String, vec::Vec};
 use stylus_sdk::{
     alloy_primitives::{Address, U256},
     alloy_sol_types::sol,
@@ -336,6 +336,11 @@ impl DryspellEngine {
 
     // ----------------------------------------------------------------- views
 
+    /// Identifies the implementation. The Solidity fallback returns "solidity-fallback".
+    pub fn engine_kind(&self) -> String {
+        String::from("stylus")
+    }
+
     pub fn owner(&self) -> Address {
         self.owner.get()
     }
@@ -631,6 +636,7 @@ mod contract_tests {
         assert!(matches!(c.constructor(Address::ZERO), Err(EngineError::ZeroAddress(_))));
         c.constructor(addr(OWNER)).unwrap();
         assert_eq!(c.owner(), addr(OWNER));
+        assert_eq!(c.engine_kind(), "stylus");
         let (k, floor, loading, max_rate, util) = c.params();
         assert_eq!((k, floor, loading, max_rate, util), (U256::from(15_000), U256::from(2_000), U256::from(2_500), U256::from(700_000), U256::from(8_000)));
     }
@@ -908,5 +914,160 @@ mod contract_tests {
             }
         }
         assert_eq!(checked, 16, "expected 11 drought + 5 flood offered tables");
+    }
+}
+
+/// Test vectors that pin the Solidity fallback engine to this implementation.
+/// `contracts/solidity/test/vectors/engine_vectors.json` is generated here and replayed by
+/// `contracts/solidity/test/EngineParity.t.sol`. Regenerate with:
+///   DRYSPELL_WRITE_VECTORS=1 cargo test --lib parity_vectors
+#[cfg(test)]
+mod parity {
+    use super::*;
+    use serde_json::{json, Value};
+
+    const PATH: &str = concat!(env!("CARGO_MANIFEST_DIR"), "/../solidity/test/vectors/engine_vectors.json");
+
+    fn real_table(loc: &str, season: &str, peril_idx: usize) -> (Peril, Vec<Point>) {
+        let j: Value = serde_json::from_str(include_str!("../../../data/generated/exceedance.json")).unwrap();
+        for l in j["locations"].as_array().unwrap() {
+            if l["id"] != loc {
+                continue;
+            }
+            for s in l["seasons"].as_array().unwrap() {
+                if s["id"] != season {
+                    continue;
+                }
+                let p = &s["perils"][peril_idx];
+                let kind = if peril_idx == 0 { Peril::Drought } else { Peril::Flood };
+                let pts = p["table"]
+                    .as_array()
+                    .unwrap()
+                    .iter()
+                    .map(|r| Point {
+                        level: r["level_mm"].as_u64().unwrap() as u32,
+                        p_ppm: r["p_ppm"].as_u64().unwrap() as u32,
+                        se_ppm: r["se_ppm"].as_u64().unwrap() as u32,
+                    })
+                    .collect();
+                return (kind, pts);
+            }
+        }
+        panic!("table {loc}/{season} not found");
+    }
+
+    fn err_name(e: PriceError) -> &'static str {
+        match e {
+            PriceError::ZeroPayout => "ZeroPayout",
+            PriceError::OutOfRange | PriceError::EmptyTable => "OutOfRange",
+            PriceError::RateTooHigh => "RateTooHigh",
+            PriceError::Overflow => "MathOverflow",
+        }
+    }
+
+    fn build() -> Value {
+        let mut tables: Vec<(&str, Peril, Vec<Point>)> = vec![
+            ("jodhpur/jjas/drought", real_table("jodhpur", "jjas", 0).0, real_table("jodhpur", "jjas", 0).1),
+            ("khonkaen/mjjaso/flood", real_table("khonkaen", "mjjaso", 1).0, real_table("khonkaen", "mjjaso", 1).1),
+            ("dodoma/ndjfma/drought", real_table("dodoma", "ndjfma", 0).0, real_table("dodoma", "ndjfma", 0).1),
+            ("garissa/short/flood", real_table("garissa", "short", 1).0, real_table("garissa", "short", 1).1),
+        ];
+        // synthetic tables that exercise the decreasing-se and tiny-slope rounding branches
+        tables.push((
+            "synthetic/drought",
+            Peril::Drought,
+            vec![
+                Point { level: 10, p_ppm: 1_000, se_ppm: 500 },
+                Point { level: 20, p_ppm: 3_001, se_ppm: 301 },
+                Point { level: 37, p_ppm: 9_000, se_ppm: 100 },
+                Point { level: 50, p_ppm: 200_000, se_ppm: 99 },
+            ],
+        ));
+        tables.push((
+            "synthetic/flood",
+            Peril::Flood,
+            vec![
+                Point { level: 300, p_ppm: 1_000, se_ppm: 0 },
+                Point { level: 250, p_ppm: 1_007, se_ppm: 20 },
+                Point { level: 241, p_ppm: 50_000, se_ppm: 10 },
+                Point { level: 100, p_ppm: 400_000, se_ppm: 7 },
+            ],
+        ));
+        let params = [
+            Params { margin_k_bps: 15_000, floor_ppm: 2_000, loading_bps: 2_500, max_rate_ppm: 700_000 },
+            Params { margin_k_bps: 5_000, floor_ppm: 500, loading_bps: 0, max_rate_ppm: 300_000 },
+            Params { margin_k_bps: 30_000, floor_ppm: 10_000, loading_bps: 10_000, max_rate_ppm: 900_000 },
+        ];
+        let payouts: [u128; 8] = [0, 1, 999_999, 1_000_000, 123_456_789, 1_000_000_000_000, u128::MAX / 500_000, u128::MAX / 3];
+
+        let mut vectors = Vec::new();
+        for (ti, (_, peril, pts)) in tables.iter().enumerate() {
+            let mut triggers: Vec<u32> = vec![0, u32::MAX];
+            for w in pts.windows(2) {
+                triggers.push(w[0].level);
+                triggers.push(w[1].level);
+                triggers.push((w[0].level + w[1].level) / 2);
+                triggers.push((w[0].level + w[1].level) / 2 + 1);
+                triggers.push(w[0].level.min(w[1].level) + 1);
+            }
+            let (lo, hi) = (pts.iter().map(|p| p.level).min().unwrap(), pts.iter().map(|p| p.level).max().unwrap());
+            triggers.extend([lo - 1, lo, hi, hi + 1]);
+            triggers.sort();
+            triggers.dedup();
+            for (pi, params) in params.iter().enumerate() {
+                for &level in &triggers {
+                    for &payout in &payouts {
+                        // only a few payouts per trigger keep the file small but cover every branch
+                        let r = pricing::quote(*peril, pts, level, payout, params);
+                        let v = match r {
+                            Ok(q) => json!({"table": ti.to_string(), "params": pi.to_string(), "level": level.to_string(), "payout": payout.to_string(),
+                                "ok": true, "premium": q.premium.to_string(), "p": q.p_ppm.to_string(), "se": q.se_ppm.to_string(), "rate": q.rate_ppm.to_string(), "err": ""}),
+                            Err(e) => json!({"table": ti.to_string(), "params": pi.to_string(), "level": level.to_string(), "payout": payout.to_string(),
+                                "ok": false, "premium": "0", "p": "0", "se": "0", "rate": "0", "err": err_name(e)}),
+                        };
+                        vectors.push(v);
+                    }
+                }
+            }
+        }
+
+        let tables_json: Vec<Value> = tables
+            .iter()
+            .map(|(name, peril, pts)| {
+                json!({
+                    "name": name,
+                    "peril": if *peril == Peril::Drought { 0 } else { 1 },
+                    "levels": pts.iter().map(|p| p.level).collect::<Vec<_>>(),
+                    "p": pts.iter().map(|p| p.p_ppm).collect::<Vec<_>>(),
+                    "se": pts.iter().map(|p| p.se_ppm).collect::<Vec<_>>(),
+                })
+            })
+            .collect();
+        let params_json: Vec<Value> = params
+            .iter()
+            .map(|p| json!({"k": p.margin_k_bps, "floor": p.floor_ppm, "loading": p.loading_bps, "maxRate": p.max_rate_ppm}))
+            .collect();
+        // column-oriented so the Solidity side can read each column with parseJson*Array
+        let col = |k: &str| -> Vec<Value> { vectors.iter().map(|v| v[k].clone()).collect() };
+        json!({
+            "tables": tables_json,
+            "params": params_json,
+            "vectors": {
+                "table": col("table"), "params": col("params"), "level": col("level"), "payout": col("payout"),
+                "ok": col("ok"), "premium": col("premium"), "p": col("p"), "se": col("se"), "rate": col("rate"), "err": col("err"),
+            }
+        })
+    }
+
+    #[test]
+    fn parity_vectors() {
+        let fresh = serde_json::to_string(&build()).unwrap() + "\n";
+        if std::env::var("DRYSPELL_WRITE_VECTORS").is_ok() {
+            std::fs::create_dir_all(std::path::Path::new(PATH).parent().unwrap()).unwrap();
+            std::fs::write(PATH, &fresh).unwrap();
+            return;
+        }
+        let committed = std::fs::read_to_string(PATH).expect("vectors missing; run with DRYSPELL_WRITE_VECTORS=1");
+        assert!(committed == fresh, "engine vectors are stale; regenerate with DRYSPELL_WRITE_VECTORS=1");
     }
 }
