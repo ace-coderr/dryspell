@@ -51,9 +51,6 @@ contract WeatherOracle is IWeatherOracle, Ownable2Step, ReentrancyGuard {
     uint256 public immutable bondBps;
     /// @notice reward paid to a reporter whose report finalises undisputed (capped by the reward pool)
     uint256 public immutable rewardPerRound;
-    /// @notice whether historical "replay" rounds may be opened (true on testnets only)
-    bool public immutable replayEnabled;
-
     uint256 public constant VOID_PENALTY_BPS = 1_000; // 10% of each bond when the resolver times out
     uint256 public constant MAX_READING = 10_000_000; // 1,000,000 mm in 0.1 mm units; plain sanity bound
     uint256 public constant PPM = 1_000_000;
@@ -139,10 +136,11 @@ contract WeatherOracle is IWeatherOracle, Ownable2Step, ReentrancyGuard {
         uint32 era5Max3,
         uint32 powerTotal,
         uint32 powerMax3,
-        uint256 bond
+        uint256 bond,
+        bool replay
     );
     event Disputed(uint256 indexed roundId, address indexed disputer, uint256 bond);
-    event Finalized(uint256 indexed roundId, uint256 totalX2, uint256 max3X2, bool disputed);
+    event Finalized(uint256 indexed roundId, uint256 totalX2, uint256 max3X2, bool disputed, bool replay);
     event Resolved(
         uint256 indexed roundId,
         bool proposalUpheld,
@@ -151,7 +149,7 @@ contract WeatherOracle is IWeatherOracle, Ownable2Step, ReentrancyGuard {
         uint32 powerTotal,
         uint32 powerMax3
     );
-    event Voided(uint256 indexed roundId, string reason);
+    event Voided(uint256 indexed roundId, string reason, bool replay);
     event RewardFunded(address indexed from, uint256 amount, uint256 pool);
     event ResolverSet(address indexed resolver);
     event BookSet(address indexed book);
@@ -166,8 +164,7 @@ contract WeatherOracle is IWeatherOracle, Ownable2Step, ReentrancyGuard {
         uint256 reportWindow_,
         uint256 minBond_,
         uint256 bondBps_,
-        uint256 rewardPerRound_,
-        bool replayEnabled_
+        uint256 rewardPerRound_
     ) Ownable(owner_) {
         if (address(bondToken_) == address(0) || resolver_ == address(0)) revert ZeroAddress();
         bondToken = bondToken_;
@@ -179,7 +176,6 @@ contract WeatherOracle is IWeatherOracle, Ownable2Step, ReentrancyGuard {
         minBond = minBond_;
         bondBps = bondBps_;
         rewardPerRound = rewardPerRound_;
-        replayEnabled = replayEnabled_;
         emit ResolverSet(resolver_);
     }
 
@@ -222,10 +218,11 @@ contract WeatherOracle is IWeatherOracle, Ownable2Step, ReentrancyGuard {
         emit CalibrationDefined(locSeasonId, peril, era5Ppm, powerPpm);
     }
 
-    /// @notice (testnet only) open a completed historical season so a policy can be bought and
-    ///         settled end-to-end in a demo. Replay rounds are labelled as such everywhere.
+    /// @notice (test networks only, see replayAllowed) open a completed historical season so a policy
+    ///         can be bought and settled end-to-end in a demo. Replay rounds are labelled "Replay"
+    ///         in every event and in the app.
     function openReplay(uint256 locSeasonId, uint256 year) external onlyOwner {
-        if (!replayEnabled) revert ReplayDisabled();
+        if (!replayAllowed()) revert ReplayDisabled();
         uint256 roundId = _roundId(locSeasonId, year);
         (, uint256 end) = _window(locSeasonId, year);
         if (block.timestamp < end + dataLag) revert SeasonNotOver();
@@ -236,6 +233,15 @@ contract WeatherOracle is IWeatherOracle, Ownable2Step, ReentrancyGuard {
     }
 
     // ------------------------------------------------------------------- views
+    /// @notice Replay rounds exist for demos only and are hard-wired to test networks by chain id:
+    ///         Arbitrum Sepolia (421614), Robinhood Chain testnet (46630) and local dev chains
+    ///         (31337, 1337). There is no owner switch: on any other chain, including Arbitrum One
+    ///         (42161), `openReplay` always reverts.
+    function replayAllowed() public view returns (bool) {
+        uint256 id = block.chainid;
+        return id == 421614 || id == 46630 || id == 31337 || id == 1337;
+    }
+
     function roundId(uint256 locSeasonId, uint256 year) external pure returns (uint256) {
         return _roundId(locSeasonId, year);
     }
@@ -330,9 +336,7 @@ contract WeatherOracle is IWeatherOracle, Ownable2Step, ReentrancyGuard {
         uint256 id = _roundId(locSeasonId, year);
         Round storage r = _rounds[id];
         if (r.state != State.None) revert WrongState(r.state);
-        (, uint256 end) = _window(locSeasonId, year);
-        if (block.timestamp < end + dataLag) revert TooEarly(end + dataLag);
-        if (block.timestamp > _reportDeadline(id, end)) revert WindowClosed();
+        _requireReportable(id, locSeasonId, year);
         _checkReadings(era5Total, era5Max3);
         _checkReadings(powerTotal, powerMax3);
         // make sure the calibration exists before anything is locked
@@ -351,7 +355,13 @@ contract WeatherOracle is IWeatherOracle, Ownable2Step, ReentrancyGuard {
         r.powerTotal = powerTotal;
         r.powerMax3 = powerMax3;
         bondToken.safeTransferFrom(msg.sender, address(this), bond);
-        emit Proposed(id, msg.sender, era5Total, era5Max3, powerTotal, powerMax3, bond);
+        emit Proposed(id, msg.sender, era5Total, era5Max3, powerTotal, powerMax3, bond, _replay[id]);
+    }
+
+    function _requireReportable(uint256 id, uint256 locSeasonId, uint256 year) internal view {
+        (, uint256 end) = _window(locSeasonId, year);
+        if (block.timestamp < end + dataLag) revert TooEarly(end + dataLag);
+        if (block.timestamp > _reportDeadline(id, end)) revert WindowClosed();
     }
 
     /// @notice challenge a proposal inside the dispute window by locking an equal bond
@@ -374,7 +384,7 @@ contract WeatherOracle is IWeatherOracle, Ownable2Step, ReentrancyGuard {
         uint256 endsAt = uint256(r.proposedAt) + disputeWindow;
         if (block.timestamp < endsAt) revert WindowOpen(endsAt);
         _setFinal(id, r);
-        emit Finalized(id, r.totalX2, r.max3X2, false);
+        emit Finalized(id, r.totalX2, r.max3X2, false, _replay[id]);
 
         uint256 reward = rewardPool < rewardPerRound ? rewardPool : rewardPerRound;
         rewardPool -= reward;
@@ -405,7 +415,7 @@ contract WeatherOracle is IWeatherOracle, Ownable2Step, ReentrancyGuard {
         }
         _setFinal(id, r);
         emit Resolved(id, proposalUpheld, r.era5Total, r.era5Max3, r.powerTotal, r.powerMax3);
-        emit Finalized(id, r.totalX2, r.max3X2, true);
+        emit Finalized(id, r.totalX2, r.max3X2, true, _replay[id]);
 
         uint256 pot = 2 * uint256(r.bond);
         bondToken.safeTransfer(proposalUpheld ? r.proposer : r.disputer, pot);
@@ -424,7 +434,7 @@ contract WeatherOracle is IWeatherOracle, Ownable2Step, ReentrancyGuard {
         rewardPool += 2 * penalty;
         bondToken.safeTransfer(r.proposer, bond - penalty);
         bondToken.safeTransfer(r.disputer, bond - penalty);
-        emit Voided(id, "resolver timeout");
+        emit Voided(id, "resolver timeout", _replay[id]);
     }
 
     /// @inheritdoc IWeatherOracle
@@ -438,7 +448,7 @@ contract WeatherOracle is IWeatherOracle, Ownable2Step, ReentrancyGuard {
         if (block.timestamp <= deadline) revert TooEarly(deadline + 1);
         if (book == address(0) || IRoundExposure(book).roundExposure(id) == 0) revert NoPolicies();
         r.state = State.Void;
-        emit Voided(id, "no report");
+        emit Voided(id, "no report", _replay[id]);
     }
 
     // ---------------------------------------------------------------- internals

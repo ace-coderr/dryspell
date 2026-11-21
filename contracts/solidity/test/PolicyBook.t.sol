@@ -364,6 +364,64 @@ contract PolicyBookTest is Base {
         vm.stopPrank();
     }
 
+    event Proposed(
+        uint256 indexed roundId,
+        address indexed proposer,
+        uint32 era5Total,
+        uint32 era5Max3,
+        uint32 powerTotal,
+        uint32 powerMax3,
+        uint256 bond,
+        bool replay
+    );
+    event Finalized(uint256 indexed roundId, uint256 totalX2, uint256 max3X2, bool disputed, bool replay);
+    event PolicySettled(
+        uint256 indexed policyId,
+        address indexed holder,
+        bool triggered,
+        uint256 payout,
+        uint256 settlementX2,
+        bool replay
+    );
+
+    /// @dev every event of a replay carries replay = true; a real forward season carries false
+    function test_replay_flag_is_in_every_event() public {
+        vm.prank(owner);
+        oracle.openReplay(LOC, 2025);
+        (uint256 premium,,,,) = book.quote(T_DRY, 2025, 200, 100 * USD);
+        _fund(buyer, premium);
+        vm.startPrank(buyer);
+        token.approve(address(book), premium);
+        vm.expectEmit(true, true, true, true, address(book));
+        emit PolicyBought(1, buyer, (LOC << 16) | 2025, T_DRY, 2025, 200, 100 * USD, premium, true);
+        book.buy(T_DRY, 2025, 200, 100 * USD, premium);
+        vm.stopPrank();
+
+        uint256 rid = (LOC << 16) | 2025;
+        uint256 bond = oracle.requiredBond(rid);
+        _fund(reporter, bond);
+        vm.startPrank(reporter);
+        token.approve(address(oracle), bond);
+        vm.expectEmit(true, true, false, true, address(oracle));
+        emit Proposed(rid, reporter, 1000, 500, 1000, 500, bond, true);
+        oracle.propose(LOC, 2025, 1000, 500, 1000, 500, bond);
+        vm.stopPrank();
+        vm.warp(block.timestamp + DISPUTE_WINDOW);
+        vm.expectEmit(true, false, false, true, address(oracle));
+        emit Finalized(rid, 2000, 1000, false, true);
+        oracle.finalize(rid);
+        vm.expectEmit(true, true, false, true, address(book));
+        emit PolicySettled(1, buyer, true, 100 * USD, 2000, true);
+        book.settle(1);
+
+        // the same flow on a real forward season reports replay = false
+        uint256 fwd = _buy(buyer2, T_DRY, 200, 100 * USD);
+        _finalizeUndisputed(2500, 900, 2500, 900);
+        vm.expectEmit(true, true, false, true, address(book));
+        emit PolicySettled(fwd, buyer2, false, 0, 5000, false);
+        book.settle(fwd);
+    }
+
     // -------------------------------------------------------------- fuzz
     function testFuzz_premium_never_below_fair_value_and_always_below_payout(uint256 trigger, uint256 payout) public {
         trigger = bound(trigger, 100, 300);

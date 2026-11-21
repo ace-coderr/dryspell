@@ -40,3 +40,6 @@ Thumbs.db
 .vscode/
 .idea/
 *.log
+
+# Foundry dry-run artefacts
+contracts/solidity/broadcast/**/dry-run/

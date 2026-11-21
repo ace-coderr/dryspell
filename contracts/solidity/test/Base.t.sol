@@ -60,7 +60,7 @@ abstract contract Base is Test {
         engine = new DryspellEngineSol(owner);
         vault = new UnderwriterVault(IERC20(address(token)), IDryspellEngine(address(engine)), 1 days, owner);
         oracle = new WeatherOracle(
-            IERC20(address(token)), owner, resolver, DATA_LAG, DISPUTE_WINDOW, RESOLVER_TIMEOUT, REPORT_WINDOW, MIN_BOND, BOND_BPS, REWARD, true
+            IERC20(address(token)), owner, resolver, DATA_LAG, DISPUTE_WINDOW, RESOLVER_TIMEOUT, REPORT_WINDOW, MIN_BOND, BOND_BPS, REWARD
         );
         book = new PolicyBook(
             IERC20(address(token)),

@@ -282,15 +282,24 @@ contract WeatherOracleTest is Base {
     }
 
     // ------------------------------------------------------------- replay
-    function test_replay_is_testnet_only() public {
-        WeatherOracle prod = new WeatherOracle(
-            IERC20(address(token)), owner, resolver, DATA_LAG, DISPUTE_WINDOW, RESOLVER_TIMEOUT, REPORT_WINDOW, MIN_BOND, BOND_BPS, REWARD, false
-        );
+    function test_replay_is_hard_wired_to_test_networks() public {
+        // allowed chains: Arbitrum Sepolia, Robinhood testnet, local dev chains
+        uint64[4] memory ok = [uint64(421614), 46630, 31337, 1337];
+        for (uint256 i; i < ok.length; ++i) {
+            vm.chainId(ok[i]);
+            assertTrue(oracle.replayAllowed());
+        }
+        // every other chain, Arbitrum One and Ethereum included, refuses - and the owner cannot override it
+        uint64[4] memory no = [uint64(42161), 1, 42170, 8453];
         vm.startPrank(owner);
-        prod.defineSeason(LOC, 6, 1, 9, 30);
-        vm.expectRevert(WeatherOracle.ReplayDisabled.selector);
-        prod.openReplay(LOC, 2025);
-        // and replaying a season that has not finished is never allowed
+        for (uint256 i; i < no.length; ++i) {
+            vm.chainId(no[i]);
+            assertFalse(oracle.replayAllowed());
+            vm.expectRevert(WeatherOracle.ReplayDisabled.selector);
+            oracle.openReplay(LOC, 2025);
+        }
+        vm.chainId(31337);
+        // a season that has not finished is never replayable, even on a test network
         vm.expectRevert(WeatherOracle.SeasonNotOver.selector);
         oracle.openReplay(LOC, 2027);
         vm.stopPrank();

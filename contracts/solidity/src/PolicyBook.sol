@@ -92,9 +92,14 @@ contract PolicyBook is Ownable2Step, ReentrancyGuard {
         bool replay
     );
     event PolicySettled(
-        uint256 indexed policyId, address indexed holder, bool triggered, uint256 payout, uint256 settlementX2
+        uint256 indexed policyId,
+        address indexed holder,
+        bool triggered,
+        uint256 payout,
+        uint256 settlementX2,
+        bool replay
     );
-    event PolicyRefunded(uint256 indexed policyId, address indexed holder, uint256 premium);
+    event PolicyRefunded(uint256 indexed policyId, address indexed holder, uint256 premium, bool replay);
     event PausedSet(bool paused);
 
     constructor(
@@ -196,29 +201,35 @@ contract PolicyBook is Ownable2Step, ReentrancyGuard {
     function settle(uint256 policyId) public nonReentrant {
         Policy storage p = _active(policyId);
         uint256 rid = roundIdOf(p.tableId, p.year);
-        IWeatherOracle.State st = oracle.roundState(rid);
-        if (st != IWeatherOracle.State.Final) revert RoundNotFinal(st);
-
-        (uint256 totalX2, uint256 max3X2) = oracle.finalValues(rid);
-        bool drought = p.tableId % 2 == 0;
-        uint256 settlementX2 = drought ? totalX2 : max3X2;
-        // trigger is in whole mm; settlement values are in units of 0.05 mm
-        bool triggered = drought ? settlementX2 <= uint256(p.trigger) * 20 : settlementX2 >= uint256(p.trigger) * 20;
+        (bool triggered, uint256 settlementX2) = _evaluate(p, rid);
 
         // effects first
         p.status = triggered ? Status.PaidOut : Status.Expired;
-        address holder = p.holder;
+        _payAndRelease(p, triggered);
+        emit PolicySettled(policyId, p.holder, triggered, triggered ? p.payout : 0, settlementX2, oracle.isReplay(rid));
+    }
+
+    /// @dev reads the final oracle values and applies the trigger rule
+    function _evaluate(Policy storage p, uint256 rid) internal view returns (bool triggered, uint256 settlementX2) {
+        IWeatherOracle.State st = oracle.roundState(rid);
+        if (st != IWeatherOracle.State.Final) revert RoundNotFinal(st);
+        (uint256 totalX2, uint256 max3X2) = oracle.finalValues(rid);
+        bool drought = p.tableId % 2 == 0;
+        settlementX2 = drought ? totalX2 : max3X2;
+        // trigger is in whole mm; settlement values are in units of 0.05 mm
+        triggered = drought ? settlementX2 <= uint256(p.trigger) * 20 : settlementX2 >= uint256(p.trigger) * 20;
+    }
+
+    function _payAndRelease(Policy storage p, bool triggered) internal {
         uint256 payout = p.payout;
         uint256 fee = (uint256(p.premium) * oracleFeeBps) / 10_000;
-
         engine.release(p.tableId, payout);
-        if (triggered) vault.payOut(holder, payout);
+        if (triggered) vault.payOut(p.holder, payout);
         if (fee > 0) {
             vault.payOut(address(this), fee);
             token.forceApprove(address(oracle), fee);
             oracle.fundRewards(fee);
         }
-        emit PolicySettled(policyId, holder, triggered, triggered ? payout : 0, settlementX2);
     }
 
     function settleMany(uint256[] calldata policyIds) external {
@@ -239,7 +250,7 @@ contract PolicyBook is Ownable2Step, ReentrancyGuard {
         uint256 premium = p.premium;
         engine.release(p.tableId, p.payout);
         vault.payOut(holder, premium);
-        emit PolicyRefunded(policyId, holder, premium);
+        emit PolicyRefunded(policyId, holder, premium, oracle.isReplay(rid));
     }
 
     // --------------------------------------------------------------- internals
