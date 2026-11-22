@@ -2,17 +2,17 @@
   "network": "Arbitrum Sepolia",
   "chainId": 421614,
   "explorer": "https://sepolia.arbiscan.io",
-  "version": 2,
-  "deployedAt": "2026-11-22T06:08:03.305Z",
-  "startBlock": 331592300,
+  "version": 3,
+  "deployedAt": "2026-11-22",
+  "startBlock": 331595000,
   "engineMode": "solidity-fallback",
   "engineModeNote": "Stylus activation was paused on Arbitrum Sepolia (official, dRPC and publicnode RPCs checked 2026-11-21/22; ArbWasm.activationGas = 2^64-1), so the Solidity fallback engine is deployed. The deployed engine reports its own kind via engineKind().",
   "contracts": {
-    "TestUSD": "0x27D52DC153Ee8251546c23D653D98Af8F70e1a3b",
-    "DryspellEngine": "0x900e2eD837229c517CF92e4A10661778C22778F6",
-    "UnderwriterVault": "0xAC0251CE70A249e5B926AA84EB1E43a6829d07b7",
-    "WeatherOracle": "0x4D69f3454322AE1e26920a9E6C37C709F41fC24d",
-    "PolicyBook": "0x684fE3FC457978782173cAC730F0AC22631DD663"
+    "TestUSD": "0x879F30a15Da9a6D7F4d9A6cCB24d59bE406721fe",
+    "DryspellEngine": "0xFa0f1746CaFf23Dbf093461f1a1620e78e331cf8",
+    "UnderwriterVault": "0x83819B9d650eE3E6B97baD7DDE6e8d3a2E00562C",
+    "WeatherOracle": "0x8ab6f26408a947699ea4d3d4f2b5BcbC9fD41Cb4",
+    "PolicyBook": "0xdEF3D853592aeCf0A807F20b2a009C0981C898D0"
   },
   "owner": "0x8d1B963b27054286fF9Bdc2dD5365c31E562C279",
   "idScheme": "locSeasonId = locationIndex*10 + seasonIndex; tableId = locSeasonId*2 + peril (0 drought, 1 flood); locations in data/generated/exceedance.json order",
@@ -24,25 +24,30 @@
     "disputeWindowHours": 1,
     "resolverTimeoutHours": 6,
     "vaultMinHoldHours": 1,
-    "leadTimeDays": 14
+    "leadTimeDays": 14,
+    "calibrationYears": "1991-2019"
   },
+  "supersedes": [
+    "v1",
+    "v2"
+  ],
   "demoPolicies": [
     {
       "id": 1,
       "kind": "forward",
       "label": "Jodhpur monsoon 2027, drought, trigger 142 mm, payout 500 tUSD",
-      "tx": "0x2b66e992e765fed927ae059d769c6706827fea1f0a89d076e8cc36da0095e4e8"
+      "tx": "0x0581fdfa5d4e4c85a2280a6fb3209d35de32071fa3057db5722ecd3c8a301a0e"
     },
     {
       "id": 2,
       "kind": "replay",
-      "label": "Replay: Garissa short rains 2023 (El Nino floods), flood, trigger 103 mm max 3-day, payout 500 tUSD. ERA5 134 mm and POWER 113 mm after calibration: both above the trigger.",
-      "tx": "0x15a11cae7b4ab784a8715a36bcda04675e80ec7a02c97d80a48da418df65082c"
+      "label": "Replay: Garissa short rains 2023 (El Nino floods), flood, trigger 103 mm max 3-day, payout 500 tUSD. After 1991-2019 calibration: ERA5 128.2 mm and POWER 117.3 mm, both above the trigger.",
+      "tx": "0x2651356dedefb39f778697ce4b2038a1c9a5ce3e62f0c0b4e2b3274cbfb42fb3"
     }
   ],
   "replayRound": {
     "roundId": 2033639,
     "label": "Replay: Garissa short rains 2023",
-    "proposeTx": "0xb5268e5eecdbabc188a6816473113c79ace81fdea1650e100df5a0ed50e66573"
+    "proposeTx": "0xc03ecf579bb4e51db3b4df513ac372382756ce77860ae38827ed79261f064652"
   }
 }

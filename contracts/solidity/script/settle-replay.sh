@@ -4,8 +4,8 @@
 cd "$(dirname "$0")/../../.." || exit 1
 set -a; source .env; set +a
 R=$ARBITRUM_SEPOLIA_RPC
-O=0x4D69f3454322AE1e26920a9E6C37C709F41fC24d
-B=0x684fE3FC457978782173cAC730F0AC22631DD663
+O=0x8ab6f26408a947699ea4d3d4f2b5BcbC9fD41Cb4
+B=0xdEF3D853592aeCf0A807F20b2a009C0981C898D0
 RID=2033639
 ENDS=$(cast call $O 'challengeEndsAt(uint256)(uint256)' $RID --rpc-url $R | awk '{print $1}')
 while [ "$(date +%s)" -le "$ENDS" ]; do sleep 20; done

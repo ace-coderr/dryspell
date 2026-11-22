@@ -48,7 +48,7 @@ contract Deploy is Script {
     WeatherOracle public oracle;
     PolicyBook public book;
 
-    function run() external {
+    function run() external virtual {
         json = vm.readFile("../../data/generated/exceedance.json");
         uint256 pk = vm.envUint("DEPLOYER_PRIVATE_KEY");
         address deployer = vm.addr(pk);
@@ -115,7 +115,7 @@ contract Deploy is Script {
         }
     }
 
-    function _loadSeason(string memory sp, uint256 locSeasonId, uint8 region) internal {
+    function _loadSeason(string memory sp, uint256 locSeasonId, uint8 region) internal virtual {
         (uint8 sm, uint8 sd) = _md(vm.parseJsonString(json, string.concat(sp, ".start")));
         (uint8 em, uint8 ed) = _md(vm.parseJsonString(json, string.concat(sp, ".end")));
         oracle.defineSeason(locSeasonId, sm, sd, em, ed);

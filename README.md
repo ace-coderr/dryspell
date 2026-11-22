@@ -27,6 +27,20 @@ The app shows which engine is live, read from the chain. Stylus is never claimed
 | `mcp` | Model Context Protocol server (runs locally) |
 | `data` | Weather-data scripts and generated exceedance tables |
 
+## Live deployment (v3, Arbitrum Sepolia)
+
+| Contract | Address |
+| --- | --- |
+| PolicyBook | [0xdEF3…98D0](https://sepolia.arbiscan.io/address/0xdEF3D853592aeCf0A807F20b2a009C0981C898D0#code) |
+| UnderwriterVault | [0x8381…562C](https://sepolia.arbiscan.io/address/0x83819B9d650eE3E6B97baD7DDE6e8d3a2E00562C#code) |
+| WeatherOracle | [0x8ab6…1Cb4](https://sepolia.arbiscan.io/address/0x8ab6f26408a947699ea4d3d4f2b5BcbC9fD41Cb4#code) |
+| Engine (**Solidity fallback**) | [0xFa0f…1cf8](https://sepolia.arbiscan.io/address/0xFa0f1746CaFf23Dbf093461f1a1620e78e331cf8#code) |
+| TestUSD (testnet play money) | [0x879F…21fe](https://sepolia.arbiscan.io/address/0x879F30a15Da9a6D7F4d9A6cCB24d59bE406721fe#code) |
+
+All five are verified on Arbiscan. The addresses are also in [contracts/deployments/arbitrum-sepolia.json](contracts/deployments/arbitrum-sepolia.json), which the web app reads.
+
+Two earlier deployments are **superseded** and must not be used: v1 (no source-disagreement rule, calibration fit on all 35 seasons) and v2 (disagreement rule, but calibration still fit on all 35 seasons, which put 2020-2025 inside their own calibration). Their records, with reasons, are in `contracts/deployments/*-superseded.json`. Nothing was ever settled on them.
+
 ## Data sources
 
 Dryspell is priced from real daily rainfall, 1991-2025, for 12 locations across West Africa, East Africa, South Asia and Southeast Asia, from two independent sources: Open-Meteo (ECMWF ERA5, CC BY 4.0, free non-commercial tier) and NASA POWER (cite service and access date). Terms, attribution, method and limits are in [data/README.md](data/README.md).

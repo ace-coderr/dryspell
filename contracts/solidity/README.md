@@ -63,3 +63,7 @@ Bonds scale with the cover at stake (10% of the round's total payout, minimum 10
 When a round is final, `PolicyBook.settle` compares the two sources' calibrated readings with the policy's trigger. If they fall on **opposite sides of the trigger**, or differ by more than `maxSpreadBps` (50%) of their mean, the policy does **not** pay automatically: it becomes `Contested`, its cover stays reserved, and the named resolver rules with `resolveContested(policyId, pay)`. If the resolver does not rule within `contestTimeout`, anyone can call `refundContested` and the premium goes back to the holder. A contested policy never pays out without the resolver, and never gets stuck. `PolicyContested` and `ContestedRuled` events carry the readings, the spread and the replay flag.
 
 This makes the single trusted resolver more load-bearing in v1: a ruling here is a judgement call, and the limitation is the same as for the oracle (see above).
+
+## Deployment scripts
+
+`script/Deploy.s.sol` deploys everything and loads the real tables, seasons, calibration factors and caps from `data/generated/exceedance.json`. If a broadcast is interrupted (for example by a local file-lock error), `script/Resume.s.sol` checks what is already on chain and sends only what is missing. `script/settle-replay.sh` finalises and settles the Replay round once its dispute window has passed.

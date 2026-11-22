@@ -37,5 +37,6 @@
     "proposeTx": "0x2f13d241dacd7614076693e1fe33e98bf8dfcba46e5cce95e77841cccaf09ab0"
   },
   "superseded": true,
-  "supersededReason": "Replaced by v2 which adds the source-disagreement (contested) rule. Its Garissa 2025 replay round was never settled: ERA5 and NASA POWER disagree there (19.2 mm vs 80.8 mm), the case the new rule exists for."
+  "supersededReason": "Replaced by v3. v1 had no source-disagreement (contested) rule and calibrated on all 35 seasons (look-ahead). Its Garissa 2025 replay round was never settled: ERA5 and NASA POWER disagree there (19.2 mm vs 80.8 mm).",
+  "supersededBy": "v3"
 }
