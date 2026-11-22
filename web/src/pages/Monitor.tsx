@@ -11,6 +11,7 @@ import { Loading, Empty, ErrorBox, ReplayTag } from "../components/States";
 import { useAction, useNow } from "../lib/hooks";
 import { waitOk } from "../lib/tx";
 import { Link } from "react-router-dom";
+import { assess, calibrateFor } from "../lib/contest";
 
 const STATES = ["Nothing reported", "Report posted · dispute window open", "Disputed · waiting for the resolver", "Final", "Voided"] as const;
 const C = { chainId: chain.id } as const;
@@ -77,6 +78,8 @@ function RoundPanel({ round, policies, now, refetchPolicies }: { round: { roundI
       { address: addr.oracle, abi: oracleAbi, functionName: "reportDeadline", args: [round.roundId], ...C },
       { address: addr.oracle, abi: oracleAbi, functionName: "requiredBond", args: [round.roundId], ...C },
       { address: addr.oracle, abi: oracleAbi, functionName: "resolver", ...C },
+      { address: addr.oracle, abi: oracleAbi, functionName: "maxSpreadBps", ...C },
+      { address: addr.book, abi: bookAbi, functionName: "contestTimeout", ...C },
     ],
     query: { refetchInterval: 8000 },
   });
@@ -126,6 +129,8 @@ function RoundPanel({ round, policies, now, refetchPolicies }: { round: { roundI
   const finalize = simple("finalize");
   const voidDisp = simple("voidDisputed");
   const voidUnrep = simple("voidUnreported");
+  const rule = useAction(async (id: number, pay: boolean) => { await ensureChain(); await done(await writeContractAsync({ address: addr.book, abi: bookAbi, functionName: "resolveContested", args: [BigInt(id), pay], ...C })); });
+  const refundContested = useAction(async (id: number) => { await ensureChain(); await done(await writeContractAsync({ address: addr.book, abi: bookAbi, functionName: "refundContested", args: [BigInt(id)], ...C })); });
   const settle = useAction(async (id: number, refund: boolean) => { await ensureChain(); await done(await writeContractAsync({ address: addr.book, abi: bookAbi, functionName: refund ? "refund" : "settle", args: [BigInt(id)], ...C })); });
 
   if (o.isLoading) return <Loading />;
@@ -138,6 +143,8 @@ function RoundPanel({ round, policies, now, refetchPolicies }: { round: { roundI
   const reportBy = Number(o.data[4].result ?? 0n);
   const bond = (o.data[5].result as bigint) ?? 0n;
   const resolver = o.data[6].result as string;
+  const maxSpread = Number((o.data[7].result as bigint) ?? 5000n);
+  const contestTimeout = Number((o.data[8].result as bigint) ?? 0n);
 
   const dTot = perilOf(season, "drought");
   const dFl = perilOf(season, "flood");
@@ -146,6 +153,8 @@ function RoundPanel({ round, policies, now, refetchPolicies }: { round: { roundI
     return (e * c.calibration_era5_ppm + p * c.calibration_power_ppm) / 2e6;
   };
   const liveSettle = typeof live === "object" && live.era5 && live.power ? { total: calibrate(live.era5.total, live.power.total, "total"), max3: calibrate(live.era5.max3, live.power.max3, "max3") } : null;
+  const liveSrc = typeof live === "object" && live.era5 && live.power ? { total: assess("drought", 0, calibrateFor(dTot, live.era5.total, live.power.total).eraX, calibrateFor(dTot, live.era5.total, live.power.total).powX, maxSpread), max3: assess("flood", 0, calibrateFor(dFl, live.era5.max3, live.power.max3).eraX, calibrateFor(dFl, live.era5.max3, live.power.max3).powX, maxSpread) } : null;
+  const spreadTxt = (bps: number) => `${(bps / 100).toFixed(0)}% ${bps > maxSpread ? "(over the limit)" : ""}`;
   const seasonOver = now >= end;
 
   const stage = state === 3 ? 4 : state === 4 ? 4 : state === 2 ? 2 : state === 1 ? 2 : seasonOver ? 1 : 0;
@@ -183,6 +192,7 @@ function RoundPanel({ round, policies, now, refetchPolicies }: { round: { roundI
                 <tbody>
                   <tr><td>ERA5 · Open-Meteo</td><td className="num">{live.era5 ? `${live.era5.total.toFixed(1)} mm` : "—"}</td><td className="num">{live.era5 ? `${live.era5.max3.toFixed(1)} mm` : "—"}</td><td>{live.era5?.lastDate ?? "unavailable"}</td></tr>
                   <tr><td>NASA POWER</td><td className="num">{live.power ? `${live.power.total.toFixed(1)} mm` : "—"}</td><td className="num">{live.power ? `${live.power.max3.toFixed(1)} mm` : "—"}</td><td>{live.power?.lastDate ?? "unavailable"}</td></tr>
+                  {liveSrc && <tr><td>Spread between sources</td><td className="num">{spreadTxt(liveSrc.total.spreadBps)}</td><td className="num">{spreadTxt(liveSrc.max3.spreadBps)}</td><td>limit {maxSpread / 100}% of the mean</td></tr>}
                   {liveSettle && <tr style={{ fontWeight: 600 }}><td>Calibrated median</td><td className="num">{liveSettle.total.toFixed(1)} mm</td><td className="num">{liveSettle.max3.toFixed(1)} mm</td><td>what the contract computes</td></tr>}
                 </tbody>
               </table>
@@ -209,6 +219,14 @@ function RoundPanel({ round, policies, now, refetchPolicies }: { round: { roundI
             <thead><tr><th>#</th><th>Trigger</th><th className="num">Payout</th><th>Now</th><th /></tr></thead>
             <tbody>
               {policies.map((p) => {
+                const pd = p.peril === "drought" ? dTot : dFl;
+                // the readings the contract will use: the posted report if there is one, else the live ones
+                const src = state >= 1
+                  ? calibrateFor(pd, Number(p.peril === "drought" ? rd.era5Total : rd.era5Max3) / 10, Number(p.peril === "drought" ? rd.powerTotal : rd.powerMax3) / 10)
+                  : typeof live === "object" && live.era5 && live.power
+                    ? calibrateFor(pd, p.peril === "drought" ? live.era5.total : live.era5.max3, p.peril === "drought" ? live.power.total : live.power.max3)
+                    : null;
+                const as = src ? assess(p.peril, p.trigger, src.eraX, src.powX, maxSpread) : null;
                 const val = liveSettle ? (p.peril === "drought" ? liveSettle.total : liveSettle.max3) : null;
                 const wouldPay = val === null ? null : p.peril === "drought" ? val <= p.trigger : val >= p.trigger;
                 return (
@@ -216,14 +234,38 @@ function RoundPanel({ round, policies, now, refetchPolicies }: { round: { roundI
                     <td>{p.id}</td>
                     <td><span className={`tag ${p.peril}`}>{p.peril}</span> {p.peril === "drought" ? "≤" : "≥"} {p.trigger} mm</td>
                     <td className="num">{fmtUsd(p.payout, 0)}</td>
-                    <td>{p.status === 2 ? <span className="tag ok">paid</span> : p.status === 3 ? <span className="tag dim">no payout</span> : p.status === 4 ? <span className="tag dim">refunded</span> : wouldPay === null ? "—" : <span className={`tag ${wouldPay ? "ok" : "dim"}`}>{wouldPay ? "on course to pay" : "not triggered"}</span>}</td>
-                    <td>{p.status === 1 && (state === 3 || state === 4) && <button className="btn small" disabled={settle.status === "pending"} onClick={() => settle.run(p.id, state === 4)}>{state === 4 ? "Refund" : "Settle"}</button>}</td>
+                    <td>
+                      {p.status === 2 ? <span className="tag ok">paid</span> : p.status === 3 ? <span className="tag dim">no payout</span> : p.status === 4 ? <span className="tag dim">refunded</span> : p.status === 5 ? <span className="tag warn">contested: resolver decides</span> : as?.contested ? <span className="tag warn" title="Sources on opposite sides of the trigger or too far apart: will go to the resolver">will be contested</span> : wouldPay === null ? "—" : <span className={`tag ${wouldPay ? "ok" : "dim"}`}>{wouldPay ? "on course to pay" : "not triggered"}</span>}
+                      {as && (
+                        <div className="muted" style={{ marginTop: 4 }}>
+                          ERA5 {(as.eraX / 10).toFixed(1)} mm {as.eraSays ? "pays" : "no pay"} · POWER {(as.powX / 10).toFixed(1)} mm {as.powSays ? "pays" : "no pay"}
+                          <br />spread {(as.spreadBps / 100).toFixed(0)}%{as.opposite ? " · opposite sides" : as.spreadBps > maxSpread ? " · over the limit" : " · agree"}
+                        </div>
+                      )}
+                    </td>
+                    <td>
+                      {p.status === 1 && (state === 3 || state === 4) && <button className="btn small" disabled={settle.status === "pending"} onClick={() => settle.run(p.id, state === 4)}>{state === 4 ? "Refund" : "Settle"}</button>}
+                      {p.status === 5 && (
+                        <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                          {address?.toLowerCase() === resolver.toLowerCase() ? (
+                            <>
+                              <button className="btn small" disabled={rule.status === "pending"} onClick={() => rule.run(p.id, true)}>Rule: pay</button>
+                              <button className="btn ghost small" disabled={rule.status === "pending"} onClick={() => rule.run(p.id, false)}>Rule: no pay</button>
+                            </>
+                          ) : <span className="muted">resolver {short(resolver)}</span>}
+                          <button className="btn ghost small" disabled={refundContested.status === "pending"} onClick={() => refundContested.run(p.id)} title={`Possible once the resolver has been silent for ${countdown(contestTimeout)}`}>Refund (resolver silent)</button>
+                        </div>
+                      )}
+                    </td>
                   </tr>
                 );
               })}
             </tbody>
           </table>
           {settle.status === "error" && <div className="note bad small">{settle.error}</div>}
+          {rule.status === "error" && <div className="note bad small">{rule.error}</div>}
+          {refundContested.status === "error" && <div className="note bad small">{refundContested.error}</div>}
+          <p className="small muted">Rule: if ERA5 and NASA POWER land on opposite sides of a policy's trigger, or are more than {maxSpread / 100}% of their mean apart, the policy is <b>contested</b> and the named resolver decides instead of paying automatically. If the resolver stays silent for {countdown(contestTimeout)}, anyone can refund the premium.</p>
         </div>
       </div>
 

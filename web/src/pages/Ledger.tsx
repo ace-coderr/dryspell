@@ -14,7 +14,7 @@ export default function Ledger() {
   const totals = useMemo(() => ({
     premium: rows.reduce((s, r) => s + r.premium, 0n),
     paid: rows.filter((r) => r.status === 2).reduce((s, r) => s + r.payout, 0n),
-    active: rows.filter((r) => r.status === 1).reduce((s, r) => s + r.payout, 0n),
+    active: rows.filter((r) => r.status === 1 || r.status === 5).reduce((s, r) => s + r.payout, 0n),
   }), [rows]);
 
   return (
@@ -63,7 +63,7 @@ export default function Ledger() {
                         <td><span className={`tag ${r.peril}`}>{r.peril}</span> {r.peril === "drought" ? "≤" : "≥"} {r.trigger} mm{r.settlementX2 !== undefined && <div className="muted">settled at {(Number(r.settlementX2) / 20).toFixed(1)} mm</div>}</td>
                         <td className="num">{fmtUsd(r.premium)}</td>
                         <td className="num">{fmtUsd(r.payout)}</td>
-                        <td><span className={`tag ${r.status === 2 ? "ok" : r.status === 1 ? "warn" : "dim"}`}>{STATUS[r.status]}</span></td>
+                        <td><span className={`tag ${r.status === 2 ? "ok" : r.status === 1 || r.status === 5 ? "warn" : "dim"}`}>{STATUS[r.status]}</span>{r.contested && <div className="muted" title="The two weather sources fell on opposite sides of the trigger or differ by more than the allowed spread, so the resolver decides.">ERA5 {(Number(r.contested.era5X) / 10).toFixed(1)} mm vs POWER {(Number(r.contested.powerX) / 10).toFixed(1)} mm · {(Number(r.contested.spreadBps) / 100).toFixed(0)}% apart{r.contested.oppositeSides ? " · opposite sides" : ""}</div>}</td>
                         <td>
                           {r.buyTx ? <a href={explorerTx(r.buyTx)} target="_blank" rel="noreferrer">buy</a> : <span className="muted">buy</span>}
                           {r.settleTx && <> · <a href={explorerTx(r.settleTx)} target="_blank" rel="noreferrer">{r.status === 4 ? "refund" : "payout"}</a></>}

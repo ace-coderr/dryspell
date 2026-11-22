@@ -35,6 +35,8 @@ contract Deploy is Script {
     uint256 constant MAX_HORIZON = 400 days;
     uint256 constant MIN_PAYOUT = 10e6;
     uint256 constant ORACLE_FEE_BPS = 200;
+    uint256 constant MAX_SPREAD_BPS = 5_000; // sources more than 50% of their mean apart => contested
+    uint256 constant CONTEST_TIMEOUT = 6 hours; // production: 3 days
     uint256 constant DROUGHT_CAP_BPS = 2_500; // per region
     uint256 constant FLOOD_CAP_BPS = 1_500; // per region
 
@@ -70,10 +72,11 @@ contract Deploy is Script {
             REPORT_WINDOW,
             MIN_BOND,
             BOND_BPS,
-            REWARD_PER_ROUND
+            REWARD_PER_ROUND,
+            MAX_SPREAD_BPS
         );
         book = new PolicyBook(
-            IERC20(address(token)), engine, vault, IWeatherOracle(address(oracle)), deployer, LEAD_TIME, MAX_HORIZON, MIN_PAYOUT, ORACLE_FEE_BPS
+            IERC20(address(token)), engine, vault, IWeatherOracle(address(oracle)), deployer, LEAD_TIME, MAX_HORIZON, MIN_PAYOUT, ORACLE_FEE_BPS, CONTEST_TIMEOUT
         );
 
         // wiring (each link is set once or owner-controlled)

@@ -57,3 +57,9 @@ Bonds scale with the cover at stake (10% of the round's total payout, minimum 10
 - The vault is fully collateralised: `totalAssets >= engine.totalExposure()` is an invariant, fuzzed with random deposits, withdrawals, purchases, disputes and settlements. Breaking the withdrawal lock or skipping an exposure release makes the invariants fail (checked by mutation).
 - `PolicyBook` holds no funds and is the only address that can reserve exposure or pull payouts. Every state-changing path is behind a reentrancy guard; a hook-token test calls back into the book, vault and oracle in the middle of transfers and checks the guard blocks every attempt.
 - Admin power is deliberately small: the owner can pause new sales, load pricing tables and set parameters, but cannot move funds, change a policy, or alter calibration or season windows once set.
+
+## Source-disagreement rule (contested policies)
+
+When a round is final, `PolicyBook.settle` compares the two sources' calibrated readings with the policy's trigger. If they fall on **opposite sides of the trigger**, or differ by more than `maxSpreadBps` (50%) of their mean, the policy does **not** pay automatically: it becomes `Contested`, its cover stays reserved, and the named resolver rules with `resolveContested(policyId, pay)`. If the resolver does not rule within `contestTimeout`, anyone can call `refundContested` and the premium goes back to the holder. A contested policy never pays out without the resolver, and never gets stuck. `PolicyContested` and `ContestedRuled` events carry the readings, the spread and the replay flag.
+
+This makes the single trusted resolver more load-bearing in v1: a ruling here is a judgement call, and the limitation is the same as for the oracle (see above).

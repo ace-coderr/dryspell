@@ -248,8 +248,8 @@ contract PolicyBookTest is Base {
     function test_one_tick_past_the_boundary_does_not_pay() public {
         uint256 d = _buy(buyer, T_DRY, 200, 100 * USD);
         uint256 f = _buy(buyer2, T_FLOOD, 150, 100 * USD);
-        // total = 4001 (200.05 mm) > 200 -> no drought payout; max3 = 2999 (149.95 mm) < 150 -> no flood payout
-        _finalizeUndisputed(2001, 1500, 2000, 1499);
+        // both sources agree: total = 4002 (200.1 mm) > 200 -> no drought payout; max3 = 2998 (149.9 mm) < 150 -> no flood payout
+        _finalizeUndisputed(2001, 1499, 2001, 1499);
         book.settle(d);
         book.settle(f);
         assertEq(uint8(book.getPolicy(d).status), uint8(PolicyBook.Status.Expired));
@@ -441,7 +441,21 @@ contract PolicyBookTest is Base {
         uint256 id = _buy(buyer, T_DRY, trigger, 50 * USD);
         _finalizeUndisputed(era, era / 2, pow, pow / 2);
         book.settle(id);
-        bool expected = uint256(era) + uint256(pow) <= trigger * 20;
-        assertEq(uint8(book.getPolicy(id).status), expected ? uint8(PolicyBook.Status.PaidOut) : uint8(PolicyBook.Status.Expired));
+
+        // reference model of the rule: opposite sides or spread > 50% of the mean => contested
+        uint256 t10 = trigger * 10;
+        bool eSays = era <= t10;
+        bool wSays = pow <= t10;
+        uint256 sum = uint256(era) + pow;
+        uint256 diff = era > pow ? era - pow : pow - era;
+        bool contested = (eSays != wSays) || (sum != 0 && (diff * 20_000) / sum > 5_000);
+        PolicyBook.Status st = book.getPolicy(id).status;
+        if (contested) {
+            assertEq(uint8(st), uint8(PolicyBook.Status.Contested));
+            assertEq(engine.totalExposure(), 50 * USD, "exposure stays reserved while contested");
+        } else {
+            bool pays = uint256(era) + pow <= trigger * 20;
+            assertEq(uint8(st), pays ? uint8(PolicyBook.Status.PaidOut) : uint8(PolicyBook.Status.Expired));
+        }
     }
 }

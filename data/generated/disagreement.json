@@ -1,0 +1,2588 @@
+{
+ "description": "Per location, season, peril and trigger level: number of seasons in which ERA5 alone and NASA POWER alone (each after calibration) fall on opposite sides of the trigger. Also, seasons whose calibrated readings differ by more than a relative spread.",
+ "thresholds": [
+  0.25,
+  0.4,
+  0.5,
+  0.75,
+  1
+ ],
+ "entries": [
+  {
+   "location": "kano",
+   "season": "jjas",
+   "peril": "drought",
+   "offered": false,
+   "seasons": 35,
+   "median_spread": 0.275,
+   "seasons_over_threshold": {
+    "1": 2,
+    "0.25": 18,
+    "0.4": 10,
+    "0.5": 8,
+    "0.75": 3
+   },
+   "per_level": [
+    {
+     "level_mm": 322,
+     "p_ppm": 5055,
+     "opposite_seasons": 4
+    },
+    {
+     "level_mm": 343,
+     "p_ppm": 9969,
+     "opposite_seasons": 4
+    },
+    {
+     "level_mm": 357,
+     "p_ppm": 14992,
+     "opposite_seasons": 4
+    },
+    {
+     "level_mm": 368,
+     "p_ppm": 20195,
+     "opposite_seasons": 5
+    },
+    {
+     "level_mm": 384,
+     "p_ppm": 30138,
+     "opposite_seasons": 6
+    },
+    {
+     "level_mm": 396,
+     "p_ppm": 39736,
+     "opposite_seasons": 7
+    },
+    {
+     "level_mm": 407,
+     "p_ppm": 50353,
+     "opposite_seasons": 9
+    },
+    {
+     "level_mm": 427,
+     "p_ppm": 74585,
+     "opposite_seasons": 11
+    },
+    {
+     "level_mm": 444,
+     "p_ppm": 100570,
+     "opposite_seasons": 13
+    },
+    {
+     "level_mm": 470,
+     "p_ppm": 150251,
+     "opposite_seasons": 16
+    },
+    {
+     "level_mm": 491,
+     "p_ppm": 198853,
+     "opposite_seasons": 15
+    },
+    {
+     "level_mm": 511,
+     "p_ppm": 251374,
+     "opposite_seasons": 17
+    },
+    {
+     "level_mm": 528,
+     "p_ppm": 299941,
+     "opposite_seasons": 18
+    },
+    {
+     "level_mm": 561,
+     "p_ppm": 401023,
+     "opposite_seasons": 16
+    },
+    {
+     "level_mm": 592,
+     "p_ppm": 498760,
+     "opposite_seasons": 17
+    }
+   ]
+  },
+  {
+   "location": "kano",
+   "season": "jjas",
+   "peril": "flood",
+   "offered": false,
+   "seasons": 35,
+   "median_spread": 0.368,
+   "seasons_over_threshold": {
+    "1": 2,
+    "0.25": 21,
+    "0.4": 15,
+    "0.5": 14,
+    "0.75": 9
+   },
+   "per_level": [
+    {
+     "level_mm": 181,
+     "p_ppm": 5100,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 165,
+     "p_ppm": 10048,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 156,
+     "p_ppm": 14700,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 149,
+     "p_ppm": 19749,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 139,
+     "p_ppm": 30062,
+     "opposite_seasons": 4
+    },
+    {
+     "level_mm": 132,
+     "p_ppm": 40278,
+     "opposite_seasons": 5
+    },
+    {
+     "level_mm": 127,
+     "p_ppm": 49585,
+     "opposite_seasons": 5
+    },
+    {
+     "level_mm": 117,
+     "p_ppm": 74872,
+     "opposite_seasons": 7
+    },
+    {
+     "level_mm": 110,
+     "p_ppm": 99513,
+     "opposite_seasons": 7
+    },
+    {
+     "level_mm": 100,
+     "p_ppm": 148197,
+     "opposite_seasons": 8
+    },
+    {
+     "level_mm": 92,
+     "p_ppm": 201827,
+     "opposite_seasons": 10
+    },
+    {
+     "level_mm": 86,
+     "p_ppm": 252472,
+     "opposite_seasons": 10
+    },
+    {
+     "level_mm": 81,
+     "p_ppm": 302293,
+     "opposite_seasons": 10
+    },
+    {
+     "level_mm": 73,
+     "p_ppm": 397032,
+     "opposite_seasons": 12
+    },
+    {
+     "level_mm": 66,
+     "p_ppm": 494082,
+     "opposite_seasons": 17
+    }
+   ]
+  },
+  {
+   "location": "niamey",
+   "season": "jjas",
+   "peril": "drought",
+   "offered": true,
+   "seasons": 35,
+   "median_spread": 0.137,
+   "seasons_over_threshold": {
+    "1": 0,
+    "0.25": 9,
+    "0.4": 2,
+    "0.5": 1,
+    "0.75": 0
+   },
+   "per_level": [
+    {
+     "level_mm": 207,
+     "p_ppm": 4933,
+     "opposite_seasons": 1
+    },
+    {
+     "level_mm": 220,
+     "p_ppm": 10063,
+     "opposite_seasons": 1
+    },
+    {
+     "level_mm": 228,
+     "p_ppm": 14953,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 234,
+     "p_ppm": 19735,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 244,
+     "p_ppm": 30272,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 251,
+     "p_ppm": 39874,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 257,
+     "p_ppm": 49759,
+     "opposite_seasons": 4
+    },
+    {
+     "level_mm": 269,
+     "p_ppm": 74620,
+     "opposite_seasons": 5
+    },
+    {
+     "level_mm": 279,
+     "p_ppm": 100953,
+     "opposite_seasons": 6
+    },
+    {
+     "level_mm": 294,
+     "p_ppm": 150458,
+     "opposite_seasons": 8
+    },
+    {
+     "level_mm": 306,
+     "p_ppm": 198469,
+     "opposite_seasons": 8
+    },
+    {
+     "level_mm": 317,
+     "p_ppm": 248356,
+     "opposite_seasons": 9
+    },
+    {
+     "level_mm": 327,
+     "p_ppm": 297767,
+     "opposite_seasons": 9
+    },
+    {
+     "level_mm": 346,
+     "p_ppm": 398870,
+     "opposite_seasons": 9
+    },
+    {
+     "level_mm": 364,
+     "p_ppm": 497869,
+     "opposite_seasons": 8
+    }
+   ]
+  },
+  {
+   "location": "niamey",
+   "season": "jjas",
+   "peril": "flood",
+   "offered": true,
+   "seasons": 35,
+   "median_spread": 0.187,
+   "seasons_over_threshold": {
+    "1": 0,
+    "0.25": 11,
+    "0.4": 8,
+    "0.5": 5,
+    "0.75": 2
+   },
+   "per_level": [
+    {
+     "level_mm": 113,
+     "p_ppm": 4917,
+     "opposite_seasons": 1
+    },
+    {
+     "level_mm": 104,
+     "p_ppm": 9812,
+     "opposite_seasons": 1
+    },
+    {
+     "level_mm": 98,
+     "p_ppm": 15533,
+     "opposite_seasons": 1
+    },
+    {
+     "level_mm": 95,
+     "p_ppm": 19531,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 89,
+     "p_ppm": 30829,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 86,
+     "p_ppm": 38688,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 83,
+     "p_ppm": 48499,
+     "opposite_seasons": 4
+    },
+    {
+     "level_mm": 77,
+     "p_ppm": 75891,
+     "opposite_seasons": 7
+    },
+    {
+     "level_mm": 73,
+     "p_ppm": 101842,
+     "opposite_seasons": 8
+    },
+    {
+     "level_mm": 68,
+     "p_ppm": 146047,
+     "opposite_seasons": 8
+    },
+    {
+     "level_mm": 64,
+     "p_ppm": 193343,
+     "opposite_seasons": 9
+    },
+    {
+     "level_mm": 60,
+     "p_ppm": 253528,
+     "opposite_seasons": 8
+    },
+    {
+     "level_mm": 57,
+     "p_ppm": 308173,
+     "opposite_seasons": 9
+    },
+    {
+     "level_mm": 53,
+     "p_ppm": 394306,
+     "opposite_seasons": 9
+    },
+    {
+     "level_mm": 49,
+     "p_ppm": 494560,
+     "opposite_seasons": 13
+    }
+   ]
+  },
+  {
+   "location": "tamale",
+   "season": "mjjas",
+   "peril": "drought",
+   "offered": true,
+   "seasons": 35,
+   "median_spread": 0.107,
+   "seasons_over_threshold": {
+    "1": 0,
+    "0.25": 5,
+    "0.4": 0,
+    "0.5": 0,
+    "0.75": 0
+   },
+   "per_level": [
+    {
+     "level_mm": 519,
+     "p_ppm": 5075,
+     "opposite_seasons": 0
+    },
+    {
+     "level_mm": 538,
+     "p_ppm": 10039,
+     "opposite_seasons": 1
+    },
+    {
+     "level_mm": 550,
+     "p_ppm": 14902,
+     "opposite_seasons": 1
+    },
+    {
+     "level_mm": 560,
+     "p_ppm": 20299,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 574,
+     "p_ppm": 30395,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 584,
+     "p_ppm": 39759,
+     "opposite_seasons": 5
+    },
+    {
+     "level_mm": 593,
+     "p_ppm": 49952,
+     "opposite_seasons": 6
+    },
+    {
+     "level_mm": 610,
+     "p_ppm": 74370,
+     "opposite_seasons": 6
+    },
+    {
+     "level_mm": 624,
+     "p_ppm": 100089,
+     "opposite_seasons": 8
+    },
+    {
+     "level_mm": 645,
+     "p_ppm": 148894,
+     "opposite_seasons": 10
+    },
+    {
+     "level_mm": 663,
+     "p_ppm": 200522,
+     "opposite_seasons": 12
+    },
+    {
+     "level_mm": 678,
+     "p_ppm": 249935,
+     "opposite_seasons": 11
+    },
+    {
+     "level_mm": 692,
+     "p_ppm": 300544,
+     "opposite_seasons": 10
+    },
+    {
+     "level_mm": 717,
+     "p_ppm": 398704,
+     "opposite_seasons": 11
+    },
+    {
+     "level_mm": 742,
+     "p_ppm": 501313,
+     "opposite_seasons": 12
+    }
+   ]
+  },
+  {
+   "location": "tamale",
+   "season": "mjjas",
+   "peril": "flood",
+   "offered": false,
+   "seasons": 35,
+   "median_spread": 0.364,
+   "seasons_over_threshold": {
+    "1": 0,
+    "0.25": 22,
+    "0.4": 16,
+    "0.5": 11,
+    "0.75": 2
+   },
+   "per_level": [
+    {
+     "level_mm": 136,
+     "p_ppm": 4997,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 126,
+     "p_ppm": 10092,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 120,
+     "p_ppm": 15368,
+     "opposite_seasons": 4
+    },
+    {
+     "level_mm": 116,
+     "p_ppm": 20327,
+     "opposite_seasons": 5
+    },
+    {
+     "level_mm": 110,
+     "p_ppm": 30871,
+     "opposite_seasons": 6
+    },
+    {
+     "level_mm": 106,
+     "p_ppm": 40727,
+     "opposite_seasons": 7
+    },
+    {
+     "level_mm": 103,
+     "p_ppm": 50082,
+     "opposite_seasons": 7
+    },
+    {
+     "level_mm": 97,
+     "p_ppm": 75454,
+     "opposite_seasons": 8
+    },
+    {
+     "level_mm": 93,
+     "p_ppm": 98799,
+     "opposite_seasons": 10
+    },
+    {
+     "level_mm": 87,
+     "p_ppm": 146867,
+     "opposite_seasons": 11
+    },
+    {
+     "level_mm": 82,
+     "p_ppm": 202295,
+     "opposite_seasons": 12
+    },
+    {
+     "level_mm": 79,
+     "p_ppm": 243675,
+     "opposite_seasons": 13
+    },
+    {
+     "level_mm": 76,
+     "p_ppm": 291855,
+     "opposite_seasons": 17
+    },
+    {
+     "level_mm": 70,
+     "p_ppm": 409596,
+     "opposite_seasons": 18
+    },
+    {
+     "level_mm": 66,
+     "p_ppm": 502784,
+     "opposite_seasons": 18
+    }
+   ]
+  },
+  {
+   "location": "garissa",
+   "season": "long",
+   "peril": "drought",
+   "offered": true,
+   "seasons": 35,
+   "median_spread": 0.314,
+   "seasons_over_threshold": {
+    "1": 1,
+    "0.25": 22,
+    "0.4": 14,
+    "0.5": 12,
+    "0.75": 3
+   },
+   "per_level": [
+    {
+     "level_mm": 40,
+     "p_ppm": 5063,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 46,
+     "p_ppm": 10508,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 49,
+     "p_ppm": 14439,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 52,
+     "p_ppm": 19324,
+     "opposite_seasons": 4
+    },
+    {
+     "level_mm": 57,
+     "p_ppm": 29856,
+     "opposite_seasons": 5
+    },
+    {
+     "level_mm": 61,
+     "p_ppm": 40655,
+     "opposite_seasons": 6
+    },
+    {
+     "level_mm": 64,
+     "p_ppm": 50241,
+     "opposite_seasons": 6
+    },
+    {
+     "level_mm": 70,
+     "p_ppm": 73402,
+     "opposite_seasons": 7
+    },
+    {
+     "level_mm": 76,
+     "p_ppm": 101944,
+     "opposite_seasons": 7
+    },
+    {
+     "level_mm": 84,
+     "p_ppm": 148022,
+     "opposite_seasons": 10
+    },
+    {
+     "level_mm": 92,
+     "p_ppm": 202193,
+     "opposite_seasons": 11
+    },
+    {
+     "level_mm": 98,
+     "p_ppm": 247106,
+     "opposite_seasons": 11
+    },
+    {
+     "level_mm": 105,
+     "p_ppm": 302869,
+     "opposite_seasons": 11
+    },
+    {
+     "level_mm": 117,
+     "p_ppm": 402856,
+     "opposite_seasons": 10
+    },
+    {
+     "level_mm": 129,
+     "p_ppm": 502444,
+     "opposite_seasons": 12
+    }
+   ]
+  },
+  {
+   "location": "garissa",
+   "season": "long",
+   "peril": "flood",
+   "offered": false,
+   "seasons": 35,
+   "median_spread": 0.45,
+   "seasons_over_threshold": {
+    "1": 6,
+    "0.25": 24,
+    "0.4": 20,
+    "0.5": 15,
+    "0.75": 8
+   },
+   "per_level": [
+    {
+     "level_mm": 78,
+     "p_ppm": 4872,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 70,
+     "p_ppm": 10399,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 66,
+     "p_ppm": 15176,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 63,
+     "p_ppm": 20137,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 59,
+     "p_ppm": 29321,
+     "opposite_seasons": 4
+    },
+    {
+     "level_mm": 56,
+     "p_ppm": 38813,
+     "opposite_seasons": 4
+    },
+    {
+     "level_mm": 53,
+     "p_ppm": 51296,
+     "opposite_seasons": 5
+    },
+    {
+     "level_mm": 49,
+     "p_ppm": 74144,
+     "opposite_seasons": 5
+    },
+    {
+     "level_mm": 46,
+     "p_ppm": 97399,
+     "opposite_seasons": 8
+    },
+    {
+     "level_mm": 41,
+     "p_ppm": 151999,
+     "opposite_seasons": 8
+    },
+    {
+     "level_mm": 38,
+     "p_ppm": 196932,
+     "opposite_seasons": 11
+    },
+    {
+     "level_mm": 35,
+     "p_ppm": 253035,
+     "opposite_seasons": 13
+    },
+    {
+     "level_mm": 33,
+     "p_ppm": 297326,
+     "opposite_seasons": 13
+    },
+    {
+     "level_mm": 29,
+     "p_ppm": 403226,
+     "opposite_seasons": 11
+    },
+    {
+     "level_mm": 26,
+     "p_ppm": 496755,
+     "opposite_seasons": 14
+    }
+   ]
+  },
+  {
+   "location": "garissa",
+   "season": "short",
+   "peril": "drought",
+   "offered": true,
+   "seasons": 35,
+   "median_spread": 0.153,
+   "seasons_over_threshold": {
+    "1": 1,
+    "0.25": 15,
+    "0.4": 8,
+    "0.5": 7,
+    "0.75": 2
+   },
+   "per_level": [
+    {
+     "level_mm": 26,
+     "p_ppm": 5104,
+     "opposite_seasons": 0
+    },
+    {
+     "level_mm": 32,
+     "p_ppm": 9679,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 37,
+     "p_ppm": 14969,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 41,
+     "p_ppm": 20243,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 47,
+     "p_ppm": 29962,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 52,
+     "p_ppm": 39747,
+     "opposite_seasons": 4
+    },
+    {
+     "level_mm": 57,
+     "p_ppm": 51057,
+     "opposite_seasons": 4
+    },
+    {
+     "level_mm": 66,
+     "p_ppm": 75129,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 74,
+     "p_ppm": 100264,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 88,
+     "p_ppm": 151515,
+     "opposite_seasons": 4
+    },
+    {
+     "level_mm": 100,
+     "p_ppm": 201230,
+     "opposite_seasons": 6
+    },
+    {
+     "level_mm": 111,
+     "p_ppm": 250036,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 122,
+     "p_ppm": 300696,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 143,
+     "p_ppm": 398713,
+     "opposite_seasons": 9
+    },
+    {
+     "level_mm": 166,
+     "p_ppm": 502148,
+     "opposite_seasons": 5
+    }
+   ]
+  },
+  {
+   "location": "garissa",
+   "season": "short",
+   "peril": "flood",
+   "offered": true,
+   "seasons": 35,
+   "median_spread": 0.32,
+   "seasons_over_threshold": {
+    "1": 1,
+    "0.25": 21,
+    "0.4": 15,
+    "0.5": 12,
+    "0.75": 5
+   },
+   "per_level": [
+    {
+     "level_mm": 115,
+     "p_ppm": 4957,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 103,
+     "p_ppm": 10297,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 97,
+     "p_ppm": 14827,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 92,
+     "p_ppm": 20076,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 85,
+     "p_ppm": 30635,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 81,
+     "p_ppm": 38957,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 77,
+     "p_ppm": 49480,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 70,
+     "p_ppm": 74903,
+     "opposite_seasons": 1
+    },
+    {
+     "level_mm": 65,
+     "p_ppm": 100305,
+     "opposite_seasons": 1
+    },
+    {
+     "level_mm": 58,
+     "p_ppm": 149700,
+     "opposite_seasons": 1
+    },
+    {
+     "level_mm": 53,
+     "p_ppm": 197609,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 49,
+     "p_ppm": 245094,
+     "opposite_seasons": 4
+    },
+    {
+     "level_mm": 45,
+     "p_ppm": 301675,
+     "opposite_seasons": 7
+    },
+    {
+     "level_mm": 39,
+     "p_ppm": 404419,
+     "opposite_seasons": 8
+    },
+    {
+     "level_mm": 34,
+     "p_ppm": 505169,
+     "opposite_seasons": 11
+    }
+   ]
+  },
+  {
+   "location": "dodoma",
+   "season": "ndjfma",
+   "peril": "drought",
+   "offered": true,
+   "seasons": 34,
+   "median_spread": 0.164,
+   "seasons_over_threshold": {
+    "1": 0,
+    "0.25": 12,
+    "0.4": 3,
+    "0.5": 1,
+    "0.75": 0
+   },
+   "per_level": [
+    {
+     "level_mm": 206,
+     "p_ppm": 4966,
+     "opposite_seasons": 0
+    },
+    {
+     "level_mm": 229,
+     "p_ppm": 9993,
+     "opposite_seasons": 1
+    },
+    {
+     "level_mm": 244,
+     "p_ppm": 14921,
+     "opposite_seasons": 1
+    },
+    {
+     "level_mm": 256,
+     "p_ppm": 20015,
+     "opposite_seasons": 1
+    },
+    {
+     "level_mm": 274,
+     "p_ppm": 29882,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 288,
+     "p_ppm": 39629,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 300,
+     "p_ppm": 49559,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 325,
+     "p_ppm": 75250,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 344,
+     "p_ppm": 99468,
+     "opposite_seasons": 4
+    },
+    {
+     "level_mm": 376,
+     "p_ppm": 149320,
+     "opposite_seasons": 5
+    },
+    {
+     "level_mm": 403,
+     "p_ppm": 199504,
+     "opposite_seasons": 5
+    },
+    {
+     "level_mm": 427,
+     "p_ppm": 249322,
+     "opposite_seasons": 6
+    },
+    {
+     "level_mm": 450,
+     "p_ppm": 300593,
+     "opposite_seasons": 8
+    },
+    {
+     "level_mm": 492,
+     "p_ppm": 399424,
+     "opposite_seasons": 9
+    },
+    {
+     "level_mm": 534,
+     "p_ppm": 499214,
+     "opposite_seasons": 11
+    }
+   ]
+  },
+  {
+   "location": "dodoma",
+   "season": "ndjfma",
+   "peril": "flood",
+   "offered": true,
+   "seasons": 34,
+   "median_spread": 0.338,
+   "seasons_over_threshold": {
+    "1": 0,
+    "0.25": 21,
+    "0.4": 12,
+    "0.5": 5,
+    "0.75": 0
+   },
+   "per_level": [
+    {
+     "level_mm": 164,
+     "p_ppm": 4986,
+     "opposite_seasons": 1
+    },
+    {
+     "level_mm": 150,
+     "p_ppm": 10116,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 142,
+     "p_ppm": 15141,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 136,
+     "p_ppm": 20471,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 128,
+     "p_ppm": 30559,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 123,
+     "p_ppm": 39205,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 118,
+     "p_ppm": 50234,
+     "opposite_seasons": 5
+    },
+    {
+     "level_mm": 110,
+     "p_ppm": 74419,
+     "opposite_seasons": 6
+    },
+    {
+     "level_mm": 104,
+     "p_ppm": 99534,
+     "opposite_seasons": 9
+    },
+    {
+     "level_mm": 95,
+     "p_ppm": 152529,
+     "opposite_seasons": 11
+    },
+    {
+     "level_mm": 89,
+     "p_ppm": 200981,
+     "opposite_seasons": 8
+    },
+    {
+     "level_mm": 84,
+     "p_ppm": 251093,
+     "opposite_seasons": 10
+    },
+    {
+     "level_mm": 80,
+     "p_ppm": 298250,
+     "opposite_seasons": 11
+    },
+    {
+     "level_mm": 73,
+     "p_ppm": 396586,
+     "opposite_seasons": 11
+    },
+    {
+     "level_mm": 67,
+     "p_ppm": 495832,
+     "opposite_seasons": 9
+    }
+   ]
+  },
+  {
+   "location": "gulu",
+   "season": "first",
+   "peril": "drought",
+   "offered": true,
+   "seasons": 35,
+   "median_spread": 0.309,
+   "seasons_over_threshold": {
+    "1": 0,
+    "0.25": 20,
+    "0.4": 11,
+    "0.5": 9,
+    "0.75": 1
+   },
+   "per_level": [
+    {
+     "level_mm": 195,
+     "p_ppm": 4934,
+     "opposite_seasons": 1
+    },
+    {
+     "level_mm": 211,
+     "p_ppm": 10101,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 221,
+     "p_ppm": 15066,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 229,
+     "p_ppm": 20257,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 241,
+     "p_ppm": 30464,
+     "opposite_seasons": 4
+    },
+    {
+     "level_mm": 250,
+     "p_ppm": 40309,
+     "opposite_seasons": 7
+    },
+    {
+     "level_mm": 257,
+     "p_ppm": 49412,
+     "opposite_seasons": 7
+    },
+    {
+     "level_mm": 273,
+     "p_ppm": 75419,
+     "opposite_seasons": 10
+    },
+    {
+     "level_mm": 285,
+     "p_ppm": 99976,
+     "opposite_seasons": 11
+    },
+    {
+     "level_mm": 305,
+     "p_ppm": 150754,
+     "opposite_seasons": 15
+    },
+    {
+     "level_mm": 321,
+     "p_ppm": 199805,
+     "opposite_seasons": 17
+    },
+    {
+     "level_mm": 336,
+     "p_ppm": 251699,
+     "opposite_seasons": 17
+    },
+    {
+     "level_mm": 349,
+     "p_ppm": 300394,
+     "opposite_seasons": 18
+    },
+    {
+     "level_mm": 374,
+     "p_ppm": 400247,
+     "opposite_seasons": 17
+    },
+    {
+     "level_mm": 398,
+     "p_ppm": 498335,
+     "opposite_seasons": 13
+    }
+   ]
+  },
+  {
+   "location": "gulu",
+   "season": "first",
+   "peril": "flood",
+   "offered": false,
+   "seasons": 35,
+   "median_spread": 0.345,
+   "seasons_over_threshold": {
+    "1": 1,
+    "0.25": 21,
+    "0.4": 16,
+    "0.5": 13,
+    "0.75": 6
+   },
+   "per_level": [
+    {
+     "level_mm": 138,
+     "p_ppm": 4896,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 127,
+     "p_ppm": 9771,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 120,
+     "p_ppm": 15149,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 116,
+     "p_ppm": 19451,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 109,
+     "p_ppm": 30077,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 104,
+     "p_ppm": 40991,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 101,
+     "p_ppm": 49311,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 94,
+     "p_ppm": 75607,
+     "opposite_seasons": 4
+    },
+    {
+     "level_mm": 89,
+     "p_ppm": 102147,
+     "opposite_seasons": 6
+    },
+    {
+     "level_mm": 82,
+     "p_ppm": 154238,
+     "opposite_seasons": 10
+    },
+    {
+     "level_mm": 77,
+     "p_ppm": 205139,
+     "opposite_seasons": 13
+    },
+    {
+     "level_mm": 73,
+     "p_ppm": 255792,
+     "opposite_seasons": 14
+    },
+    {
+     "level_mm": 70,
+     "p_ppm": 300186,
+     "opposite_seasons": 13
+    },
+    {
+     "level_mm": 64,
+     "p_ppm": 406092,
+     "opposite_seasons": 17
+    },
+    {
+     "level_mm": 59,
+     "p_ppm": 510363,
+     "opposite_seasons": 16
+    }
+   ]
+  },
+  {
+   "location": "gulu",
+   "season": "second",
+   "peril": "drought",
+   "offered": true,
+   "seasons": 35,
+   "median_spread": 0.244,
+   "seasons_over_threshold": {
+    "1": 0,
+    "0.25": 15,
+    "0.4": 7,
+    "0.5": 4,
+    "0.75": 2
+   },
+   "per_level": [
+    {
+     "level_mm": 316,
+     "p_ppm": 4959,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 338,
+     "p_ppm": 9941,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 352,
+     "p_ppm": 14805,
+     "opposite_seasons": 4
+    },
+    {
+     "level_mm": 363,
+     "p_ppm": 19804,
+     "opposite_seasons": 6
+    },
+    {
+     "level_mm": 380,
+     "p_ppm": 29984,
+     "opposite_seasons": 6
+    },
+    {
+     "level_mm": 393,
+     "p_ppm": 40101,
+     "opposite_seasons": 8
+    },
+    {
+     "level_mm": 404,
+     "p_ppm": 50444,
+     "opposite_seasons": 8
+    },
+    {
+     "level_mm": 425,
+     "p_ppm": 75200,
+     "opposite_seasons": 11
+    },
+    {
+     "level_mm": 442,
+     "p_ppm": 100412,
+     "opposite_seasons": 11
+    },
+    {
+     "level_mm": 469,
+     "p_ppm": 150288,
+     "opposite_seasons": 13
+    },
+    {
+     "level_mm": 491,
+     "p_ppm": 199512,
+     "opposite_seasons": 13
+    },
+    {
+     "level_mm": 511,
+     "p_ppm": 250166,
+     "opposite_seasons": 10
+    },
+    {
+     "level_mm": 529,
+     "p_ppm": 299686,
+     "opposite_seasons": 11
+    },
+    {
+     "level_mm": 563,
+     "p_ppm": 399925,
+     "opposite_seasons": 11
+    },
+    {
+     "level_mm": 596,
+     "p_ppm": 499956,
+     "opposite_seasons": 9
+    }
+   ]
+  },
+  {
+   "location": "gulu",
+   "season": "second",
+   "peril": "flood",
+   "offered": false,
+   "seasons": 35,
+   "median_spread": 0.335,
+   "seasons_over_threshold": {
+    "1": 1,
+    "0.25": 23,
+    "0.4": 15,
+    "0.5": 11,
+    "0.75": 4
+   },
+   "per_level": [
+    {
+     "level_mm": 125,
+     "p_ppm": 5114,
+     "opposite_seasons": 0
+    },
+    {
+     "level_mm": 116,
+     "p_ppm": 10197,
+     "opposite_seasons": 1
+    },
+    {
+     "level_mm": 111,
+     "p_ppm": 14946,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 107,
+     "p_ppm": 20279,
+     "opposite_seasons": 4
+    },
+    {
+     "level_mm": 102,
+     "p_ppm": 29653,
+     "opposite_seasons": 6
+    },
+    {
+     "level_mm": 98,
+     "p_ppm": 40124,
+     "opposite_seasons": 7
+    },
+    {
+     "level_mm": 95,
+     "p_ppm": 50278,
+     "opposite_seasons": 8
+    },
+    {
+     "level_mm": 90,
+     "p_ppm": 72993,
+     "opposite_seasons": 8
+    },
+    {
+     "level_mm": 86,
+     "p_ppm": 97975,
+     "opposite_seasons": 10
+    },
+    {
+     "level_mm": 80,
+     "p_ppm": 150936,
+     "opposite_seasons": 9
+    },
+    {
+     "level_mm": 76,
+     "p_ppm": 199563,
+     "opposite_seasons": 11
+    },
+    {
+     "level_mm": 73,
+     "p_ppm": 244520,
+     "opposite_seasons": 12
+    },
+    {
+     "level_mm": 70,
+     "p_ppm": 297576,
+     "opposite_seasons": 12
+    },
+    {
+     "level_mm": 65,
+     "p_ppm": 404868,
+     "opposite_seasons": 17
+    },
+    {
+     "level_mm": 61,
+     "p_ppm": 506403,
+     "opposite_seasons": 19
+    }
+   ]
+  },
+  {
+   "location": "jodhpur",
+   "season": "jjas",
+   "peril": "drought",
+   "offered": true,
+   "seasons": 35,
+   "median_spread": 0.161,
+   "seasons_over_threshold": {
+    "1": 0,
+    "0.25": 13,
+    "0.4": 7,
+    "0.5": 4,
+    "0.75": 1
+   },
+   "per_level": [
+    {
+     "level_mm": 101,
+     "p_ppm": 5132,
+     "opposite_seasons": 0
+    },
+    {
+     "level_mm": 114,
+     "p_ppm": 9906,
+     "opposite_seasons": 0
+    },
+    {
+     "level_mm": 123,
+     "p_ppm": 14735,
+     "opposite_seasons": 0
+    },
+    {
+     "level_mm": 131,
+     "p_ppm": 20279,
+     "opposite_seasons": 1
+    },
+    {
+     "level_mm": 142,
+     "p_ppm": 30093,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 151,
+     "p_ppm": 40206,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 158,
+     "p_ppm": 49461,
+     "opposite_seasons": 4
+    },
+    {
+     "level_mm": 174,
+     "p_ppm": 75402,
+     "opposite_seasons": 5
+    },
+    {
+     "level_mm": 186,
+     "p_ppm": 99303,
+     "opposite_seasons": 5
+    },
+    {
+     "level_mm": 207,
+     "p_ppm": 149956,
+     "opposite_seasons": 5
+    },
+    {
+     "level_mm": 225,
+     "p_ppm": 201335,
+     "opposite_seasons": 7
+    },
+    {
+     "level_mm": 240,
+     "p_ppm": 248682,
+     "opposite_seasons": 5
+    },
+    {
+     "level_mm": 255,
+     "p_ppm": 299078,
+     "opposite_seasons": 4
+    },
+    {
+     "level_mm": 284,
+     "p_ppm": 401152,
+     "opposite_seasons": 6
+    },
+    {
+     "level_mm": 312,
+     "p_ppm": 499690,
+     "opposite_seasons": 9
+    }
+   ]
+  },
+  {
+   "location": "jodhpur",
+   "season": "jjas",
+   "peril": "flood",
+   "offered": true,
+   "seasons": 35,
+   "median_spread": 0.274,
+   "seasons_over_threshold": {
+    "1": 0,
+    "0.25": 18,
+    "0.4": 13,
+    "0.5": 8,
+    "0.75": 3
+   },
+   "per_level": [
+    {
+     "level_mm": 228,
+     "p_ppm": 5031,
+     "opposite_seasons": 0
+    },
+    {
+     "level_mm": 207,
+     "p_ppm": 10152,
+     "opposite_seasons": 1
+    },
+    {
+     "level_mm": 195,
+     "p_ppm": 15149,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 187,
+     "p_ppm": 19768,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 174,
+     "p_ppm": 30414,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 166,
+     "p_ppm": 39593,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 159,
+     "p_ppm": 49812,
+     "opposite_seasons": 4
+    },
+    {
+     "level_mm": 146,
+     "p_ppm": 75999,
+     "opposite_seasons": 8
+    },
+    {
+     "level_mm": 137,
+     "p_ppm": 101397,
+     "opposite_seasons": 8
+    },
+    {
+     "level_mm": 125,
+     "p_ppm": 147798,
+     "opposite_seasons": 6
+    },
+    {
+     "level_mm": 115,
+     "p_ppm": 200453,
+     "opposite_seasons": 7
+    },
+    {
+     "level_mm": 108,
+     "p_ppm": 246443,
+     "opposite_seasons": 7
+    },
+    {
+     "level_mm": 101,
+     "p_ppm": 300842,
+     "opposite_seasons": 5
+    },
+    {
+     "level_mm": 90,
+     "p_ppm": 404099,
+     "opposite_seasons": 8
+    },
+    {
+     "level_mm": 81,
+     "p_ppm": 503526,
+     "opposite_seasons": 10
+    }
+   ]
+  },
+  {
+   "location": "latur",
+   "season": "jjas",
+   "peril": "drought",
+   "offered": true,
+   "seasons": 35,
+   "median_spread": 0.134,
+   "seasons_over_threshold": {
+    "1": 0,
+    "0.25": 10,
+    "0.4": 2,
+    "0.5": 0,
+    "0.75": 0
+   },
+   "per_level": [
+    {
+     "level_mm": 374,
+     "p_ppm": 5052,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 398,
+     "p_ppm": 9930,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 414,
+     "p_ppm": 14911,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 426,
+     "p_ppm": 19805,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 445,
+     "p_ppm": 30004,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 459,
+     "p_ppm": 39749,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 471,
+     "p_ppm": 49805,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 495,
+     "p_ppm": 75142,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 514,
+     "p_ppm": 100528,
+     "opposite_seasons": 5
+    },
+    {
+     "level_mm": 544,
+     "p_ppm": 150573,
+     "opposite_seasons": 7
+    },
+    {
+     "level_mm": 568,
+     "p_ppm": 199097,
+     "opposite_seasons": 11
+    },
+    {
+     "level_mm": 590,
+     "p_ppm": 249460,
+     "opposite_seasons": 11
+    },
+    {
+     "level_mm": 610,
+     "p_ppm": 299266,
+     "opposite_seasons": 11
+    },
+    {
+     "level_mm": 648,
+     "p_ppm": 400910,
+     "opposite_seasons": 7
+    },
+    {
+     "level_mm": 684,
+     "p_ppm": 500081,
+     "opposite_seasons": 8
+    }
+   ]
+  },
+  {
+   "location": "latur",
+   "season": "jjas",
+   "peril": "flood",
+   "offered": false,
+   "seasons": 35,
+   "median_spread": 0.237,
+   "seasons_over_threshold": {
+    "1": 0,
+    "0.25": 16,
+    "0.4": 13,
+    "0.5": 10,
+    "0.75": 3
+   },
+   "per_level": [
+    {
+     "level_mm": 214,
+     "p_ppm": 5027,
+     "opposite_seasons": 1
+    },
+    {
+     "level_mm": 198,
+     "p_ppm": 9835,
+     "opposite_seasons": 1
+    },
+    {
+     "level_mm": 188,
+     "p_ppm": 14943,
+     "opposite_seasons": 1
+    },
+    {
+     "level_mm": 181,
+     "p_ppm": 20012,
+     "opposite_seasons": 1
+    },
+    {
+     "level_mm": 171,
+     "p_ppm": 30326,
+     "opposite_seasons": 1
+    },
+    {
+     "level_mm": 164,
+     "p_ppm": 40505,
+     "opposite_seasons": 4
+    },
+    {
+     "level_mm": 159,
+     "p_ppm": 49754,
+     "opposite_seasons": 5
+    },
+    {
+     "level_mm": 149,
+     "p_ppm": 74800,
+     "opposite_seasons": 6
+    },
+    {
+     "level_mm": 142,
+     "p_ppm": 99122,
+     "opposite_seasons": 8
+    },
+    {
+     "level_mm": 131,
+     "p_ppm": 152832,
+     "opposite_seasons": 8
+    },
+    {
+     "level_mm": 124,
+     "p_ppm": 199637,
+     "opposite_seasons": 11
+    },
+    {
+     "level_mm": 118,
+     "p_ppm": 249243,
+     "opposite_seasons": 10
+    },
+    {
+     "level_mm": 113,
+     "p_ppm": 298004,
+     "opposite_seasons": 8
+    },
+    {
+     "level_mm": 104,
+     "p_ppm": 403573,
+     "opposite_seasons": 8
+    },
+    {
+     "level_mm": 97,
+     "p_ppm": 500369,
+     "opposite_seasons": 11
+    }
+   ]
+  },
+  {
+   "location": "sylhet",
+   "season": "mjjas",
+   "peril": "drought",
+   "offered": false,
+   "seasons": 35,
+   "median_spread": 0.342,
+   "seasons_over_threshold": {
+    "1": 1,
+    "0.25": 22,
+    "0.4": 16,
+    "0.5": 12,
+    "0.75": 4
+   },
+   "per_level": [
+    {
+     "level_mm": 1885,
+     "p_ppm": 4985,
+     "opposite_seasons": 6
+    },
+    {
+     "level_mm": 1994,
+     "p_ppm": 9971,
+     "opposite_seasons": 6
+    },
+    {
+     "level_mm": 2065,
+     "p_ppm": 15002,
+     "opposite_seasons": 6
+    },
+    {
+     "level_mm": 2119,
+     "p_ppm": 20046,
+     "opposite_seasons": 6
+    },
+    {
+     "level_mm": 2200,
+     "p_ppm": 30002,
+     "opposite_seasons": 6
+    },
+    {
+     "level_mm": 2263,
+     "p_ppm": 40063,
+     "opposite_seasons": 7
+    },
+    {
+     "level_mm": 2315,
+     "p_ppm": 50102,
+     "opposite_seasons": 7
+    },
+    {
+     "level_mm": 2417,
+     "p_ppm": 74877,
+     "opposite_seasons": 7
+    },
+    {
+     "level_mm": 2499,
+     "p_ppm": 100087,
+     "opposite_seasons": 10
+    },
+    {
+     "level_mm": 2629,
+     "p_ppm": 150199,
+     "opposite_seasons": 16
+    },
+    {
+     "level_mm": 2735,
+     "p_ppm": 200046,
+     "opposite_seasons": 17
+    },
+    {
+     "level_mm": 2828,
+     "p_ppm": 249745,
+     "opposite_seasons": 21
+    },
+    {
+     "level_mm": 2914,
+     "p_ppm": 299832,
+     "opposite_seasons": 20
+    },
+    {
+     "level_mm": 3074,
+     "p_ppm": 400204,
+     "opposite_seasons": 22
+    },
+    {
+     "level_mm": 3228,
+     "p_ppm": 500089,
+     "opposite_seasons": 22
+    }
+   ]
+  },
+  {
+   "location": "sylhet",
+   "season": "mjjas",
+   "peril": "flood",
+   "offered": false,
+   "seasons": 35,
+   "median_spread": 0.397,
+   "seasons_over_threshold": {
+    "1": 0,
+    "0.25": 23,
+    "0.4": 17,
+    "0.5": 13,
+    "0.75": 7
+   },
+   "per_level": [
+    {
+     "level_mm": 543,
+     "p_ppm": 4984,
+     "opposite_seasons": 1
+    },
+    {
+     "level_mm": 503,
+     "p_ppm": 9971,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 479,
+     "p_ppm": 15100,
+     "opposite_seasons": 6
+    },
+    {
+     "level_mm": 463,
+     "p_ppm": 19898,
+     "opposite_seasons": 6
+    },
+    {
+     "level_mm": 439,
+     "p_ppm": 30056,
+     "opposite_seasons": 8
+    },
+    {
+     "level_mm": 422,
+     "p_ppm": 40190,
+     "opposite_seasons": 8
+    },
+    {
+     "level_mm": 409,
+     "p_ppm": 50132,
+     "opposite_seasons": 9
+    },
+    {
+     "level_mm": 385,
+     "p_ppm": 75119,
+     "opposite_seasons": 10
+    },
+    {
+     "level_mm": 368,
+     "p_ppm": 99647,
+     "opposite_seasons": 11
+    },
+    {
+     "level_mm": 343,
+     "p_ppm": 149706,
+     "opposite_seasons": 13
+    },
+    {
+     "level_mm": 325,
+     "p_ppm": 198939,
+     "opposite_seasons": 13
+    },
+    {
+     "level_mm": 310,
+     "p_ppm": 250217,
+     "opposite_seasons": 18
+    },
+    {
+     "level_mm": 298,
+     "p_ppm": 298712,
+     "opposite_seasons": 20
+    },
+    {
+     "level_mm": 277,
+     "p_ppm": 400315,
+     "opposite_seasons": 22
+    },
+    {
+     "level_mm": 260,
+     "p_ppm": 497097,
+     "opposite_seasons": 21
+    }
+   ]
+  },
+  {
+   "location": "khonkaen",
+   "season": "mjjaso",
+   "peril": "drought",
+   "offered": true,
+   "seasons": 35,
+   "median_spread": 0.09,
+   "seasons_over_threshold": {
+    "1": 0,
+    "0.25": 0,
+    "0.4": 0,
+    "0.5": 0,
+    "0.75": 0
+   },
+   "per_level": [
+    {
+     "level_mm": 783,
+     "p_ppm": 5048,
+     "opposite_seasons": 0
+    },
+    {
+     "level_mm": 811,
+     "p_ppm": 10049,
+     "opposite_seasons": 0
+    },
+    {
+     "level_mm": 829,
+     "p_ppm": 15073,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 842,
+     "p_ppm": 19858,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 863,
+     "p_ppm": 30119,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 878,
+     "p_ppm": 39720,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 891,
+     "p_ppm": 49809,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 916,
+     "p_ppm": 74451,
+     "opposite_seasons": 5
+    },
+    {
+     "level_mm": 936,
+     "p_ppm": 99662,
+     "opposite_seasons": 5
+    },
+    {
+     "level_mm": 967,
+     "p_ppm": 149151,
+     "opposite_seasons": 6
+    },
+    {
+     "level_mm": 993,
+     "p_ppm": 200463,
+     "opposite_seasons": 9
+    },
+    {
+     "level_mm": 1015,
+     "p_ppm": 250354,
+     "opposite_seasons": 9
+    },
+    {
+     "level_mm": 1035,
+     "p_ppm": 300131,
+     "opposite_seasons": 9
+    },
+    {
+     "level_mm": 1072,
+     "p_ppm": 400233,
+     "opposite_seasons": 6
+    },
+    {
+     "level_mm": 1107,
+     "p_ppm": 499268,
+     "opposite_seasons": 11
+    }
+   ]
+  },
+  {
+   "location": "khonkaen",
+   "season": "mjjaso",
+   "peril": "flood",
+   "offered": true,
+   "seasons": 35,
+   "median_spread": 0.225,
+   "seasons_over_threshold": {
+    "1": 0,
+    "0.25": 16,
+    "0.4": 9,
+    "0.5": 4,
+    "0.75": 0
+   },
+   "per_level": [
+    {
+     "level_mm": 212,
+     "p_ppm": 5024,
+     "opposite_seasons": 1
+    },
+    {
+     "level_mm": 195,
+     "p_ppm": 10203,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 186,
+     "p_ppm": 14832,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 179,
+     "p_ppm": 19828,
+     "opposite_seasons": 1
+    },
+    {
+     "level_mm": 169,
+     "p_ppm": 29971,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 162,
+     "p_ppm": 39961,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 157,
+     "p_ppm": 49026,
+     "opposite_seasons": 4
+    },
+    {
+     "level_mm": 147,
+     "p_ppm": 73534,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 139,
+     "p_ppm": 101236,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 129,
+     "p_ppm": 149705,
+     "opposite_seasons": 5
+    },
+    {
+     "level_mm": 121,
+     "p_ppm": 202783,
+     "opposite_seasons": 6
+    },
+    {
+     "level_mm": 115,
+     "p_ppm": 252697,
+     "opposite_seasons": 8
+    },
+    {
+     "level_mm": 110,
+     "p_ppm": 301660,
+     "opposite_seasons": 11
+    },
+    {
+     "level_mm": 102,
+     "p_ppm": 394532,
+     "opposite_seasons": 11
+    },
+    {
+     "level_mm": 94,
+     "p_ppm": 503999,
+     "opposite_seasons": 13
+    }
+   ]
+  },
+  {
+   "location": "cantho",
+   "season": "mjjason",
+   "peril": "drought",
+   "offered": false,
+   "seasons": 35,
+   "median_spread": 0.222,
+   "seasons_over_threshold": {
+    "1": 0,
+    "0.25": 14,
+    "0.4": 4,
+    "0.5": 2,
+    "0.75": 0
+   },
+   "per_level": [
+    {
+     "level_mm": 974,
+     "p_ppm": 5034,
+     "opposite_seasons": 1
+    },
+    {
+     "level_mm": 1023,
+     "p_ppm": 10030,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 1054,
+     "p_ppm": 14913,
+     "opposite_seasons": 4
+    },
+    {
+     "level_mm": 1079,
+     "p_ppm": 20115,
+     "opposite_seasons": 5
+    },
+    {
+     "level_mm": 1115,
+     "p_ppm": 30022,
+     "opposite_seasons": 7
+    },
+    {
+     "level_mm": 1143,
+     "p_ppm": 40046,
+     "opposite_seasons": 8
+    },
+    {
+     "level_mm": 1166,
+     "p_ppm": 50013,
+     "opposite_seasons": 9
+    },
+    {
+     "level_mm": 1212,
+     "p_ppm": 75208,
+     "opposite_seasons": 10
+    },
+    {
+     "level_mm": 1248,
+     "p_ppm": 100268,
+     "opposite_seasons": 14
+    },
+    {
+     "level_mm": 1305,
+     "p_ppm": 150096,
+     "opposite_seasons": 13
+    },
+    {
+     "level_mm": 1352,
+     "p_ppm": 200397,
+     "opposite_seasons": 14
+    },
+    {
+     "level_mm": 1393,
+     "p_ppm": 250439,
+     "opposite_seasons": 13
+    },
+    {
+     "level_mm": 1430,
+     "p_ppm": 299745,
+     "opposite_seasons": 15
+    },
+    {
+     "level_mm": 1500,
+     "p_ppm": 400492,
+     "opposite_seasons": 16
+    },
+    {
+     "level_mm": 1567,
+     "p_ppm": 500558,
+     "opposite_seasons": 11
+    }
+   ]
+  },
+  {
+   "location": "cantho",
+   "season": "mjjason",
+   "peril": "flood",
+   "offered": false,
+   "seasons": 35,
+   "median_spread": 0.316,
+   "seasons_over_threshold": {
+    "1": 2,
+    "0.25": 22,
+    "0.4": 13,
+    "0.5": 9,
+    "0.75": 2
+   },
+   "per_level": [
+    {
+     "level_mm": 201,
+     "p_ppm": 5083,
+     "opposite_seasons": 1
+    },
+    {
+     "level_mm": 185,
+     "p_ppm": 10218,
+     "opposite_seasons": 1
+    },
+    {
+     "level_mm": 176,
+     "p_ppm": 15119,
+     "opposite_seasons": 1
+    },
+    {
+     "level_mm": 170,
+     "p_ppm": 19619,
+     "opposite_seasons": 1
+    },
+    {
+     "level_mm": 160,
+     "p_ppm": 30238,
+     "opposite_seasons": 1
+    },
+    {
+     "level_mm": 153,
+     "p_ppm": 40865,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 148,
+     "p_ppm": 50614,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 139,
+     "p_ppm": 74148,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 132,
+     "p_ppm": 99394,
+     "opposite_seasons": 4
+    },
+    {
+     "level_mm": 122,
+     "p_ppm": 149758,
+     "opposite_seasons": 8
+    },
+    {
+     "level_mm": 115,
+     "p_ppm": 197844,
+     "opposite_seasons": 9
+    },
+    {
+     "level_mm": 109,
+     "p_ppm": 249279,
+     "opposite_seasons": 12
+    },
+    {
+     "level_mm": 104,
+     "p_ppm": 300179,
+     "opposite_seasons": 15
+    },
+    {
+     "level_mm": 96,
+     "p_ppm": 397540,
+     "opposite_seasons": 18
+    },
+    {
+     "level_mm": 89,
+     "p_ppm": 497709,
+     "opposite_seasons": 20
+    }
+   ]
+  },
+  {
+   "location": "iloilo",
+   "season": "jjason",
+   "peril": "drought",
+   "offered": true,
+   "seasons": 35,
+   "median_spread": 0.093,
+   "seasons_over_threshold": {
+    "1": 0,
+    "0.25": 6,
+    "0.4": 0,
+    "0.5": 0,
+    "0.75": 0
+   },
+   "per_level": [
+    {
+     "level_mm": 955,
+     "p_ppm": 5031,
+     "opposite_seasons": 0
+    },
+    {
+     "level_mm": 1003,
+     "p_ppm": 9993,
+     "opposite_seasons": 0
+    },
+    {
+     "level_mm": 1034,
+     "p_ppm": 14952,
+     "opposite_seasons": 0
+    },
+    {
+     "level_mm": 1058,
+     "p_ppm": 20019,
+     "opposite_seasons": 0
+    },
+    {
+     "level_mm": 1094,
+     "p_ppm": 30072,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 1121,
+     "p_ppm": 39879,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 1144,
+     "p_ppm": 49985,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 1189,
+     "p_ppm": 74982,
+     "opposite_seasons": 6
+    },
+    {
+     "level_mm": 1224,
+     "p_ppm": 99643,
+     "opposite_seasons": 6
+    },
+    {
+     "level_mm": 1281,
+     "p_ppm": 150152,
+     "opposite_seasons": 5
+    },
+    {
+     "level_mm": 1327,
+     "p_ppm": 200121,
+     "opposite_seasons": 4
+    },
+    {
+     "level_mm": 1367,
+     "p_ppm": 249631,
+     "opposite_seasons": 4
+    },
+    {
+     "level_mm": 1404,
+     "p_ppm": 299648,
+     "opposite_seasons": 11
+    },
+    {
+     "level_mm": 1473,
+     "p_ppm": 400445,
+     "opposite_seasons": 10
+    },
+    {
+     "level_mm": 1539,
+     "p_ppm": 500493,
+     "opposite_seasons": 9
+    }
+   ]
+  },
+  {
+   "location": "iloilo",
+   "season": "jjason",
+   "peril": "flood",
+   "offered": false,
+   "seasons": 35,
+   "median_spread": 0.187,
+   "seasons_over_threshold": {
+    "1": 0,
+    "0.25": 17,
+    "0.4": 13,
+    "0.5": 8,
+    "0.75": 2
+   },
+   "per_level": [
+    {
+     "level_mm": 249,
+     "p_ppm": 4916,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 230,
+     "p_ppm": 10050,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 219,
+     "p_ppm": 15187,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 212,
+     "p_ppm": 19737,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 201,
+     "p_ppm": 29750,
+     "opposite_seasons": 6
+    },
+    {
+     "level_mm": 193,
+     "p_ppm": 40032,
+     "opposite_seasons": 6
+    },
+    {
+     "level_mm": 187,
+     "p_ppm": 49956,
+     "opposite_seasons": 6
+    },
+    {
+     "level_mm": 176,
+     "p_ppm": 74704,
+     "opposite_seasons": 8
+    },
+    {
+     "level_mm": 168,
+     "p_ppm": 99702,
+     "opposite_seasons": 9
+    },
+    {
+     "level_mm": 156,
+     "p_ppm": 152317,
+     "opposite_seasons": 10
+    },
+    {
+     "level_mm": 148,
+     "p_ppm": 200318,
+     "opposite_seasons": 11
+    },
+    {
+     "level_mm": 141,
+     "p_ppm": 252625,
+     "opposite_seasons": 10
+    },
+    {
+     "level_mm": 136,
+     "p_ppm": 296516,
+     "opposite_seasons": 10
+    },
+    {
+     "level_mm": 126,
+     "p_ppm": 401367,
+     "opposite_seasons": 11
+    },
+    {
+     "level_mm": 118,
+     "p_ppm": 500479,
+     "opposite_seasons": 13
+    }
+   ]
+  }
+ ]
+}

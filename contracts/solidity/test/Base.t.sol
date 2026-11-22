@@ -51,6 +51,8 @@ abstract contract Base is Test {
     uint256 constant HORIZON = 400 days;
     uint256 constant MIN_PAYOUT = 10 * USD;
     uint256 constant FEE_BPS = 200;
+    uint256 constant MAX_SPREAD = 5_000; // 50% of the mean
+    uint256 constant CONTEST_TIMEOUT = 6 hours;
 
     function setUp() public virtual {
         (seasonStart, seasonEnd) = SeasonCalendar.window(YEAR, 6, 1, 9, 30);
@@ -60,7 +62,7 @@ abstract contract Base is Test {
         engine = new DryspellEngineSol(owner);
         vault = new UnderwriterVault(IERC20(address(token)), IDryspellEngine(address(engine)), 1 days, owner);
         oracle = new WeatherOracle(
-            IERC20(address(token)), owner, resolver, DATA_LAG, DISPUTE_WINDOW, RESOLVER_TIMEOUT, REPORT_WINDOW, MIN_BOND, BOND_BPS, REWARD
+            IERC20(address(token)), owner, resolver, DATA_LAG, DISPUTE_WINDOW, RESOLVER_TIMEOUT, REPORT_WINDOW, MIN_BOND, BOND_BPS, REWARD, MAX_SPREAD
         );
         book = new PolicyBook(
             IERC20(address(token)),
@@ -71,7 +73,8 @@ abstract contract Base is Test {
             LEAD,
             HORIZON,
             MIN_PAYOUT,
-            FEE_BPS
+            FEE_BPS,
+            CONTEST_TIMEOUT
         );
 
         vm.startPrank(owner);

@@ -24,12 +24,14 @@ export interface PolicyRow {
   settleBlock?: bigint;
   triggered?: boolean;
   settlementX2?: bigint;
+  contested?: { era5X: bigint; powerX: bigint; spreadBps: bigint; oppositeSides: boolean };
 }
 
-export const STATUS = ["", "Active", "Paid out", "No payout (expired)", "Refunded"] as const;
+export const STATUS = ["", "Active", "Paid out", "No payout (expired)", "Refunded", "Contested: with resolver"] as const;
 
 const bought = parseAbiItem("event PolicyBought(uint256 indexed policyId, address indexed holder, uint256 indexed roundId, uint256 tableId, uint256 year, uint256 trigger, uint256 payout, uint256 premium, bool replay)");
 const settled = parseAbiItem("event PolicySettled(uint256 indexed policyId, address indexed holder, bool triggered, uint256 payout, uint256 settlementX2, bool replay)");
+const contested = parseAbiItem("event PolicyContested(uint256 indexed policyId, address indexed holder, uint256 era5X, uint256 powerX, uint256 spreadBps, bool oppositeSides, bool replay)");
 const refunded = parseAbiItem("event PolicyRefunded(uint256 indexed policyId, address indexed holder, uint256 premium, bool replay)");
 
 export function usePolicies() {
@@ -46,8 +48,8 @@ export function usePolicies() {
     refetchInterval: 20_000,
     queryFn: async () => {
       const common = { address: addr.book, fromBlock: START_BLOCK, toBlock: "latest" as const };
-      const [b, s, r] = await Promise.all([publicClient.getLogs({ ...common, event: bought }), publicClient.getLogs({ ...common, event: settled }), publicClient.getLogs({ ...common, event: refunded })]);
-      return { b, s, r };
+      const [b, s, r, c] = await Promise.all([publicClient.getLogs({ ...common, event: bought }), publicClient.getLogs({ ...common, event: settled }), publicClient.getLogs({ ...common, event: refunded }), publicClient.getLogs({ ...common, event: contested })]);
+      return { b, s, r, c };
     },
   });
 
@@ -61,6 +63,7 @@ export function usePolicies() {
     const bl = logs.data?.b.find((l) => Number(l.args.policyId) === id);
     const sl = logs.data?.s.find((l) => Number(l.args.policyId) === id);
     const rl = logs.data?.r.find((l) => Number(l.args.policyId) === id);
+    const cl = logs.data?.c.find((l) => Number(l.args.policyId) === id);
     rows.push({
       id,
       holder: p.holder,
@@ -80,6 +83,7 @@ export function usePolicies() {
       settleBlock: (sl ?? rl)?.blockNumber ?? undefined,
       triggered: sl?.args.triggered,
       settlementX2: sl?.args.settlementX2,
+      contested: cl ? { era5X: cl.args.era5X!, powerX: cl.args.powerX!, spreadBps: cl.args.spreadBps!, oppositeSides: cl.args.oppositeSides! } : undefined,
     });
   });
   const place = (r: PolicyRow) => {

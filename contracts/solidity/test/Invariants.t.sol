@@ -107,7 +107,8 @@ contract Handler is Test {
         deal(address(sys.token()), rep, sys.token().balanceOf(rep) + bond, true);
         vm.startPrank(rep);
         sys.token().approve(address(sys.oracle()), bond);
-        try sys.oracle().propose(0, year, uint32(total), uint32(total / 2), uint32(total), uint32(total / 2), bond) {} catch {
+        uint256 pow = (total * (50 + (outcome / 3) % 100)) / 100; // the second source reads 50%..149% of the first
+        try sys.oracle().propose(0, year, uint32(total), uint32(total / 2), uint32(pow), uint32(pow / 2), bond) {} catch {
             vm.stopPrank();
             return;
         }
@@ -138,13 +139,25 @@ contract Handler is Test {
             sys.oracle().voidDisputed(rid);
         }
 
-        IWeatherOracle.State fin = sys.oracle().roundState(rid);
+        _settleAll(year, sys.oracle().roundState(rid), outcome);
+    }
+
+    /// settle (or refund) every policy of one season; contested ones go to the resolver
+    function _settleAll(uint256 year, IWeatherOracle.State fin, uint256 outcome) internal {
         uint256 n = book.policyCount();
         for (uint256 i = 1; i <= n; ++i) {
             PolicyBook.Policy memory p = book.getPolicy(i);
             if (p.status != PolicyBook.Status.Active || p.year != year) continue;
-            if (fin == IWeatherOracle.State.Final) book.settle(i);
-            else if (fin == IWeatherOracle.State.Void) book.refund(i);
+            if (fin == IWeatherOracle.State.Final) {
+                book.settle(i);
+                if (book.getPolicy(i).status == PolicyBook.Status.Contested) {
+                    address res = sys.resolver();
+                    vm.prank(res);
+                    book.resolveContested(i, (outcome + i) % 2 == 0);
+                }
+            } else if (fin == IWeatherOracle.State.Void) {
+                book.refund(i);
+            }
             settled++;
         }
     }
@@ -184,13 +197,13 @@ contract InvariantsTest is Base {
         assertGe(vault.totalAssets(), engine.totalExposure());
     }
 
-    /// the engine's exposure book equals the payouts of policies that are still active
+    /// the engine's exposure book equals the payouts of policies that are still active or contested
     function invariant_exposure_equals_active_payouts() public view {
         uint256 sum;
         uint256 n = book.policyCount();
         for (uint256 i = 1; i <= n; ++i) {
             PolicyBook.Policy memory p = book.getPolicy(i);
-            if (p.status == PolicyBook.Status.Active) sum += p.payout;
+            if (p.status == PolicyBook.Status.Active || p.status == PolicyBook.Status.Contested) sum += p.payout;
         }
         assertEq(engine.totalExposure(), sum);
     }

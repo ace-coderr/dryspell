@@ -31,7 +31,8 @@ contract PolicyBook is Ownable2Step, ReentrancyGuard {
         Active,
         PaidOut, // trigger crossed, payout sent
         Expired, // trigger not crossed, no payout
-        Refunded // round was voided, premium returned
+        Refunded, // round was voided, premium returned
+        Contested // the two sources disagree: waiting for the resolver
     }
 
     struct Policy {
@@ -55,6 +56,8 @@ contract PolicyBook is Ownable2Step, ReentrancyGuard {
     uint256 public immutable maxHorizon;
     /// @notice smallest payout accepted (blocks dust spam)
     uint256 public immutable minPayout;
+    /// @notice time the resolver has to rule on a contested policy before it can be refunded
+    uint256 public immutable contestTimeout;
     /// @notice share of premium (bps) paid from the vault to the oracle reward pool when a policy settles
     uint256 public immutable oracleFeeBps;
 
@@ -64,6 +67,8 @@ contract PolicyBook is Ownable2Step, ReentrancyGuard {
     /// @notice total payout sold per round (drives the oracle bond size)
     mapping(uint256 => uint256) public roundExposure;
     mapping(uint256 => uint256) public roundPolicies;
+    /// @notice when a policy was marked contested (0 if it never was)
+    mapping(uint256 => uint256) public contestedAt;
 
     error ZeroAddress();
     error PausedError();
@@ -79,6 +84,10 @@ contract PolicyBook is Ownable2Step, ReentrancyGuard {
     error RoundNotFinal(IWeatherOracle.State state);
     error RoundNotVoid(IWeatherOracle.State state);
     error UnknownPolicy();
+    error NotResolver();
+    error NotContested(Status status);
+    error ContestWindowClosed();
+    error ContestWindowOpen(uint256 endsAt);
 
     event PolicyBought(
         uint256 indexed policyId,
@@ -100,6 +109,17 @@ contract PolicyBook is Ownable2Step, ReentrancyGuard {
         bool replay
     );
     event PolicyRefunded(uint256 indexed policyId, address indexed holder, uint256 premium, bool replay);
+    /// @dev the two sources fell on opposite sides of the trigger, or differ by more than the allowed spread
+    event PolicyContested(
+        uint256 indexed policyId,
+        address indexed holder,
+        uint256 era5X,
+        uint256 powerX,
+        uint256 spreadBps,
+        bool oppositeSides,
+        bool replay
+    );
+    event ContestedRuled(uint256 indexed policyId, bool pay, bool replay);
     event PausedSet(bool paused);
 
     constructor(
@@ -111,7 +131,8 @@ contract PolicyBook is Ownable2Step, ReentrancyGuard {
         uint256 leadTime_,
         uint256 maxHorizon_,
         uint256 minPayout_,
-        uint256 oracleFeeBps_
+        uint256 oracleFeeBps_,
+        uint256 contestTimeout_
     ) Ownable(owner_) {
         if (
             address(token_) == address(0) || address(engine_) == address(0) || address(vault_) == address(0)
@@ -125,6 +146,7 @@ contract PolicyBook is Ownable2Step, ReentrancyGuard {
         maxHorizon = maxHorizon_;
         minPayout = minPayout_;
         oracleFeeBps = oracleFeeBps_;
+        contestTimeout = contestTimeout_;
     }
 
     // ------------------------------------------------------------------ admin
@@ -203,6 +225,9 @@ contract PolicyBook is Ownable2Step, ReentrancyGuard {
         uint256 rid = roundIdOf(p.tableId, p.year);
         (bool triggered, uint256 settlementX2) = _evaluate(p, rid);
 
+        // two sources that disagree never pay automatically: the resolver rules (see resolveContested)
+        if (_contest(policyId, p, rid)) return;
+
         // effects first
         p.status = triggered ? Status.PaidOut : Status.Expired;
         _payAndRelease(p, triggered);
@@ -230,6 +255,67 @@ contract PolicyBook is Ownable2Step, ReentrancyGuard {
             token.forceApprove(address(oracle), fee);
             oracle.fundRewards(fee);
         }
+    }
+
+    struct Assessment {
+        uint256 era5X;
+        uint256 powerX;
+        uint256 spreadBps;
+        bool opposite;
+    }
+
+    /// @dev how the two sources compare against this policy's trigger (all in 0.1 mm)
+    function _assess(Policy storage p, uint256 rid) internal view returns (Assessment memory a) {
+        bool drought = p.tableId % 2 == 0;
+        (a.era5X, a.powerX) = oracle.calibratedSources(rid, drought ? 0 : 1);
+        uint256 t10 = uint256(p.trigger) * 10;
+        bool eSays = drought ? a.era5X <= t10 : a.era5X >= t10;
+        bool wSays = drought ? a.powerX <= t10 : a.powerX >= t10;
+        a.opposite = eSays != wSays;
+        uint256 sum = a.era5X + a.powerX; // twice the mean
+        uint256 diff = a.era5X > a.powerX ? a.era5X - a.powerX : a.powerX - a.era5X;
+        a.spreadBps = sum == 0 ? 0 : (diff * 20_000) / sum; // |e-w| / mean, in bps
+    }
+
+    /// @dev returns true (and parks the policy) if the sources are on opposite sides of the trigger
+    ///      or their calibrated readings differ by more than the oracle's max spread
+    function _contest(uint256 policyId, Policy storage p, uint256 rid) internal returns (bool) {
+        Assessment memory a = _assess(p, rid);
+        if (!a.opposite && a.spreadBps <= oracle.maxSpreadBps()) return false;
+        p.status = Status.Contested;
+        contestedAt[policyId] = block.timestamp;
+        emit PolicyContested(policyId, p.holder, a.era5X, a.powerX, a.spreadBps, a.opposite, oracle.isReplay(rid));
+        return true;
+    }
+
+    /// @notice the named resolver rules on a contested policy: pay it or not. This is the trusted step
+    ///         the v1 oracle uses where the two sources disagree.
+    function resolveContested(uint256 policyId, bool pay) external nonReentrant {
+        if (msg.sender != oracle.resolver()) revert NotResolver();
+        Policy storage p = _policies[policyId];
+        if (p.holder == address(0)) revert UnknownPolicy();
+        if (p.status != Status.Contested) revert NotContested(p.status);
+        if (block.timestamp > contestedAt[policyId] + contestTimeout) revert ContestWindowClosed();
+        uint256 rid = roundIdOf(p.tableId, p.year);
+        p.status = pay ? Status.PaidOut : Status.Expired;
+        _payAndRelease(p, pay);
+        emit ContestedRuled(policyId, pay, oracle.isReplay(rid));
+        emit PolicySettled(policyId, p.holder, pay, pay ? p.payout : 0, 0, oracle.isReplay(rid));
+    }
+
+    /// @notice if the resolver does not rule in time, anyone can send the premium back to the holder
+    function refundContested(uint256 policyId) external nonReentrant {
+        Policy storage p = _policies[policyId];
+        if (p.holder == address(0)) revert UnknownPolicy();
+        if (p.status != Status.Contested) revert NotContested(p.status);
+        uint256 endsAt = contestedAt[policyId] + contestTimeout;
+        if (block.timestamp <= endsAt) revert ContestWindowOpen(endsAt);
+        p.status = Status.Refunded;
+        address holder = p.holder;
+        uint256 premium = p.premium;
+        engine.release(p.tableId, p.payout);
+        vault.payOut(holder, premium);
+        emit PolicyRefunded(policyId, holder, premium, oracle.isReplay(roundIdOf(p.tableId, p.year)));
     }
 
     function settleMany(uint256[] calldata policyIds) external {

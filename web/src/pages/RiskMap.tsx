@@ -6,6 +6,7 @@ import { locations, perilOf, regions, type PerilName, type Season } from "../lib
 import { breakdown, interpolate, type EngineParams } from "../lib/pricing";
 import { pct } from "../lib/format";
 import { Loading } from "../components/States";
+import { assess, calibrateFor, MAX_SPREAD_BPS_DEFAULT } from "../lib/contest";
 
 export default function RiskMap() {
   const [locId, setLocId] = useState("jodhpur");
@@ -25,6 +26,15 @@ export default function RiskMap() {
     const ip = interpolate(peril, rows, row.level_mm);
     return ip ? breakdown(ip.p, ip.se, ep) : null;
   }, [ep, rows, row, peril]);
+
+  // how many of the 35 seasons would have put the two sources on opposite sides of this trigger, or too far apart
+  const split = useMemo(() => {
+    const rowsH = season.history.map((h) => {
+      const { eraX, powX } = calibrateFor(pd, peril === "drought" ? h.total_era5_mm : h.max3_era5_mm, peril === "drought" ? h.total_power_mm : h.max3_power_mm);
+      return assess(peril, row.level_mm, eraX, powX, MAX_SPREAD_BPS_DEFAULT);
+    });
+    return { opposite: rowsH.filter((a) => a.opposite).length, contested: rowsH.filter((a) => a.contested).length, n: rowsH.length };
+  }, [season, pd, peril, row.level_mm]);
 
   const pick = (id: string) => {
     setLocId(id);
@@ -110,7 +120,7 @@ export default function RiskMap() {
             <div className="grid g3">
               <div className="stat"><div className="k">Fitted chance per season</div><div className="v">{pct(row.p_ppm)}</div><div className="s">smooth curve, used for pricing</div></div>
               <div className="stat"><div className="k">Actually happened</div><div className="v">{pct(row.p_empirical_ppm, 1)}</div><div className="s">{Math.round((row.p_empirical_ppm / 1e6) * season.years)} of {season.years} seasons</div></div>
-              <div className="stat"><div className="k">Sources would split</div><div className="v">{pct(row.source_split_ppm, 0)}</div><div className="s">of seasons: one pays, one does not</div></div>
+              <div className="stat"><div className="k">Sources on opposite sides</div><div className="v">{split.opposite} of {split.n}</div><div className="s">seasons · {split.contested} would be contested (opposite sides or &gt;50% apart) and go to the resolver</div></div>
             </div>
             <hr className="hr" />
             {!ep ? <Loading label="Reading engine parameters…" /> : parts ? (

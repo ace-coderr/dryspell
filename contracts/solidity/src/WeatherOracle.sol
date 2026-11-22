@@ -51,11 +51,14 @@ contract WeatherOracle is IWeatherOracle, Ownable2Step, ReentrancyGuard {
     uint256 public immutable bondBps;
     /// @notice reward paid to a reporter whose report finalises undisputed (capped by the reward pool)
     uint256 public immutable rewardPerRound;
+    /// @notice if the two calibrated source readings differ by more than this share of their mean (bps),
+    ///         policies on the round are CONTESTED and go to the resolver instead of paying automatically
+    uint256 public immutable override maxSpreadBps;
     uint256 public constant VOID_PENALTY_BPS = 1_000; // 10% of each bond when the resolver times out
     uint256 public constant MAX_READING = 10_000_000; // 1,000,000 mm in 0.1 mm units; plain sanity bound
     uint256 public constant PPM = 1_000_000;
 
-    address public resolver;
+    address public override resolver;
     address public book;
     bool public bookLocked;
     uint256 public rewardPool;
@@ -164,7 +167,8 @@ contract WeatherOracle is IWeatherOracle, Ownable2Step, ReentrancyGuard {
         uint256 reportWindow_,
         uint256 minBond_,
         uint256 bondBps_,
-        uint256 rewardPerRound_
+        uint256 rewardPerRound_,
+        uint256 maxSpreadBps_
     ) Ownable(owner_) {
         if (address(bondToken_) == address(0) || resolver_ == address(0)) revert ZeroAddress();
         bondToken = bondToken_;
@@ -176,6 +180,7 @@ contract WeatherOracle is IWeatherOracle, Ownable2Step, ReentrancyGuard {
         minBond = minBond_;
         bondBps = bondBps_;
         rewardPerRound = rewardPerRound_;
+        maxSpreadBps = maxSpreadBps_;
         emit ResolverSet(resolver_);
     }
 
@@ -223,13 +228,13 @@ contract WeatherOracle is IWeatherOracle, Ownable2Step, ReentrancyGuard {
     ///         in every event and in the app.
     function openReplay(uint256 locSeasonId, uint256 year) external onlyOwner {
         if (!replayAllowed()) revert ReplayDisabled();
-        uint256 roundId = _roundId(locSeasonId, year);
+        uint256 rid = _roundId(locSeasonId, year);
         (, uint256 end) = _window(locSeasonId, year);
         if (block.timestamp < end + dataLag) revert SeasonNotOver();
-        if (_rounds[roundId].state != State.None) revert WrongState(_rounds[roundId].state);
-        _replay[roundId] = true;
-        _replayOpenedAt[roundId] = block.timestamp;
-        emit ReplayOpened(roundId);
+        if (_rounds[rid].state != State.None) revert WrongState(_rounds[rid].state);
+        _replay[rid] = true;
+        _replayOpenedAt[rid] = block.timestamp;
+        emit ReplayOpened(rid);
     }
 
     // ------------------------------------------------------------------- views
@@ -299,6 +304,19 @@ contract WeatherOracle is IWeatherOracle, Ownable2Step, ReentrancyGuard {
         Round storage r = _rounds[id];
         if (r.state != State.Final) revert WrongState(r.state);
         return (r.totalX2, r.max3X2);
+    }
+
+    /// @notice the two sources' readings after calibration, in 0.1 mm units, for one peril
+    ///         (peril 0 uses the season totals, peril 1 the maximum 3-day rainfall). Only once the round is final.
+    function calibratedSources(uint256 id, uint8 peril) external view override returns (uint256 era5X, uint256 powerX) {
+        Round storage r = _rounds[id];
+        if (r.state != State.Final) revert WrongState(r.state);
+        Calibration memory c = calibration[id >> 16][peril];
+        if (!c.set) revert CalibrationMissing();
+        uint256 e = peril == 0 ? r.era5Total : r.era5Max3;
+        uint256 p = peril == 0 ? r.powerTotal : r.powerMax3;
+        era5X = (e * c.era5Ppm) / PPM;
+        powerX = (p * c.powerPpm) / PPM;
     }
 
     /// @notice what the settlement values would be for a set of readings (pure convenience for UIs and verifiers)

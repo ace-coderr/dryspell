@@ -54,3 +54,34 @@ Kano, Sylhet and Can Tho fail on both perils: ERA5 and NASA POWER do not agree o
 - Stationary climate assumed; no trend or ENSO conditioning.
 - Both sources are gridded products tens of kilometres wide. They miss local convective storms, so a farm can suffer while the grid cell does not (basis risk). The backtester shows this explicitly.
 - Calibration factors are fixed by the deployer in v1.
+
+## Source disagreement, season by season
+
+`pnpm --filter @dryspell/data run disagree` writes `generated/disagreement.json`: for every location, season, peril and trigger level, in how many of the 35 seasons ERA5 alone and NASA POWER alone (each after calibration) fall on **opposite sides of the trigger**. Pooled over the 16 offered covers, the sources decide a trigger differently in **8.4%** of seasons at a ~3% trigger, **17.9%** at ~10% and **23.8%** at ~25%.
+
+Per cover, of 35 seasons (triggers whose fitted chance is about 3%, 10% and 25%):
+
+| Cover | ~3% | ~10% | ~25% |
+| --- | ---: | ---: | ---: |
+| Niamey monsoon, drought | 3 | 6 | 9 |
+| Niamey monsoon, flood | 2 | 8 | 8 |
+| Tamale rains, drought | 3 | 8 | 11 |
+| Garissa long rains, drought | 5 | 7 | 11 |
+| Garissa short rains, drought | 3 | 3 | 3 |
+| Garissa short rains, flood | 2 | 1 | 4 |
+| Dodoma rains, drought | 2 | 4 | 6 |
+| Dodoma rains, flood | 3 | 9 | 10 |
+| Gulu first rains, drought | 4 | 11 | 17 |
+| Gulu second rains, drought | 6 | 11 | 10 |
+| Jodhpur monsoon, drought | 2 | 5 | 5 |
+| Jodhpur monsoon, flood | 3 | 8 | 7 |
+| Latur monsoon, drought | 2 | 5 | 11 |
+| Khon Kaen rains, drought | 2 | 5 | 9 |
+| Khon Kaen rains, flood | 3 | 3 | 8 |
+| Iloilo wet season, drought | 2 | 6 | 4 |
+
+The relative spread between the two calibrated readings (|ERA5 − POWER| ÷ their mean) has a median of 23% and a 90th percentile of 68%; 20% of season readings are more than 50% apart.
+
+**The contested rule.** On-chain, a policy does not pay automatically when the two calibrated readings are on opposite sides of its trigger or more than `maxSpreadBps` (50%) of their mean apart. It becomes *contested* and the named resolver decides; if the resolver is silent past the timeout, anyone can refund the premium.
+
+**Why the Garissa 2025 gap is not a bug.** For 1 Oct to 31 Dec 2025 the raw APIs return ERA5 19.2 mm over 92 days (3 days above 1 mm, grid cell −0.5°, 39.75°) and NASA POWER 80.8 mm (17 days above 1 mm, point −0.45°, 39.65°); both in mm per day, UTC, no missing days, identical to the committed files. ERA5 is a reanalysis model that under-produces light rain in this region; POWER's bias-corrected product blends satellite rainfall. The calibration factors for that season (1.48 and 0.75) exist because of exactly this.
