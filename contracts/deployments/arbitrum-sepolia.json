@@ -53,6 +53,9 @@
   "replayRound": {
     "roundId": 2033639,
     "label": "Replay: Garissa short rains 2023",
-    "proposeTx": "0xb05a66ca3cfcab869fdcbf31f1e78cfb277a4dd954811ae79b67cf5b1593ad54"
+    "proposeTx": "0xb05a66ca3cfcab869fdcbf31f1e78cfb277a4dd954811ae79b67cf5b1593ad54",
+    "finalizeTx": "0xf23604a2c483c65049dd7749794e85364bd3ca06a45eb48b306216c9448f5616",
+    "settleTx": "0x07a92a770b76cfeb6bc4b6d90c923669925f6ccc3834169bd4ff483b36009b03",
+    "outcome": "Final at 122.7 mm max 3-day; policy 2 paid 500 tUSD automatically (sources agreed, no resolver)."
   }
 }
