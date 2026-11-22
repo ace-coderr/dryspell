@@ -41,7 +41,7 @@
     {
       "id": 2,
       "kind": "replay",
-      "label": "Replay: Garissa short rains 2023 (El Nino floods), flood, trigger 103 mm max 3-day, payout 500 tUSD. After 1991-2019 calibration: ERA5 128.2 mm and POWER 117.3 mm, both above the trigger.",
+      "label": "Replay: Garissa short rains 2023 (El Nino floods), flood, trigger 103 mm max 3-day, payout 500 tUSD. After 1991-2019 calibration: ERA5 128.1 mm and POWER 117.3 mm, both above the trigger.",
       "tx": "0x2651356dedefb39f778697ce4b2038a1c9a5ce3e62f0c0b4e2b3274cbfb42fb3"
     }
   ],

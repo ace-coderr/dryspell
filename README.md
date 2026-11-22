@@ -17,6 +17,8 @@ The pricing and solvency engine is written twice, with one ABI:
 
 The app shows which engine is live, read from the chain. Stylus is never claimed unless the deployed engine answers `"stylus"`. See [contracts/solidity/README.md](contracts/solidity/README.md).
 
+See [AUDIT.md](AUDIT.md) for the security and honesty review of this deployment, including what is still weak.
+
 ## Layout
 
 | Path | Contents |

@@ -56,9 +56,9 @@ An earlier build calibrated on all 35 seasons, which put 2020-2025 inside their 
 | --- | ---: | ---: |
 | Raw reading (2023) | 115.3 mm | 129.1 mm |
 | Factor | 1.1115 | 0.9088 |
-| Calibrated | 128.2 mm | 117.3 mm |
+| Calibrated (the contract floors to 0.1 mm) | 128.1 mm | 117.3 mm |
 
-The spread is 9% of the mean and both sit above the 103 mm trigger, so the policy pays automatically (the median, 122.8 mm, is also above it). The factors are in the table (`calibration_*_ppm`), so anyone can recompute the settlement value from the two raw readings.
+The spread is 9% of the mean and both sit above the 103 mm trigger, so the policy pays automatically (the median, 122.7 mm, is also above it). The factors are in the table (`calibration_*_ppm`), so anyone can recompute the settlement value from the two raw readings.
 
 **Exceedance table.** For each location, season and peril there are up to 15 whole-mm trigger levels with:
 

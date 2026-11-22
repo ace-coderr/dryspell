@@ -5,13 +5,14 @@ import { addr, chain, explorerTx } from "../lib/chain";
 import { bookAbi, engineAbi, tokenAbi } from "../lib/abi";
 import { allSeasons, locations, perilOf, tableId, roundId, type PerilName, type Season } from "../lib/data";
 import { nextBuyableYear, seasonWindow, fmtDate, LEAD_TIME } from "../lib/season";
-import { fmtUsd, parseUsd, pct, errMessage } from "../lib/format";
+import { fmtUsd, parseUsd, pct } from "../lib/format";
 import { breakdown, type EngineParams } from "../lib/pricing";
 import { loadDaily, seasonSlice } from "../lib/daily";
 import { RainRibbon } from "../components/RainRibbon";
 import { SkyArt } from "../components/Sky";
 import { Features, CtaBand } from "../components/HomeSections";
 import { useTween } from "../lib/tween";
+import { explain } from "../lib/errors";
 import { ReplayTag, Loading } from "../components/States";
 import { waitOk } from "../lib/tx";
 import { useAction } from "../lib/hooks";
@@ -136,7 +137,7 @@ export default function Builder() {
 
   const [start, end] = year ? seasonWindow(season, year) : [0, 0];
   const now = Math.floor(Date.now() / 1000);
-  const buyBlocked = quote.isError ? errMessage(quote.error) : null;
+  const quoteProblem = quote.isError ? explain(quote.error) : null;
   const small = minPayout.data !== undefined && payout < minPayout.data;
   const dir = activePeril === "drought" ? "at or below" : "at or above";
   const ribbonDaily = ribbon
@@ -255,8 +256,11 @@ export default function Builder() {
               </div>
             ) : quote.isLoading ? (
               <Loading label="Pricing on-chain…" />
-            ) : buyBlocked ? (
-              <div className="note bad">The engine will not price this cover: {buyBlocked}</div>
+            ) : quoteProblem ? (
+              <div className="note bad" role="alert">
+                {quoteProblem?.kind === "network" ? quoteProblem.message : <>The engine will not price this cover. {quoteProblem?.message}</>}
+                {quoteProblem?.kind === "network" && <div style={{ marginTop: 10 }}><button className="btn ghost small" onClick={() => quote.refetch()}>Try again</button></div>}
+              </div>
             ) : premium !== undefined && q ? (
               <>
                 <div className="premium-box">

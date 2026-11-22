@@ -328,3 +328,9 @@ main > .wrap:not(.nopad) { padding-bottom: 72px; }
   table.data.stack td > * { text-align: right; }
   table.data.stack td.num { text-align: right; }
 }
+@media (max-width: 700px) {
+  /* long cells get the label on top and the full card width */
+  table.data.stack td[data-label="Cover"], table.data.stack td[data-label="Peril & trigger"], table.data.stack td[data-label="Now"], table.data.stack td[data-label="Action"], table.data.stack td[data-label="Trigger"], table.data.stack td[data-label="Outcome"] { flex-direction: column; align-items: flex-start; text-align: left; gap: 6px; }
+  table.data.stack td[data-label="Cover"] > *, table.data.stack td[data-label="Peril & trigger"] > *, table.data.stack td[data-label="Now"] > *, table.data.stack td[data-label="Action"] > *, table.data.stack td[data-label="Trigger"] > *, table.data.stack td[data-label="Outcome"] > * { text-align: left; }
+  table.data.stack td[data-label="Cover"] b { font-size: 1.05rem; }
+}
