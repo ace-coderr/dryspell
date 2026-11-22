@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { NavLink, Outlet, Link, useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import { useAccount, useConnect, useDisconnect, useSwitchChain } from "wagmi";
-import { chain, addr, explorerAddress, deployment } from "../lib/chain";
+import { addr, chain, deployment, explorerAddress } from "../lib/chain";
 import { useEngineKind } from "../lib/hooks";
 import { short } from "../lib/format";
+import { SkyBackdrop } from "./Sky";
 
 const links = [
   ["/", "Buy cover"],
@@ -19,34 +19,43 @@ const links = [
 export function EngineBadge() {
   const { data, isLoading, isError } = useEngineKind();
   const stylus = data === "stylus";
-  const label = isLoading ? "reading engine…" : isError ? "engine unreadable" : stylus ? "Engine: Stylus (Rust/WASM)" : "Engine: Solidity fallback (Stylus paused)";
+  const label = isLoading ? "reading engine…" : isError ? "engine unreadable" : stylus ? "Engine: Stylus (Rust/WASM)" : "Engine: Solidity fallback";
   return (
-    <span className={`engine ${isLoading ? "load" : stylus ? "stylus" : ""}`} title="Read from the deployed PolicyBook: engine.engineKind(). Stylus is only shown if the chain says so.">
+    <span className={`engine ${isLoading ? "load" : stylus ? "stylus" : ""}`} title="Read from the deployed PolicyBook: engine.engineKind(). Stylus is only shown if the chain says so. Stylus activation is paused on Arbitrum Sepolia.">
       <i /> {label}
     </span>
   );
 }
 
-function WalletButton() {
+export const Logo = ({ size = 26 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden>
+    <rect width="32" height="32" rx="9" fill="#fafaf7" />
+    <path d="M5 21c3.6-8.4 6.6-8.4 9.6-2.8s6.4 4.6 12.4-7" fill="none" stroke="#0a0a0a" strokeWidth="2.6" strokeLinecap="round" />
+    <path d="M5 26h22" stroke="#ff7a2f" strokeWidth="2.2" strokeLinecap="round" />
+  </svg>
+);
+
+/** the navbar pill: becomes the real connected-wallet pill with the address once connected */
+function WalletPill() {
   const { address, chainId, isConnected } = useAccount();
   const { connect, connectors, isPending, error } = useConnect();
   const { disconnect } = useDisconnect();
   const { switchChain, isPending: switching } = useSwitchChain();
   if (!isConnected)
     return (
-      <button className="btn small" disabled={isPending} onClick={() => connect({ connector: connectors[0], chainId: chain.id })} title={error?.message}>
-        {isPending ? "Connecting…" : "Connect wallet"}
+      <button className="wallet-pill cta" disabled={isPending} onClick={() => connect({ connector: connectors[0], chainId: chain.id })} title={error?.message}>
+        {isPending ? "Connecting…" : "Connect Wallet"}
       </button>
     );
   if (chainId !== chain.id)
     return (
-      <button className="btn small" disabled={switching} onClick={() => switchChain({ chainId: chain.id })}>
+      <button className="wallet-pill warn" disabled={switching} onClick={() => switchChain({ chainId: chain.id })}>
         {switching ? "Switching…" : "Switch to Arbitrum Sepolia"}
       </button>
     );
   return (
-    <button className="btn ghost small" onClick={() => disconnect()} title="Disconnect">
-      {short(address!)}
+    <button className="wallet-pill on" onClick={() => disconnect()} title={`${address} · click to disconnect`}>
+      <i /> {short(address!)}
     </button>
   );
 }
@@ -60,37 +69,42 @@ export function Layout() {
   }, [loc.pathname]);
   return (
     <>
+      <SkyBackdrop />
       <a className="skip" href="#main">Skip to content</a>
-      <div className="strip">
-        <div className="wrap">
-          <span>Parametric weather cover · Arbitrum Sepolia testnet · play money only</span>
-          <EngineBadge />
+      <div className="frame">
+        <div className="inner">
+          <div className="strip">
+            <div className="wrap">
+              <span>Parametric weather cover · Arbitrum Sepolia testnet · play money only</span>
+              <EngineBadge />
+            </div>
+          </div>
+          <header className="mast">
+            <div className="wrap">
+              <Link to="/" className="brand" aria-label="Dryspell home">
+                <Logo /> Dryspell
+              </Link>
+              <nav className={`main${open ? " open" : ""}`} aria-label="Main">
+                {links.map(([to, label]) => (
+                  <NavLink key={to} to={to} end={to === "/"} className={({ isActive }) => (isActive ? "active" : "")}>
+                    {label}
+                  </NavLink>
+                ))}
+              </nav>
+              <div className="right">
+                <WalletPill />
+                <button className="btn ghost small menu-btn" aria-expanded={open} aria-label="Menu" onClick={() => setOpen((o) => !o)}>
+                  {open ? "Close" : "Menu"}
+                </button>
+              </div>
+            </div>
+          </header>
+          <main id="main">
+            <Outlet />
+          </main>
+          <Footer />
         </div>
       </div>
-      <header className="mast">
-        <div className="wrap">
-          <Link to="/" className="brand" aria-label="Dryspell home">
-            Dryspell <small>weather cover</small>
-          </Link>
-          <nav className={`main${open ? " open" : ""}`} aria-label="Main">
-            {links.map(([to, label]) => (
-              <NavLink key={to} to={to} end={to === "/"} className={({ isActive }) => (isActive ? "active" : "")}>
-                {label}
-              </NavLink>
-            ))}
-          </nav>
-          <div className="right">
-            <WalletButton />
-            <button className="btn ghost small menu-btn" aria-expanded={open} aria-label="Menu" onClick={() => setOpen((o) => !o)}>
-              {open ? "Close" : "Menu"}
-            </button>
-          </div>
-        </div>
-      </header>
-      <main id="main">
-        <Outlet />
-      </main>
-      <Footer />
     </>
   );
 }
@@ -99,46 +113,35 @@ function Footer() {
   const { data } = useEngineKind();
   return (
     <footer>
+      <div className="band" />
       <div className="wrap">
-        <div className="cols">
-          <div>
-            <h4>Dryspell</h4>
-            <p style={{ maxWidth: "36ch" }}>Rain-based cover for farms and communities. Priced on-chain, paid out automatically when real weather data crosses the trigger. No claims form, no adjuster.</p>
-            <p className="small muted">Testnet only. TestUSD is play money with no value.</p>
-          </div>
-          <div>
-            <h4>App</h4>
-            <ul>
-              {links.map(([to, label]) => (
-                <li key={to}>
-                  <Link to={to}>{label}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h4>Contracts · Arbiscan</h4>
-            <ul className="mono small">
-              <li><a href={explorerAddress(addr.book)} target="_blank" rel="noreferrer">PolicyBook</a></li>
-              <li><a href={explorerAddress(addr.vault)} target="_blank" rel="noreferrer">UnderwriterVault</a></li>
-              <li><a href={explorerAddress(addr.oracle)} target="_blank" rel="noreferrer">WeatherOracle</a></li>
-              <li><a href={explorerAddress(addr.engine)} target="_blank" rel="noreferrer">Engine ({data === "stylus" ? "Stylus" : "Solidity fallback"})</a></li>
-              <li><a href={explorerAddress(addr.token)} target="_blank" rel="noreferrer">TestUSD</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4>Data &amp; source</h4>
-            <ul className="small">
-              <li><a href="https://open-meteo.com/" target="_blank" rel="noreferrer">Weather data by Open-Meteo.com</a> (CC BY 4.0)</li>
-              <li>ERA5 © Copernicus Climate Change Service</li>
-              <li><a href="https://power.larc.nasa.gov/" target="_blank" rel="noreferrer">NASA POWER</a></li>
-              <li><a href="https://github.com/ace-coderr/dryspell" target="_blank" rel="noreferrer">Source code</a></li>
-            </ul>
-          </div>
+        <div className="row">
+          <Link to="/" className="brand" aria-label="Dryspell home">
+            <Logo /> Dryspell
+          </Link>
+          <EngineBadge />
+        </div>
+        <div className="links">
+          <b>Quick links:</b>
+          {links.map(([to, label]) => (
+            <Link key={to} to={to}>{label}</Link>
+          ))}
         </div>
         <div className="fine">
-          Engine mode is read live from the contract (<code>{deployment.engineMode}</code> at deployment). Weather data are gridded products tens of kilometres wide: cover pays on the data, not on any one farm (basis risk). See the Backtest page for where it would have missed.
+          <span>
+            Weather data by <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">Open-Meteo.com</a> (CC BY 4.0, ERA5 © Copernicus) and <a href="https://power.larc.nasa.gov/" target="_blank" rel="noreferrer">NASA POWER</a> · <a href="https://github.com/ace-coderr/dryspell" target="_blank" rel="noreferrer">Source</a>
+          </span>
+          <span>© 2026 Dryspell. Testnet only, TestUSD has no value.</span>
         </div>
+        <div className="addr">
+          <a href={explorerAddress(addr.book)} target="_blank" rel="noreferrer">PolicyBook</a>
+          <a href={explorerAddress(addr.vault)} target="_blank" rel="noreferrer">Vault</a>
+          <a href={explorerAddress(addr.oracle)} target="_blank" rel="noreferrer">Oracle</a>
+          <a href={explorerAddress(addr.engine)} target="_blank" rel="noreferrer">Engine ({data === "stylus" ? "Stylus" : "Solidity fallback"})</a>
+          <a href={explorerAddress(addr.token)} target="_blank" rel="noreferrer">TestUSD</a>
+          <span>deployment v{deployment.version}</span>
+        </div>
+        <div style={{ height: 22 }} />
       </div>
     </footer>
   );

@@ -9,6 +9,9 @@ import { fmtUsd, parseUsd, pct, errMessage } from "../lib/format";
 import { breakdown, type EngineParams } from "../lib/pricing";
 import { loadDaily, seasonSlice } from "../lib/daily";
 import { RainRibbon } from "../components/RainRibbon";
+import { SkyArt } from "../components/Sky";
+import { Features, CtaBand } from "../components/HomeSections";
+import { useTween } from "../lib/tween";
 import { ReplayTag, Loading } from "../components/States";
 import { waitOk } from "../lib/tx";
 import { useAction } from "../lib/hooks";
@@ -138,43 +141,39 @@ export default function Builder() {
   const dir = activePeril === "drought" ? "at or below" : "at or above";
   const ribbonDaily = ribbon
     ? [
-        { name: "ERA5 (Open-Meteo)", color: "var(--rain)", mm: ribbon.era5.map((v) => v * (pd.calibration_era5_ppm / 1e6)) },
-        { name: "NASA POWER", color: "var(--ochre)", mm: ribbon.power.map((v) => v * (pd.calibration_power_ppm / 1e6)) },
+        { name: "ERA5 (Open-Meteo)", color: "var(--amber)", mm: ribbon.era5.map((v) => v * (pd.calibration_era5_ppm / 1e6)) },
+        { name: "NASA POWER", color: "var(--teal)", mm: ribbon.power.map((v) => v * (pd.calibration_power_ppm / 1e6)) },
       ]
     : [];
 
+  const premiumT = useTween(premium !== undefined ? Number(premium) / 1e6 : undefined);
+
   return (
-    <div className="wrap">
-      <section className="hero">
-        <div className="reveal">
-          <div className="eyebrow">Parametric weather cover · live on Arbitrum Sepolia</div>
-          <h1>
-            When the rain data crosses the line, <em>you get paid.</em>
-          </h1>
-          <p className="lede muted" style={{ fontSize: "1.2rem", maxWidth: "52ch" }}>
-            Choose a place, a peril and a payout. The price is computed on-chain from 35 years of real rainfall, and the payout happens automatically. No claim form, no adjuster.
-          </p>
-        </div>
-        <div className="reveal d2">
-          {ribbonDaily.length ? <RainRibbon series={ribbonDaily} threshold={trigger} kind={activePeril} replayKey={`${tId}-${trigger}-${ribbonYear}`} height={250} /> : <Loading label="Drawing the season…" />}
-          <div className="small muted" style={{ marginTop: 6, display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
-            Real {season.location.name} season, replayed for illustration:
-            <select aria-label="Illustration year" value={ribbonYear} onChange={(e) => setRibbonYear(Number(e.target.value))} style={{ width: "auto", padding: "3px 8px" }}>
-              {Array.from({ length: 12 }, (_, i) => 2025 - i).map((y) => (
-                <option key={y}>{y}</option>
-              ))}
-            </select>
-          </div>
+    <>
+      <section className="hero wrap nopad">
+        <div className="kicker reveal">Parametric weather cover · live on Arbitrum Sepolia</div>
+        <h1 className="reveal d1">When the rain data crosses the line, <em>you get paid.</em></h1>
+        <p className="sub reveal d2">Pick a place, a peril and a payout. The price is worked out on-chain from 35 years of real rainfall, and the payout is released by the contract when the data crosses your trigger. No claim form. No adjuster.</p>
+        <div className="hero-actions reveal d3">
+          <a className="btn" href="#builder">Build your cover</a>
+          <Link className="btn ghost nochev" to="/map">See how it is priced</Link>
         </div>
       </section>
-
-      <div className="steps reveal d1">
-        <div><b>1 · PLACE</b><span>Pick where it rains</span><p>12 locations, 4 regions.</p></div>
-        <div><b>2 · PERIL</b><span>Drought or flood</span><p>Only where two data sources agree.</p></div>
-        <div><b>3 · TRIGGER</b><span>Set the line</span><p>See the odds and the price move.</p></div>
-        <div><b>4 · BUY</b><span>Paid automatically</span><p>Settled by the oracle, claimable by anyone.</p></div>
-      </div>
-
+      <div className="band" />
+      <section className="sky-panel" id="builder">
+        <SkyArt variant="drought" seed={9} cell={5} speed={0.025} />
+        <div className="panel-inner">
+          <span className="panel-tag">LIVE · QUOTED BY THE DEPLOYED v3 CONTRACT</span>
+          <div style={{ marginTop: 10 }}>
+            {ribbonDaily.length ? <RainRibbon series={ribbonDaily} threshold={trigger} kind={activePeril} replayKey={`${tId}-${trigger}-${ribbonYear}`} height={240} /> : <Loading label="Drawing the season…" />}
+            <div className="small muted" style={{ margin: "8px 0 22px", display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
+              Real {season.location.name} season, drawn into your trigger line:
+              <select aria-label="Illustration year" value={ribbonYear} onChange={(e) => setRibbonYear(Number(e.target.value))} style={{ width: "auto", padding: "5px 30px 5px 10px" }}>
+                {Array.from({ length: 12 }, (_, i) => 2025 - i).map((y) => (
+                  <option key={y}>{y}</option>
+                ))}
+              </select>
+            </div>
       <div className="builder">
         <div className="card">
           <h3>Build your cover</h3>
@@ -262,7 +261,7 @@ export default function Builder() {
               <>
                 <div className="premium-box">
                   <div className="eyebrow">Premium</div>
-                  <span key={tick} className="premium-num tick">{fmtUsd(premium)}</span> <span className="mono">tUSD</span>
+                  <span key={tick} className="premium-num tick">{fmtUsd(premiumT ?? Number(premium) / 1e6)}</span> <span className="mono">tUSD</span>
                   <div className="small muted" style={{ position: "relative" }}>
                     for a {fmtUsd(payout, 0)} tUSD payout · {pct(q[3], 2)} of payout
                   </div>
@@ -324,6 +323,19 @@ export default function Builder() {
           </div>
         </div>
       </div>
-    </div>
+          </div>
+        </div>
+      </section>
+      <div className="band tall" />
+      <section className="sec flush">
+        <div className="wrap nopad center" style={{ padding: "64px var(--pad) 44px" }}>
+          <div className="kicker" style={{ justifyContent: "center" }}>How it works</div>
+          <h2 style={{ maxWidth: "20ch", margin: "0 auto" }}>One season. Two data sources. A contract that settles.</h2>
+        </div>
+        <Features />
+      </section>
+      <div className="band" />
+      <CtaBand />
+    </>
   );
 }

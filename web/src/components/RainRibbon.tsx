@@ -75,9 +75,9 @@ export function RainRibbon({ series, threshold, kind, height = 300, replayKey = 
         })}
 
         <g>
-          <line x1={pad.l} x2={W - pad.r} y1={ty} y2={ty} stroke="var(--drought)" strokeWidth="2.4" strokeDasharray="7 5" />
-          <rect x={W - pad.r - 148} y={ty - 25} width="148" height="20" fill="var(--paper)" stroke="var(--drought)" />
-          <text x={W - pad.r - 74} y={ty - 11} textAnchor="middle" fontFamily="var(--mono)" fontSize="11" fontWeight="600" fill="var(--drought)">
+          <line x1={pad.l} x2={W - pad.r} y1={ty} y2={ty} stroke="var(--white)" strokeWidth="1.8" strokeDasharray="6 5" />
+          <rect x={W - pad.r - 148} y={ty - 25} width="148" height="20" fill="var(--bg)" stroke="var(--white)" />
+          <text x={W - pad.r - 74} y={ty - 11} textAnchor="middle" fontFamily="var(--mono)" fontSize="11" fontWeight="600" fill="var(--white)">
             TRIGGER {threshold} mm
           </text>
         </g>
