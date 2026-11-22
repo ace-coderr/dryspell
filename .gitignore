@@ -43,3 +43,4 @@ Thumbs.db
 
 # Foundry dry-run artefacts
 contracts/solidity/broadcast/**/dry-run/
+web/public/data/
