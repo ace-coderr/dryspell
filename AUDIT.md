@@ -47,6 +47,10 @@ Each attack idea, and the evidence it fails or is bounded. Tests are in `contrac
 4. **Testnet timings.** A one-hour dispute window and a one-hour vault hold are far shorter than production would use.
 5. **Faucet.** TestUSD can be minted repeatedly from many addresses. Intended on a testnet.
 
+### Key rotation
+
+During this audit the testnet owner key was briefly displayed in a developer tool output (a crashing scan script echoed its arguments). The key was never in the repository or its history. It is a throwaway testnet key, but it was rotated anyway on 2026-11-22: ownership of the engine, vault, oracle and book and the named resolver moved to a new address (two-step transfer, accepted on-chain, no pending transfers). The previous address still holds the demo policies and the vault shares and has no admin rights.
+
 ## Calibration and pricing
 
 - Calibration factors use 1991-2019 only (`CALIBRATION_END_YEAR` in `data/scripts/build.ts`), are produced by one published rule, set once at deployment and write-once on-chain. The oracle refuses any round before 2020, so no season that can be settled feeds its own calibration. An earlier build used all 35 seasons; it was found in review and superseded (v1 and v2).

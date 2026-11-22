@@ -14,7 +14,7 @@
     "WeatherOracle": "0x8ab6f26408a947699ea4d3d4f2b5BcbC9fD41Cb4",
     "PolicyBook": "0xdEF3D853592aeCf0A807F20b2a009C0981C898D0"
   },
-  "owner": "0x8d1B963b27054286fF9Bdc2dD5365c31E562C279",
+  "owner": "0xC464e8055a546172AB401C86Ff544F0Cb7867503",
   "idScheme": "locSeasonId = locationIndex*10 + seasonIndex; tableId = locSeasonId*2 + peril (0 drought, 1 flood); locations in data/generated/exceedance.json order",
   "verified": true,
   "verifiedOn": "Arbiscan (Etherscan V2), 2026-11-22",
@@ -49,5 +49,11 @@
     "roundId": 2033639,
     "label": "Replay: Garissa short rains 2023",
     "proposeTx": "0xc03ecf579bb4e51db3b4df513ac372382756ce77860ae38827ed79261f064652"
+  },
+  "resolver": "0xC464e8055a546172AB401C86Ff544F0Cb7867503",
+  "ownerRotation": {
+    "on": "2026-11-22",
+    "from": "0x8d1B963b27054286fF9Bdc2dD5365c31E562C279",
+    "note": "Owner and resolver key rotated after the previous testnet key was shown in a developer tool output during the audit. The previous address still holds the demo policies and the vault shares but has no admin rights."
   }
 }
