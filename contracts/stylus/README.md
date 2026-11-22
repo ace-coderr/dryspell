@@ -17,7 +17,7 @@ The Stylus tooling does not compile on native Windows (`cargo-stylus` uses Unix-
 
 ```
 cd contracts/stylus
-cargo test --lib                 # 36 tests, including every real offered table and the Solidity parity vectors
+cargo test --lib                 # 38 tests, including every real offered table, set-once wiring and the Solidity parity vectors
 cargo stylus check --endpoint https://sepolia-rollup.arbitrum.io/rpc
 ```
 

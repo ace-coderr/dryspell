@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAccount, useReadContract, useReadContracts, useWriteContract, useSwitchChain } from "wagmi";
-import { addr, chain, explorerTx } from "../lib/chain";
+import { addr, chain, explorerTx, deployment } from "../lib/chain";
 import { bookAbi, engineAbi, tokenAbi } from "../lib/abi";
 import { allSeasons, locations, perilOf, tableId, roundId, type PerilName, type Season } from "../lib/data";
 import { nextBuyableYear, seasonWindow, fmtDate, LEAD_TIME } from "../lib/season";
@@ -164,7 +164,7 @@ export default function Builder() {
       <section className="sky-panel" id="builder">
         <SkyArt variant="drought" seed={9} cell={3} speed={0.01} />
         <div className="panel-inner">
-          <span className="panel-tag">LIVE · QUOTED BY THE DEPLOYED v3 CONTRACT</span>
+          <span className="panel-tag">LIVE · QUOTED BY THE DEPLOYED v{deployment.version} CONTRACT</span>
           <div style={{ marginTop: 10 }}>
             {ribbonDaily.length ? <RainRibbon series={ribbonDaily} threshold={trigger} kind={activePeril} replayKey={`${tId}-${trigger}-${ribbonYear}`} height={240} /> : <Loading label="Drawing the season…" />}
             <div className="small muted" style={{ margin: "8px 0 22px", display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>

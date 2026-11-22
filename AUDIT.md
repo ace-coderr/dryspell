@@ -1,6 +1,6 @@
 # Dryspell audit
 
-Self-audit of the v3 deployment on Arbitrum Sepolia, done as a hostile attacker and a skeptical judge. Findings are listed with what was done about them. Nothing here is a third-party audit.
+Self-audit of the v3 deployment, with the fixes shipped as the v4 deployment, on Arbitrum Sepolia, done as a hostile attacker and a skeptical judge. Findings are listed with what was done about them. Nothing here is a third-party audit.
 
 ## Scope
 
@@ -14,13 +14,13 @@ Contracts (`contracts/solidity`, deployed v3), the Stylus crate (not deployed), 
 | Deployment state | Complete: 14/14 seasons, 28/28 calibrations, 16/16 tables, all four contracts wired and owned by one key, no half-wired state |
 | Stale deployments | No config, source, doc or build output references a v1 or v2 address |
 | Calibration look-ahead | None: factors fit on 1991-2019, the oracle refuses rounds before 2020 |
-| Contract logic | No exploitable bug found; two trust weaknesses documented below |
+| Contract logic | No exploitable bug found. The one code-level weakness (engine wiring could be re-pointed by the owner) is fixed in v4; one trust weakness (single resolver) remains |
 | Web app | Four defects found and fixed (deep links, phone tables, one display bug, one misleading error) |
 | Live buy flow | Passed end to end in a browser with a connected wallet |
 
 ## Contracts
 
-Each attack idea, and the evidence it fails or is bounded. Tests are in `contracts/solidity/test`; 84 pass, plus 36 Rust tests and 5 data tests.
+Each attack idea, and the evidence it fails or is bounded. Tests are in `contracts/solidity/test`; 86 pass, plus 38 Rust tests and 5 data tests.
 
 | Attack | Outcome | Evidence |
 | --- | --- | --- |
@@ -37,19 +37,22 @@ Each attack idea, and the evidence it fails or is bounded. Tests are in `contrac
 | Rounding drift | Premium rounds up, interpolation rounds up, fee rounds down; premium is never below fitted fair value and never at or above the payout (512-run fuzz); the Solidity engine matches the Rust engine on 6,648 generated vectors including every revert | `testFuzz_premium_*`, `EngineParity.t.sol` |
 | Access control | Every admin function is owner-only; book-only functions reject the owner; wiring on the vault and oracle is set once; ownership transfer is two-step | `EngineSol.t.sol`, `UnderwriterVault.t.sol`, `WeatherOracle.t.sol` |
 | Replay rounds on a real network | Hard-wired by chain id: allowed on Arbitrum Sepolia, Robinhood testnet and local chains only; refused on Arbitrum One, Ethereum and others, and the owner cannot override it. Every event on a replay carries `replay = true` | `test_replay_is_hard_wired_to_test_networks`, `test_replay_flag_is_in_every_event` |
-| Half-wired deployment after the resumed broadcast | None. `mcp/scripts/audit-chain.ts` reads every season window, calibration factor and table point back from the chain and compares it with `data/generated/exceedance.json`: 16/16 tables and 28/28 calibrations identical, 0 mismatches. Ownership, `pendingOwner`, wiring, caps and parameters read back as intended | `pnpm --filter @dryspell/mcp exec tsx scripts/audit-chain.ts` |
+| Half-wired deployment | None, on v3 (after its resumed broadcast) and on v4 (a single clean broadcast). `mcp/scripts/audit-chain.ts` reads every season window, calibration factor and table point back from the chain and compares it with `data/generated/exceedance.json`: 16/16 tables and 28/28 calibrations identical, 0 mismatches. Ownership, `pendingOwner`, wiring, caps and parameters read back as intended | `pnpm --filter @dryspell/mcp exec tsx scripts/audit-chain.ts` |
 
-### Weak points that remain (not fixed)
+### Fixed after the audit (v4)
 
-1. **The owner can re-point the engine's `book` and `vault`.** `setBook` and `setVault` on the engine are not set-once. A malicious owner could re-point the book address and release reserved exposure, letting underwriters withdraw collateral that backs live policies. Fix for production: make both set-once like the vault and oracle wiring, and put ownership behind a multisig with a timelock. Not changed because it means redeploying every contract (about 0.0006 ETH) and re-doing the demo policies.
-2. **One named resolver.** It rules on disputes and on contested policies and can choose a wrong result. It is also the owner here, and the owner can change the resolver at any time. Timeouts stop it freezing funds but not misjudging.
-3. **Oracle fee headroom.** If the owner set the engine's utilisation cap to 100%, the fee paid at settlement could take assets 1-2% below exposure. With the 80% cap used here the invariant has ample slack.
-4. **Testnet timings.** A one-hour dispute window and a one-hour vault hold are far shorter than production would use.
-5. **Faucet.** TestUSD can be minted repeatedly from many addresses. Intended on a testnet.
+- **Engine wiring is set-once.** In v3 the owner could re-point the engine's `book` and `vault`, release reserved exposure and let underwriters withdraw collateral behind live policies. In v4 `setBook` and `setVault` revert with `AlreadySet` once wired, in both the Solidity and Stylus engines. Checked live on v4 by simulating the owner's calls: `setBook` and `setVault` both revert with `AlreadySet`. Tests cover the owner and a new owner after a transfer.
+- **Utilisation cap bounded at 95%.** With a 100% cap the oracle fee paid at settlement could have taken assets 1-2% below exposure. The engine now refuses anything above 95% (`BadParams`); the deployed value is 80%.
+
+### Weak points that remain
+
+1. **One named resolver, which is also the owner.** It rules on disputes and on contested policies and can choose a wrong result, and the owner can change the resolver at any time. Timeouts stop it freezing funds but not misjudging. Owner and resolver are the same address because a separate resolver would need a third key to manage.
+2. **Testnet timings.** A one-hour dispute window and a one-hour vault hold are far shorter than production would use.
+3. **Faucet.** TestUSD can be minted repeatedly from many addresses. Intended on a testnet.
 
 ### Key rotation
 
-During this audit the testnet owner key was briefly displayed in a developer tool output (a crashing scan script echoed its arguments). The key was never in the repository or its history. It is a throwaway testnet key, but it was rotated anyway on 2026-11-22: ownership of the engine, vault, oracle and book and the named resolver moved to a new address (two-step transfer, accepted on-chain, no pending transfers). The previous address still holds the demo policies and the vault shares and has no admin rights.
+During this audit the testnet owner key was briefly displayed in a developer tool output (a crashing scan script echoed its arguments). The key was never in the repository or its history. It is a throwaway testnet key, but it was rotated anyway on 2026-11-22 (two-step ownership transfer on all four contracts plus the resolver). v4 was then deployed from the new key. The previous address still holds the v3 demo policies and vault shares and has no admin rights on anything.
 
 ## Calibration and pricing
 

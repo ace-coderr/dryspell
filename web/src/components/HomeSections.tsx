@@ -41,7 +41,7 @@ const garissa = allSeasons.find((s) => s.location.id === "garissa" && s.id === "
 const jodhpur = allSeasons.find((s) => s.location.id === "jodhpur")!;
 
 export function Features() {
-  // live reads from the deployed v3 contracts
+  // live reads from the deployed contracts
   const vault = useReadContracts({
     contracts: [
       { address: addr.vault, abi: vaultAbi, functionName: "totalAssets", ...C },

@@ -46,7 +46,7 @@ console.log(`on-chain tables identical to the JSON: ${tables}/16, calibrations: 
 // ---- stale deployment references
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const stale = new Set<string>();
-for (const f of ["contracts/deployments/arbitrum-sepolia-v1-superseded.json", "contracts/deployments/arbitrum-sepolia-v2-superseded.json"]) {
+for (const f of readdirSync(path.join(root, "contracts/deployments")).filter((n) => n.endsWith("-superseded.json")).map((n) => "contracts/deployments/" + n)) {
   const j = JSON.parse(readFileSync(path.join(root, f), "utf8"));
   Object.values(j.contracts as Record<string, string>).forEach((a) => stale.add(a.toLowerCase()));
 }

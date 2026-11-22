@@ -2,7 +2,7 @@
 
 ```
 cd contracts/solidity
-forge test            # 84 tests: unit, fuzz, invariants, reentrancy, contested path, Rust parity
+forge test            # 86 tests: unit, fuzz, invariants, reentrancy, contested path, Rust parity
 ```
 
 | Contract | Job |
@@ -71,6 +71,7 @@ This makes the single trusted resolver more load-bearing in v1: a ruling here is
 ## Admin powers and known weak points (audit notes)
 
 - The owner (a single key on this testnet deployment) can pause new sales, load or disable pricing tables, set pricing parameters and caps, and change the named resolver. It cannot move vault funds, change a policy, or change calibration or season windows once set. Vault and oracle wiring to the book is set once.
-- **Known weakness:** the engine's `setBook` and `setVault` stay callable by the owner. A malicious owner could re-point them and release reserved exposure, so underwriters could withdraw collateral that backs live policies. Fix for a production deployment: make both set-once like the vault and oracle wiring, and put ownership behind a multisig with a timelock. Not changed here because it requires redeploying every contract.
+- **Fixed in v4:** the engine's `setBook` and `setVault` are now set-once (`AlreadySet`), like the vault and oracle wiring, in both the Solidity and Stylus engines. In v3 a malicious owner could have re-pointed them and released reserved exposure, letting underwriters withdraw collateral behind live policies. Production should still put ownership behind a multisig with a timelock.
 - The named resolver (also the owner here) can rule any disputed or contested case either way; a silent resolver cannot freeze funds because timeouts void the round or refund the premium.
-- If the owner set the engine's utilisation cap to 100%, the oracle fee paid at settlement could take assets 1-2% below exposure; with the 80% cap used here the invariant has ample slack.
+- Fixed in v4: the engine's utilisation cap is bounded at 95% (`BadParams` above that), so the oracle fee paid at settlement can never push assets below exposure. The deployed value is 80%.
+- Owner and resolver are the same address on this deployment (a separate resolver would need a third key). That is a single point of trust.
