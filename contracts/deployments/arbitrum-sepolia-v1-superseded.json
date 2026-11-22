@@ -1,0 +1,41 @@
+{
+  "network": "Arbitrum Sepolia",
+  "chainId": 421614,
+  "explorer": "https://sepolia.arbiscan.io",
+  "deployedAt": "2026-11-22T05:21:14.803Z",
+  "startBlock": 331582028,
+  "engineMode": "solidity-fallback",
+  "engineModeNote": "Stylus activation was paused on Arbitrum Sepolia, dRPC and publicnode RPCs on 2026-11-21/22 (ArbWasm.activationGas = 2^64-1), so the Solidity fallback engine is deployed. The deployed engine reports its own kind via engineKind().",
+  "contracts": {
+    "TestUSD": "0x930F3a4AA4FC211C16A84FCf376A40ff4b9d619e",
+    "DryspellEngine": "0xCB95bc5EF81083834Ede8A2Aeda28Cecd2bcE7D3",
+    "UnderwriterVault": "0x9E0bAa12d9a1Dd6f7cA92bA738F770E32E346053",
+    "WeatherOracle": "0x63210b3CBdf8B98BA38d32596622d3E95009863E",
+    "PolicyBook": "0x757Ea1E42F6b5fCbE0239cB29F36E7BA78FEb699"
+  },
+  "owner": "0x8d1B963b27054286fF9Bdc2dD5365c31E562C279",
+  "idScheme": "locSeasonId = locationIndex*10 + seasonIndex; tableId = locSeasonId*2 + peril (0 drought, 1 flood); locations in data/generated/exceedance.json order",
+  "demoPolicies": [
+    {
+      "id": 1,
+      "kind": "forward",
+      "label": "Jodhpur monsoon 2027, drought, trigger 142 mm, payout 500 tUSD",
+      "tx": "0x3595607103eb46ba748380d53aa4dced3bcf1b6617e2a1f5f4b739fa478da47d"
+    },
+    {
+      "id": 2,
+      "kind": "replay",
+      "label": "Replay: Garissa short rains 2025, drought, trigger 47 mm, payout 500 tUSD",
+      "tx": "0xb3afe034a6f41f5ccf8d618ae92d935c875cd0c2a93bc9e927765614758018f9"
+    }
+  ],
+  "verified": true,
+  "verifiedOn": "Arbiscan (Etherscan V2), 2026-11-22",
+  "replayRound": {
+    "roundId": 2033641,
+    "label": "Replay: Garissa short rains 2025",
+    "proposeTx": "0x2f13d241dacd7614076693e1fe33e98bf8dfcba46e5cce95e77841cccaf09ab0"
+  },
+  "superseded": true,
+  "supersededReason": "Replaced by v2 which adds the source-disagreement (contested) rule. Its Garissa 2025 replay round was never settled: ERA5 and NASA POWER disagree there (19.2 mm vs 80.8 mm), the case the new rule exists for."
+}
