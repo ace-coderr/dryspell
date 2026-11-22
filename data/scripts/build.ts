@@ -32,6 +32,10 @@ const root = path.resolve(here, "..");
 const dailyDir = path.join(root, "generated", "daily");
 
 const BOOTSTRAPS = 500;
+// Calibration uses ONLY seasons up to this year. The oracle refuses rounds before 2020, so no season that can
+// ever be reported or settled contributes to its own calibration (no look-ahead). Forward seasons (2027+)
+// are likewise out of sample. The pricing fit below still uses all seasons; see data/README.md.
+const CALIBRATION_END_YEAR = 2019;
 // A peril is only offered where the two sources agree on the year-to-year signal
 const MIN_CORRELATION = 0.4;
 // Probabilities at which the table levels are placed (tail-heavy: that is where cover is bought)
@@ -110,8 +114,9 @@ function tableFor(locId: string, seasonId: string, peril: Peril, stats: SeasonSt
 
   // Per-source calibration: scale each source so both share the pooled long-run mean.
   // Factors are published (ppm) so the settlement is reproducible by anyone from the raw readings.
-  const mE = mean(eRaw);
-  const mP = mean(pRaw);
+  const calIdx = stats.map((x, i) => (x.year <= CALIBRATION_END_YEAR ? i : -1)).filter((i) => i >= 0);
+  const mE = mean(calIdx.map((i) => eRaw[i]));
+  const mP = mean(calIdx.map((i) => pRaw[i]));
   const mPool = (mE + mP) / 2;
   const calE = Math.round((mPool / mE) * 1e6);
   const calP = Math.round((mPool / mP) * 1e6);
@@ -168,6 +173,8 @@ function tableFor(locId: string, seasonId: string, peril: Peril, stats: SeasonSt
     ks_distance: Number(ksDistance(settle, main.cdf).toFixed(4)),
     settlement_mean_mm: Number(mean(settle).toFixed(1)),
     settlement_stdev_mm: Number(stdev(settle).toFixed(1)),
+    calibration_years: `${stats[0].year}-${CALIBRATION_END_YEAR}`,
+    calibration_seasons: calIdx.length,
     calibration_era5_ppm: calE,
     calibration_power_ppm: calP,
     source_correlation: Number(corr.toFixed(3)),
@@ -221,7 +228,7 @@ const out = {
     settlement:
       "Each source computes the season statistic independently. Each reading is multiplied by its published calibration factor (calibration_*_ppm / 1e6) and the settlement value is the median (mean of the two) of the calibrated readings.",
     calibration:
-      "Raw ERA5 and NASA POWER rainfall differ structurally (up to 2x in some places). Factors scale each source to the pooled 1991-2025 mean of the two for that location, season and peril, so neither source is favoured. This is a v1 parameter set by the deployer.",
+      "Raw ERA5 and NASA POWER rainfall differ structurally (up to 2x in some places). Rule: for each location, season and peril, factor_source = pooled_mean / source_mean, where source_mean is that source's mean of the season statistic over 1991-2019 only and pooled_mean = (era5_mean + power_mean) / 2. No season from 2020 on, and no forward season, takes part in its own calibration. Factors are fixed at deployment (write-once on-chain) and apply to every year.",
     offering_rule:
       "A peril is offered only where the two sources' season statistics correlate at or above " +
       MIN_CORRELATION +

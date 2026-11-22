@@ -14,88 +14,88 @@
    "peril": "drought",
    "offered": false,
    "seasons": 35,
-   "median_spread": 0.275,
+   "median_spread": 0.295,
    "seasons_over_threshold": {
     "1": 2,
     "0.25": 18,
-    "0.4": 10,
-    "0.5": 8,
+    "0.4": 11,
+    "0.5": 5,
     "0.75": 3
    },
    "per_level": [
     {
-     "level_mm": 322,
-     "p_ppm": 5055,
+     "level_mm": 315,
+     "p_ppm": 4944,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 337,
+     "p_ppm": 9974,
      "opposite_seasons": 4
     },
     {
-     "level_mm": 343,
-     "p_ppm": 9969,
+     "level_mm": 351,
+     "p_ppm": 14902,
      "opposite_seasons": 4
     },
     {
-     "level_mm": 357,
-     "p_ppm": 14992,
+     "level_mm": 362,
+     "p_ppm": 19980,
      "opposite_seasons": 4
     },
     {
-     "level_mm": 368,
-     "p_ppm": 20195,
+     "level_mm": 379,
+     "p_ppm": 30341,
      "opposite_seasons": 5
     },
     {
-     "level_mm": 384,
-     "p_ppm": 30138,
+     "level_mm": 391,
+     "p_ppm": 39781,
      "opposite_seasons": 6
     },
     {
-     "level_mm": 396,
-     "p_ppm": 39736,
+     "level_mm": 402,
+     "p_ppm": 50177,
      "opposite_seasons": 7
     },
     {
-     "level_mm": 407,
-     "p_ppm": 50353,
+     "level_mm": 423,
+     "p_ppm": 75135,
      "opposite_seasons": 9
     },
     {
-     "level_mm": 427,
-     "p_ppm": 74585,
+     "level_mm": 440,
+     "p_ppm": 100618,
      "opposite_seasons": 11
     },
     {
-     "level_mm": 444,
-     "p_ppm": 100570,
-     "opposite_seasons": 13
+     "level_mm": 466,
+     "p_ppm": 149049,
+     "opposite_seasons": 14
     },
     {
-     "level_mm": 470,
-     "p_ppm": 150251,
-     "opposite_seasons": 16
-    },
-    {
-     "level_mm": 491,
-     "p_ppm": 198853,
+     "level_mm": 489,
+     "p_ppm": 201065,
      "opposite_seasons": 15
     },
     {
-     "level_mm": 511,
-     "p_ppm": 251374,
+     "level_mm": 508,
+     "p_ppm": 249773,
      "opposite_seasons": 17
     },
     {
-     "level_mm": 528,
-     "p_ppm": 299941,
-     "opposite_seasons": 18
+     "level_mm": 526,
+     "p_ppm": 299828,
+     "opposite_seasons": 17
     },
     {
-     "level_mm": 561,
-     "p_ppm": 401023,
+     "level_mm": 560,
+     "p_ppm": 401226,
      "opposite_seasons": 16
     },
     {
      "level_mm": 592,
-     "p_ppm": 498760,
+     "p_ppm": 499337,
      "opposite_seasons": 17
     }
    ]
@@ -106,89 +106,89 @@
    "peril": "flood",
    "offered": false,
    "seasons": 35,
-   "median_spread": 0.368,
+   "median_spread": 0.397,
    "seasons_over_threshold": {
-    "1": 2,
-    "0.25": 21,
-    "0.4": 15,
-    "0.5": 14,
-    "0.75": 9
+    "1": 1,
+    "0.25": 27,
+    "0.4": 17,
+    "0.5": 13,
+    "0.75": 7
    },
    "per_level": [
     {
-     "level_mm": 181,
-     "p_ppm": 5100,
+     "level_mm": 189,
+     "p_ppm": 4905,
      "opposite_seasons": 2
     },
     {
-     "level_mm": 165,
-     "p_ppm": 10048,
-     "opposite_seasons": 2
-    },
-    {
-     "level_mm": 156,
-     "p_ppm": 14700,
-     "opposite_seasons": 2
-    },
-    {
-     "level_mm": 149,
-     "p_ppm": 19749,
+     "level_mm": 171,
+     "p_ppm": 10108,
      "opposite_seasons": 3
     },
     {
-     "level_mm": 139,
-     "p_ppm": 30062,
+     "level_mm": 161,
+     "p_ppm": 15089,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 154,
+     "p_ppm": 19959,
      "opposite_seasons": 4
     },
     {
-     "level_mm": 132,
-     "p_ppm": 40278,
-     "opposite_seasons": 5
+     "level_mm": 144,
+     "p_ppm": 29721,
+     "opposite_seasons": 4
     },
     {
-     "level_mm": 127,
-     "p_ppm": 49585,
-     "opposite_seasons": 5
+     "level_mm": 137,
+     "p_ppm": 39220,
+     "opposite_seasons": 4
     },
     {
-     "level_mm": 117,
-     "p_ppm": 74872,
+     "level_mm": 131,
+     "p_ppm": 49682,
+     "opposite_seasons": 4
+    },
+    {
+     "level_mm": 120,
+     "p_ppm": 76330,
+     "opposite_seasons": 6
+    },
+    {
+     "level_mm": 113,
+     "p_ppm": 99936,
      "opposite_seasons": 7
     },
     {
-     "level_mm": 110,
-     "p_ppm": 99513,
-     "opposite_seasons": 7
+     "level_mm": 102,
+     "p_ppm": 151302,
+     "opposite_seasons": 9
     },
     {
-     "level_mm": 100,
-     "p_ppm": 148197,
-     "opposite_seasons": 8
-    },
-    {
-     "level_mm": 92,
-     "p_ppm": 201827,
+     "level_mm": 94,
+     "p_ppm": 202675,
      "opposite_seasons": 10
     },
     {
-     "level_mm": 86,
-     "p_ppm": 252472,
+     "level_mm": 88,
+     "p_ppm": 250594,
      "opposite_seasons": 10
     },
     {
-     "level_mm": 81,
-     "p_ppm": 302293,
-     "opposite_seasons": 10
+     "level_mm": 83,
+     "p_ppm": 297353,
+     "opposite_seasons": 11
     },
     {
-     "level_mm": 73,
-     "p_ppm": 397032,
-     "opposite_seasons": 12
+     "level_mm": 74,
+     "p_ppm": 397859,
+     "opposite_seasons": 13
     },
     {
      "level_mm": 66,
-     "p_ppm": 494082,
-     "opposite_seasons": 17
+     "p_ppm": 503581,
+     "opposite_seasons": 18
     }
    ]
   },
@@ -198,89 +198,89 @@
    "peril": "drought",
    "offered": true,
    "seasons": 35,
-   "median_spread": 0.137,
+   "median_spread": 0.119,
    "seasons_over_threshold": {
     "1": 0,
-    "0.25": 9,
-    "0.4": 2,
-    "0.5": 1,
+    "0.25": 10,
+    "0.4": 4,
+    "0.5": 2,
     "0.75": 0
    },
    "per_level": [
     {
-     "level_mm": 207,
-     "p_ppm": 4933,
+     "level_mm": 206,
+     "p_ppm": 4930,
      "opposite_seasons": 1
     },
     {
-     "level_mm": 220,
-     "p_ppm": 10063,
-     "opposite_seasons": 1
-    },
-    {
-     "level_mm": 228,
-     "p_ppm": 14953,
+     "level_mm": 219,
+     "p_ppm": 10147,
      "opposite_seasons": 2
     },
     {
-     "level_mm": 234,
-     "p_ppm": 19735,
+     "level_mm": 227,
+     "p_ppm": 15145,
      "opposite_seasons": 3
     },
     {
-     "level_mm": 244,
-     "p_ppm": 30272,
+     "level_mm": 233,
+     "p_ppm": 20046,
      "opposite_seasons": 3
     },
     {
-     "level_mm": 251,
-     "p_ppm": 39874,
+     "level_mm": 242,
+     "p_ppm": 29627,
      "opposite_seasons": 3
     },
     {
-     "level_mm": 257,
-     "p_ppm": 49759,
-     "opposite_seasons": 4
-    },
-    {
-     "level_mm": 269,
-     "p_ppm": 74620,
+     "level_mm": 250,
+     "p_ppm": 40766,
      "opposite_seasons": 5
     },
     {
-     "level_mm": 279,
-     "p_ppm": 100953,
+     "level_mm": 255,
+     "p_ppm": 49145,
+     "opposite_seasons": 5
+    },
+    {
+     "level_mm": 267,
+     "p_ppm": 74206,
      "opposite_seasons": 6
     },
     {
-     "level_mm": 294,
-     "p_ppm": 150458,
-     "opposite_seasons": 8
+     "level_mm": 277,
+     "p_ppm": 100866,
+     "opposite_seasons": 7
     },
     {
-     "level_mm": 306,
-     "p_ppm": 198469,
-     "opposite_seasons": 8
+     "level_mm": 292,
+     "p_ppm": 151163,
+     "opposite_seasons": 6
     },
     {
-     "level_mm": 317,
-     "p_ppm": 248356,
+     "level_mm": 304,
+     "p_ppm": 200059,
+     "opposite_seasons": 7
+    },
+    {
+     "level_mm": 315,
+     "p_ppm": 250915,
      "opposite_seasons": 9
     },
     {
-     "level_mm": 327,
-     "p_ppm": 297767,
+     "level_mm": 325,
+     "p_ppm": 301290,
      "opposite_seasons": 9
     },
     {
-     "level_mm": 346,
-     "p_ppm": 398870,
+     "level_mm": 343,
+     "p_ppm": 398694,
      "opposite_seasons": 9
     },
     {
-     "level_mm": 364,
-     "p_ppm": 497869,
-     "opposite_seasons": 8
+     "level_mm": 361,
+     "p_ppm": 499245,
+     "opposite_seasons": 10
     }
    ]
   },
@@ -290,89 +290,89 @@
    "peril": "flood",
    "offered": true,
    "seasons": 35,
-   "median_spread": 0.187,
+   "median_spread": 0.262,
    "seasons_over_threshold": {
     "1": 0,
-    "0.25": 11,
-    "0.4": 8,
-    "0.5": 5,
-    "0.75": 2
+    "0.25": 19,
+    "0.4": 7,
+    "0.5": 6,
+    "0.75": 3
    },
    "per_level": [
     {
      "level_mm": 113,
-     "p_ppm": 4917,
+     "p_ppm": 5010,
      "opposite_seasons": 1
     },
     {
      "level_mm": 104,
-     "p_ppm": 9812,
+     "p_ppm": 9978,
      "opposite_seasons": 1
     },
     {
-     "level_mm": 98,
-     "p_ppm": 15533,
+     "level_mm": 99,
+     "p_ppm": 14616,
      "opposite_seasons": 1
     },
     {
      "level_mm": 95,
-     "p_ppm": 19531,
-     "opposite_seasons": 2
+     "p_ppm": 19822,
+     "opposite_seasons": 1
     },
     {
-     "level_mm": 89,
-     "p_ppm": 30829,
-     "opposite_seasons": 2
+     "level_mm": 90,
+     "p_ppm": 28970,
+     "opposite_seasons": 3
     },
     {
      "level_mm": 86,
-     "p_ppm": 38688,
-     "opposite_seasons": 2
+     "p_ppm": 39185,
+     "opposite_seasons": 3
     },
     {
      "level_mm": 83,
-     "p_ppm": 48499,
-     "opposite_seasons": 4
+     "p_ppm": 49089,
+     "opposite_seasons": 3
     },
     {
      "level_mm": 77,
-     "p_ppm": 75891,
-     "opposite_seasons": 7
+     "p_ppm": 76709,
+     "opposite_seasons": 6
     },
     {
      "level_mm": 73,
-     "p_ppm": 101842,
-     "opposite_seasons": 8
+     "p_ppm": 102842,
+     "opposite_seasons": 6
     },
     {
      "level_mm": 68,
-     "p_ppm": 146047,
+     "p_ppm": 147301,
      "opposite_seasons": 8
     },
     {
      "level_mm": 64,
-     "p_ppm": 193343,
-     "opposite_seasons": 9
-    },
-    {
-     "level_mm": 60,
-     "p_ppm": 253528,
+     "p_ppm": 194808,
      "opposite_seasons": 8
     },
     {
-     "level_mm": 57,
-     "p_ppm": 308173,
-     "opposite_seasons": 9
+     "level_mm": 60,
+     "p_ppm": 255189,
+     "opposite_seasons": 10
+    },
+    {
+     "level_mm": 58,
+     "p_ppm": 290757,
+     "opposite_seasons": 10
     },
     {
      "level_mm": 53,
-     "p_ppm": 394306,
-     "opposite_seasons": 9
+     "p_ppm": 396167,
+     "opposite_seasons": 12
     },
     {
      "level_mm": 49,
-     "p_ppm": 494560,
-     "opposite_seasons": 13
+     "p_ppm": 496383,
+     "opposite_seasons": 12
     }
    ]
   },
@@ -382,7 +382,7 @@
    "peril": "drought",
    "offered": true,
    "seasons": 35,
-   "median_spread": 0.107,
+   "median_spread": 0.101,
    "seasons_over_threshold": {
     "1": 0,
     "0.25": 5,
@@ -392,78 +392,78 @@
    },
    "per_level": [
     {
-     "level_mm": 519,
-     "p_ppm": 5075,
+     "level_mm": 518,
+     "p_ppm": 4908,
      "opposite_seasons": 0
     },
     {
      "level_mm": 538,
-     "p_ppm": 10039,
-     "opposite_seasons": 1
+     "p_ppm": 10080,
+     "opposite_seasons": 0
     },
     {
      "level_mm": 550,
-     "p_ppm": 14902,
+     "p_ppm": 14959,
      "opposite_seasons": 1
     },
     {
-     "level_mm": 560,
-     "p_ppm": 20299,
+     "level_mm": 559,
+     "p_ppm": 19769,
      "opposite_seasons": 2
     },
     {
-     "level_mm": 574,
-     "p_ppm": 30395,
-     "opposite_seasons": 3
+     "level_mm": 573,
+     "p_ppm": 29664,
+     "opposite_seasons": 2
     },
     {
      "level_mm": 584,
-     "p_ppm": 39759,
-     "opposite_seasons": 5
+     "p_ppm": 39887,
+     "opposite_seasons": 4
     },
     {
      "level_mm": 593,
-     "p_ppm": 49952,
+     "p_ppm": 50106,
      "opposite_seasons": 6
     },
     {
      "level_mm": 610,
-     "p_ppm": 74370,
+     "p_ppm": 74578,
      "opposite_seasons": 6
     },
     {
      "level_mm": 624,
-     "p_ppm": 100089,
+     "p_ppm": 100348,
      "opposite_seasons": 8
     },
     {
      "level_mm": 645,
-     "p_ppm": 148894,
+     "p_ppm": 149235,
      "opposite_seasons": 10
     },
     {
      "level_mm": 663,
-     "p_ppm": 200522,
+     "p_ppm": 200932,
      "opposite_seasons": 12
     },
     {
      "level_mm": 678,
-     "p_ppm": 249935,
-     "opposite_seasons": 11
+     "p_ppm": 250397,
+     "opposite_seasons": 12
     },
     {
      "level_mm": 692,
-     "p_ppm": 300544,
+     "p_ppm": 301049,
      "opposite_seasons": 10
     },
     {
      "level_mm": 717,
-     "p_ppm": 398704,
-     "opposite_seasons": 11
+     "p_ppm": 399259,
+     "opposite_seasons": 10
     },
     {
      "level_mm": 742,
-     "p_ppm": 501313,
+     "p_ppm": 501883,
      "opposite_seasons": 12
     }
    ]
@@ -474,89 +474,89 @@
    "peril": "flood",
    "offered": false,
    "seasons": 35,
-   "median_spread": 0.364,
+   "median_spread": 0.331,
    "seasons_over_threshold": {
     "1": 0,
     "0.25": 22,
     "0.4": 16,
-    "0.5": 11,
-    "0.75": 2
+    "0.5": 12,
+    "0.75": 1
    },
    "per_level": [
     {
      "level_mm": 136,
-     "p_ppm": 4997,
-     "opposite_seasons": 2
-    },
-    {
-     "level_mm": 126,
-     "p_ppm": 10092,
+     "p_ppm": 5145,
      "opposite_seasons": 3
     },
     {
-     "level_mm": 120,
-     "p_ppm": 15368,
+     "level_mm": 127,
+     "p_ppm": 9689,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 121,
+     "p_ppm": 14762,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 117,
+     "p_ppm": 19531,
      "opposite_seasons": 4
     },
     {
-     "level_mm": 116,
-     "p_ppm": 20327,
+     "level_mm": 111,
+     "p_ppm": 29678,
      "opposite_seasons": 5
     },
     {
-     "level_mm": 110,
-     "p_ppm": 30871,
+     "level_mm": 107,
+     "p_ppm": 39170,
      "opposite_seasons": 6
     },
     {
-     "level_mm": 106,
-     "p_ppm": 40727,
-     "opposite_seasons": 7
-    },
-    {
      "level_mm": 103,
-     "p_ppm": 50082,
+     "p_ppm": 51615,
      "opposite_seasons": 7
     },
     {
-     "level_mm": 97,
-     "p_ppm": 75454,
+     "level_mm": 98,
+     "p_ppm": 72653,
      "opposite_seasons": 8
     },
     {
      "level_mm": 93,
-     "p_ppm": 98799,
-     "opposite_seasons": 10
-    },
-    {
-     "level_mm": 87,
-     "p_ppm": 146867,
+     "p_ppm": 101794,
      "opposite_seasons": 11
     },
     {
-     "level_mm": 82,
-     "p_ppm": 202295,
+     "level_mm": 87,
+     "p_ppm": 151238,
+     "opposite_seasons": 13
+    },
+    {
+     "level_mm": 83,
+     "p_ppm": 195457,
      "opposite_seasons": 12
     },
     {
      "level_mm": 79,
-     "p_ppm": 243675,
-     "opposite_seasons": 13
+     "p_ppm": 250569,
+     "opposite_seasons": 14
     },
     {
      "level_mm": 76,
-     "p_ppm": 291855,
+     "p_ppm": 299864,
      "opposite_seasons": 17
     },
     {
-     "level_mm": 70,
-     "p_ppm": 409596,
-     "opposite_seasons": 18
+     "level_mm": 71,
+     "p_ppm": 397928,
+     "opposite_seasons": 17
     },
     {
-     "level_mm": 66,
-     "p_ppm": 502784,
-     "opposite_seasons": 18
+     "level_mm": 67,
+     "p_ppm": 489788,
+     "opposite_seasons": 17
     }
    ]
   },
@@ -566,89 +566,89 @@
    "peril": "drought",
    "offered": true,
    "seasons": 35,
-   "median_spread": 0.314,
+   "median_spread": 0.313,
    "seasons_over_threshold": {
-    "1": 1,
-    "0.25": 22,
-    "0.4": 14,
-    "0.5": 12,
-    "0.75": 3
+    "1": 2,
+    "0.25": 23,
+    "0.4": 13,
+    "0.5": 11,
+    "0.75": 6
    },
    "per_level": [
     {
      "level_mm": 40,
-     "p_ppm": 5063,
+     "p_ppm": 5054,
      "opposite_seasons": 2
     },
     {
      "level_mm": 46,
-     "p_ppm": 10508,
+     "p_ppm": 10532,
      "opposite_seasons": 3
     },
     {
      "level_mm": 49,
-     "p_ppm": 14439,
+     "p_ppm": 14496,
      "opposite_seasons": 3
     },
     {
      "level_mm": 52,
-     "p_ppm": 19324,
+     "p_ppm": 19428,
      "opposite_seasons": 4
     },
     {
      "level_mm": 57,
-     "p_ppm": 29856,
+     "p_ppm": 30077,
      "opposite_seasons": 5
     },
     {
      "level_mm": 61,
-     "p_ppm": 40655,
+     "p_ppm": 41011,
      "opposite_seasons": 6
     },
     {
      "level_mm": 64,
-     "p_ppm": 50241,
-     "opposite_seasons": 6
+     "p_ppm": 50722,
+     "opposite_seasons": 7
     },
     {
      "level_mm": 70,
-     "p_ppm": 73402,
+     "p_ppm": 74202,
      "opposite_seasons": 7
     },
     {
-     "level_mm": 76,
-     "p_ppm": 101944,
-     "opposite_seasons": 7
+     "level_mm": 75,
+     "p_ppm": 97952,
+     "opposite_seasons": 8
     },
     {
      "level_mm": 84,
-     "p_ppm": 148022,
+     "p_ppm": 149894,
      "opposite_seasons": 10
     },
     {
-     "level_mm": 92,
-     "p_ppm": 202193,
+     "level_mm": 91,
+     "p_ppm": 197566,
      "opposite_seasons": 11
     },
     {
      "level_mm": 98,
-     "p_ppm": 247106,
+     "p_ppm": 250329,
+     "opposite_seasons": 12
+    },
+    {
+     "level_mm": 104,
+     "p_ppm": 298542,
      "opposite_seasons": 11
     },
     {
-     "level_mm": 105,
-     "p_ppm": 302869,
-     "opposite_seasons": 11
-    },
-    {
-     "level_mm": 117,
-     "p_ppm": 402856,
+     "level_mm": 116,
+     "p_ppm": 399314,
      "opposite_seasons": 10
     },
     {
-     "level_mm": 129,
-     "p_ppm": 502444,
-     "opposite_seasons": 12
+     "level_mm": 128,
+     "p_ppm": 499943,
+     "opposite_seasons": 11
     }
    ]
   },
@@ -658,89 +658,89 @@
    "peril": "flood",
    "offered": false,
    "seasons": 35,
-   "median_spread": 0.45,
+   "median_spread": 0.393,
    "seasons_over_threshold": {
-    "1": 6,
-    "0.25": 24,
-    "0.4": 20,
+    "1": 7,
+    "0.25": 23,
+    "0.4": 17,
     "0.5": 15,
-    "0.75": 8
+    "0.75": 9
    },
    "per_level": [
     {
-     "level_mm": 78,
-     "p_ppm": 4872,
+     "level_mm": 76,
+     "p_ppm": 5192,
      "opposite_seasons": 2
     },
     {
-     "level_mm": 70,
-     "p_ppm": 10399,
+     "level_mm": 69,
+     "p_ppm": 10220,
      "opposite_seasons": 2
     },
     {
-     "level_mm": 66,
-     "p_ppm": 15176,
-     "opposite_seasons": 2
-    },
-    {
-     "level_mm": 63,
-     "p_ppm": 20137,
+     "level_mm": 65,
+     "p_ppm": 15035,
      "opposite_seasons": 3
     },
     {
-     "level_mm": 59,
-     "p_ppm": 29321,
+     "level_mm": 62,
+     "p_ppm": 20069,
      "opposite_seasons": 4
     },
     {
-     "level_mm": 56,
-     "p_ppm": 38813,
+     "level_mm": 58,
+     "p_ppm": 29455,
      "opposite_seasons": 4
     },
     {
-     "level_mm": 53,
-     "p_ppm": 51296,
-     "opposite_seasons": 5
+     "level_mm": 55,
+     "p_ppm": 39220,
+     "opposite_seasons": 4
     },
     {
-     "level_mm": 49,
-     "p_ppm": 74144,
-     "opposite_seasons": 5
+     "level_mm": 52,
+     "p_ppm": 52134,
+     "opposite_seasons": 4
     },
     {
-     "level_mm": 46,
-     "p_ppm": 97399,
-     "opposite_seasons": 8
+     "level_mm": 48,
+     "p_ppm": 75923,
+     "opposite_seasons": 7
+    },
+    {
+     "level_mm": 45,
+     "p_ppm": 100275,
+     "opposite_seasons": 7
     },
     {
      "level_mm": 41,
-     "p_ppm": 151999,
+     "p_ppm": 144293,
      "opposite_seasons": 8
     },
     {
-     "level_mm": 38,
-     "p_ppm": 196932,
-     "opposite_seasons": 11
+     "level_mm": 37,
+     "p_ppm": 205308,
+     "opposite_seasons": 9
     },
     {
      "level_mm": 35,
-     "p_ppm": 253035,
-     "opposite_seasons": 13
+     "p_ppm": 243509,
+     "opposite_seasons": 11
     },
     {
-     "level_mm": 33,
-     "p_ppm": 297326,
-     "opposite_seasons": 13
+     "level_mm": 32,
+     "p_ppm": 311647,
+     "opposite_seasons": 12
     },
     {
      "level_mm": 29,
-     "p_ppm": 403226,
+     "p_ppm": 393328,
      "opposite_seasons": 11
     },
     {
      "level_mm": 26,
-     "p_ppm": 496755,
-     "opposite_seasons": 14
+     "p_ppm": 487679,
+     "opposite_seasons": 13
     }
    ]
   },
@@ -750,10 +750,10 @@
    "peril": "drought",
    "offered": true,
    "seasons": 35,
-   "median_spread": 0.153,
+   "median_spread": 0.146,
    "seasons_over_threshold": {
     "1": 1,
-    "0.25": 15,
+    "0.25": 14,
     "0.4": 8,
     "0.5": 7,
     "0.75": 2
@@ -761,77 +761,77 @@
    "per_level": [
     {
      "level_mm": 26,
-     "p_ppm": 5104,
+     "p_ppm": 5102,
      "opposite_seasons": 0
     },
     {
      "level_mm": 32,
-     "p_ppm": 9679,
+     "p_ppm": 9671,
      "opposite_seasons": 3
     },
     {
      "level_mm": 37,
-     "p_ppm": 14969,
+     "p_ppm": 14953,
      "opposite_seasons": 3
     },
     {
      "level_mm": 41,
-     "p_ppm": 20243,
+     "p_ppm": 20218,
      "opposite_seasons": 3
     },
     {
      "level_mm": 47,
-     "p_ppm": 29962,
+     "p_ppm": 29920,
      "opposite_seasons": 3
     },
     {
      "level_mm": 52,
-     "p_ppm": 39747,
+     "p_ppm": 39687,
      "opposite_seasons": 4
     },
     {
      "level_mm": 57,
-     "p_ppm": 51057,
+     "p_ppm": 50974,
      "opposite_seasons": 4
     },
     {
      "level_mm": 66,
-     "p_ppm": 75129,
+     "p_ppm": 74997,
      "opposite_seasons": 3
     },
     {
      "level_mm": 74,
-     "p_ppm": 100264,
-     "opposite_seasons": 3
+     "p_ppm": 100080,
+     "opposite_seasons": 2
     },
     {
      "level_mm": 88,
-     "p_ppm": 151515,
+     "p_ppm": 151226,
      "opposite_seasons": 4
     },
     {
      "level_mm": 100,
-     "p_ppm": 201230,
+     "p_ppm": 200844,
      "opposite_seasons": 6
     },
     {
      "level_mm": 111,
-     "p_ppm": 250036,
+     "p_ppm": 249561,
      "opposite_seasons": 3
     },
     {
      "level_mm": 122,
-     "p_ppm": 300696,
+     "p_ppm": 300136,
      "opposite_seasons": 3
     },
     {
      "level_mm": 143,
-     "p_ppm": 398713,
-     "opposite_seasons": 9
+     "p_ppm": 398013,
+     "opposite_seasons": 10
     },
     {
      "level_mm": 166,
-     "p_ppm": 502148,
+     "p_ppm": 501343,
      "opposite_seasons": 5
     }
    ]
@@ -842,89 +842,89 @@
    "peril": "flood",
    "offered": true,
    "seasons": 35,
-   "median_spread": 0.32,
+   "median_spread": 0.307,
    "seasons_over_threshold": {
     "1": 1,
-    "0.25": 21,
-    "0.4": 15,
-    "0.5": 12,
+    "0.25": 20,
+    "0.4": 14,
+    "0.5": 13,
     "0.75": 5
    },
    "per_level": [
     {
-     "level_mm": 115,
-     "p_ppm": 4957,
-     "opposite_seasons": 3
+     "level_mm": 114,
+     "p_ppm": 5075,
+     "opposite_seasons": 1
     },
     {
      "level_mm": 103,
-     "p_ppm": 10297,
+     "p_ppm": 9960,
      "opposite_seasons": 2
     },
     {
-     "level_mm": 97,
-     "p_ppm": 14827,
+     "level_mm": 96,
+     "p_ppm": 15279,
      "opposite_seasons": 2
     },
     {
      "level_mm": 92,
-     "p_ppm": 20076,
+     "p_ppm": 19499,
      "opposite_seasons": 2
     },
     {
      "level_mm": 85,
-     "p_ppm": 30635,
+     "p_ppm": 29836,
      "opposite_seasons": 2
     },
     {
-     "level_mm": 81,
-     "p_ppm": 38957,
+     "level_mm": 80,
+     "p_ppm": 40361,
      "opposite_seasons": 2
     },
     {
-     "level_mm": 77,
-     "p_ppm": 49480,
+     "level_mm": 76,
+     "p_ppm": 51328,
      "opposite_seasons": 2
     },
     {
      "level_mm": 70,
-     "p_ppm": 74903,
+     "p_ppm": 73382,
      "opposite_seasons": 1
     },
     {
      "level_mm": 65,
-     "p_ppm": 100305,
+     "p_ppm": 98469,
      "opposite_seasons": 1
     },
     {
      "level_mm": 58,
-     "p_ppm": 149700,
+     "p_ppm": 147388,
      "opposite_seasons": 1
     },
     {
      "level_mm": 53,
-     "p_ppm": 197609,
-     "opposite_seasons": 2
+     "p_ppm": 194967,
+     "opposite_seasons": 3
     },
     {
-     "level_mm": 49,
-     "p_ppm": 245094,
-     "opposite_seasons": 4
+     "level_mm": 48,
+     "p_ppm": 255449,
+     "opposite_seasons": 5
     },
     {
      "level_mm": 45,
-     "p_ppm": 301675,
+     "p_ppm": 298656,
      "opposite_seasons": 7
     },
     {
      "level_mm": 39,
-     "p_ppm": 404419,
-     "opposite_seasons": 8
+     "p_ppm": 401380,
+     "opposite_seasons": 6
     },
     {
      "level_mm": 34,
-     "p_ppm": 505169,
-     "opposite_seasons": 11
+     "p_ppm": 502380,
+     "opposite_seasons": 12
     }
    ]
   },
@@ -934,88 +934,88 @@
    "peril": "drought",
    "offered": true,
    "seasons": 34,
-   "median_spread": 0.164,
+   "median_spread": 0.153,
    "seasons_over_threshold": {
     "1": 0,
-    "0.25": 12,
-    "0.4": 3,
+    "0.25": 11,
+    "0.4": 1,
     "0.5": 1,
     "0.75": 0
    },
    "per_level": [
     {
      "level_mm": 206,
-     "p_ppm": 4966,
+     "p_ppm": 5067,
      "opposite_seasons": 0
     },
     {
-     "level_mm": 229,
-     "p_ppm": 9993,
+     "level_mm": 228,
+     "p_ppm": 9900,
      "opposite_seasons": 1
     },
     {
      "level_mm": 244,
-     "p_ppm": 14921,
+     "p_ppm": 15191,
      "opposite_seasons": 1
     },
     {
-     "level_mm": 256,
-     "p_ppm": 20015,
-     "opposite_seasons": 1
+     "level_mm": 255,
+     "p_ppm": 19890,
+     "opposite_seasons": 2
     },
     {
-     "level_mm": 274,
-     "p_ppm": 29882,
+     "level_mm": 273,
+     "p_ppm": 29742,
      "opposite_seasons": 2
     },
     {
      "level_mm": 288,
-     "p_ppm": 39629,
+     "p_ppm": 40254,
      "opposite_seasons": 3
     },
     {
      "level_mm": 300,
-     "p_ppm": 49559,
+     "p_ppm": 50313,
      "opposite_seasons": 2
     },
     {
-     "level_mm": 325,
-     "p_ppm": 75250,
-     "opposite_seasons": 2
+     "level_mm": 324,
+     "p_ppm": 75132,
+     "opposite_seasons": 3
     },
     {
-     "level_mm": 344,
-     "p_ppm": 99468,
-     "opposite_seasons": 4
+     "level_mm": 343,
+     "p_ppm": 99390,
+     "opposite_seasons": 3
     },
     {
-     "level_mm": 376,
-     "p_ppm": 149320,
+     "level_mm": 375,
+     "p_ppm": 149352,
      "opposite_seasons": 5
     },
     {
-     "level_mm": 403,
-     "p_ppm": 199504,
-     "opposite_seasons": 5
-    },
-    {
-     "level_mm": 427,
-     "p_ppm": 249322,
+     "level_mm": 402,
+     "p_ppm": 199663,
      "opposite_seasons": 6
     },
     {
-     "level_mm": 450,
-     "p_ppm": 300593,
+     "level_mm": 426,
+     "p_ppm": 249615,
+     "opposite_seasons": 7
+    },
+    {
+     "level_mm": 449,
+     "p_ppm": 301023,
      "opposite_seasons": 8
     },
     {
-     "level_mm": 492,
-     "p_ppm": 399424,
+     "level_mm": 491,
+     "p_ppm": 400100,
      "opposite_seasons": 9
     },
     {
-     "level_mm": 534,
-     "p_ppm": 499214,
+     "level_mm": 533,
+     "p_ppm": 500094,
      "opposite_seasons": 11
     }
    ]
@@ -1026,89 +1026,89 @@
    "peril": "flood",
    "offered": true,
    "seasons": 34,
-   "median_spread": 0.338,
+   "median_spread": 0.289,
    "seasons_over_threshold": {
     "1": 0,
-    "0.25": 21,
-    "0.4": 12,
+    "0.25": 18,
+    "0.4": 7,
     "0.5": 5,
-    "0.75": 0
+    "0.75": 1
    },
    "per_level": [
     {
      "level_mm": 164,
-     "p_ppm": 4986,
+     "p_ppm": 4920,
      "opposite_seasons": 1
     },
     {
      "level_mm": 150,
-     "p_ppm": 10116,
-     "opposite_seasons": 3
+     "p_ppm": 9963,
+     "opposite_seasons": 2
     },
     {
      "level_mm": 142,
-     "p_ppm": 15141,
+     "p_ppm": 14894,
      "opposite_seasons": 3
     },
     {
      "level_mm": 136,
-     "p_ppm": 20471,
+     "p_ppm": 20120,
      "opposite_seasons": 3
     },
     {
      "level_mm": 128,
-     "p_ppm": 30559,
+     "p_ppm": 30002,
      "opposite_seasons": 3
     },
     {
-     "level_mm": 123,
-     "p_ppm": 39205,
-     "opposite_seasons": 3
-    },
-    {
-     "level_mm": 118,
-     "p_ppm": 50234,
+     "level_mm": 122,
+     "p_ppm": 40421,
      "opposite_seasons": 5
     },
     {
-     "level_mm": 110,
-     "p_ppm": 74419,
+     "level_mm": 118,
+     "p_ppm": 49257,
      "opposite_seasons": 6
     },
     {
-     "level_mm": 104,
-     "p_ppm": 99534,
-     "opposite_seasons": 9
+     "level_mm": 109,
+     "p_ppm": 76540,
+     "opposite_seasons": 6
+    },
+    {
+     "level_mm": 103,
+     "p_ppm": 102244,
+     "opposite_seasons": 7
     },
     {
      "level_mm": 95,
-     "p_ppm": 152529,
-     "opposite_seasons": 11
-    },
-    {
-     "level_mm": 89,
-     "p_ppm": 200981,
-     "opposite_seasons": 8
-    },
-    {
-     "level_mm": 84,
-     "p_ppm": 251093,
+     "p_ppm": 149255,
      "opposite_seasons": 10
     },
     {
-     "level_mm": 80,
-     "p_ppm": 298250,
+     "level_mm": 89,
+     "p_ppm": 196636,
+     "opposite_seasons": 10
+    },
+    {
+     "level_mm": 84,
+     "p_ppm": 245682,
+     "opposite_seasons": 10
+    },
+    {
+     "level_mm": 79,
+     "p_ppm": 304454,
      "opposite_seasons": 11
     },
     {
-     "level_mm": 73,
-     "p_ppm": 396586,
+     "level_mm": 72,
+     "p_ppm": 403858,
      "opposite_seasons": 11
     },
     {
-     "level_mm": 67,
-     "p_ppm": 495832,
-     "opposite_seasons": 9
+     "level_mm": 66,
+     "p_ppm": 503741,
+     "opposite_seasons": 7
     }
    ]
   },
@@ -1118,89 +1118,89 @@
    "peril": "drought",
    "offered": true,
    "seasons": 35,
-   "median_spread": 0.309,
+   "median_spread": 0.316,
    "seasons_over_threshold": {
     "1": 0,
     "0.25": 20,
-    "0.4": 11,
-    "0.5": 9,
-    "0.75": 1
+    "0.4": 12,
+    "0.5": 8,
+    "0.75": 0
    },
    "per_level": [
     {
-     "level_mm": 195,
-     "p_ppm": 4934,
+     "level_mm": 194,
+     "p_ppm": 4962,
      "opposite_seasons": 1
     },
     {
-     "level_mm": 211,
-     "p_ppm": 10101,
+     "level_mm": 210,
+     "p_ppm": 10078,
      "opposite_seasons": 2
     },
     {
-     "level_mm": 221,
-     "p_ppm": 15066,
+     "level_mm": 220,
+     "p_ppm": 14970,
      "opposite_seasons": 2
     },
     {
-     "level_mm": 229,
-     "p_ppm": 20257,
+     "level_mm": 228,
+     "p_ppm": 20069,
+     "opposite_seasons": 2
+    },
+    {
+     "level_mm": 240,
+     "p_ppm": 30065,
      "opposite_seasons": 3
     },
     {
-     "level_mm": 241,
-     "p_ppm": 30464,
+     "level_mm": 249,
+     "p_ppm": 39683,
      "opposite_seasons": 4
     },
     {
-     "level_mm": 250,
-     "p_ppm": 40309,
-     "opposite_seasons": 7
-    },
-    {
      "level_mm": 257,
-     "p_ppm": 49412,
-     "opposite_seasons": 7
+     "p_ppm": 49936,
+     "opposite_seasons": 8
     },
     {
      "level_mm": 273,
-     "p_ppm": 75419,
+     "p_ppm": 75713,
      "opposite_seasons": 10
     },
     {
      "level_mm": 285,
-     "p_ppm": 99976,
-     "opposite_seasons": 11
+     "p_ppm": 99951,
+     "opposite_seasons": 14
     },
     {
      "level_mm": 305,
-     "p_ppm": 150754,
-     "opposite_seasons": 15
+     "p_ppm": 149895,
+     "opposite_seasons": 14
     },
     {
-     "level_mm": 321,
-     "p_ppm": 199805,
-     "opposite_seasons": 17
+     "level_mm": 322,
+     "p_ppm": 201248,
+     "opposite_seasons": 16
     },
     {
      "level_mm": 336,
-     "p_ppm": 251699,
-     "opposite_seasons": 17
+     "p_ppm": 248878,
+     "opposite_seasons": 16
     },
     {
-     "level_mm": 349,
-     "p_ppm": 300394,
-     "opposite_seasons": 18
+     "level_mm": 350,
+     "p_ppm": 300378,
+     "opposite_seasons": 14
     },
     {
-     "level_mm": 374,
-     "p_ppm": 400247,
-     "opposite_seasons": 17
+     "level_mm": 375,
+     "p_ppm": 398543,
+     "opposite_seasons": 15
     },
     {
-     "level_mm": 398,
-     "p_ppm": 498335,
-     "opposite_seasons": 13
+     "level_mm": 400,
+     "p_ppm": 498964,
+     "opposite_seasons": 14
     }
    ]
   },
@@ -1210,89 +1210,89 @@
    "peril": "flood",
    "offered": false,
    "seasons": 35,
-   "median_spread": 0.345,
+   "median_spread": 0.349,
    "seasons_over_threshold": {
     "1": 1,
-    "0.25": 21,
-    "0.4": 16,
-    "0.5": 13,
-    "0.75": 6
+    "0.25": 26,
+    "0.4": 14,
+    "0.5": 10,
+    "0.75": 3
    },
    "per_level": [
     {
-     "level_mm": 138,
-     "p_ppm": 4896,
+     "level_mm": 139,
+     "p_ppm": 5155,
      "opposite_seasons": 2
     },
     {
-     "level_mm": 127,
-     "p_ppm": 9771,
+     "level_mm": 128,
+     "p_ppm": 10109,
      "opposite_seasons": 2
     },
     {
-     "level_mm": 120,
-     "p_ppm": 15149,
+     "level_mm": 122,
+     "p_ppm": 14583,
      "opposite_seasons": 2
     },
     {
-     "level_mm": 116,
-     "p_ppm": 19451,
+     "level_mm": 117,
+     "p_ppm": 19777,
      "opposite_seasons": 2
     },
     {
-     "level_mm": 109,
-     "p_ppm": 30077,
+     "level_mm": 110,
+     "p_ppm": 30246,
      "opposite_seasons": 2
     },
     {
-     "level_mm": 104,
-     "p_ppm": 40991,
+     "level_mm": 105,
+     "p_ppm": 40901,
      "opposite_seasons": 2
     },
     {
-     "level_mm": 101,
-     "p_ppm": 49311,
-     "opposite_seasons": 2
-    },
-    {
-     "level_mm": 94,
-     "p_ppm": 75607,
+     "level_mm": 102,
+     "p_ppm": 48976,
      "opposite_seasons": 4
     },
     {
-     "level_mm": 89,
-     "p_ppm": 102147,
-     "opposite_seasons": 6
+     "level_mm": 95,
+     "p_ppm": 74304,
+     "opposite_seasons": 5
     },
     {
-     "level_mm": 82,
-     "p_ppm": 154238,
-     "opposite_seasons": 10
+     "level_mm": 90,
+     "p_ppm": 99660,
+     "opposite_seasons": 7
     },
     {
-     "level_mm": 77,
-     "p_ppm": 205139,
+     "level_mm": 83,
+     "p_ppm": 149062,
+     "opposite_seasons": 8
+    },
+    {
+     "level_mm": 78,
+     "p_ppm": 197064,
      "opposite_seasons": 13
     },
     {
-     "level_mm": 73,
-     "p_ppm": 255792,
-     "opposite_seasons": 14
+     "level_mm": 74,
+     "p_ppm": 244702,
+     "opposite_seasons": 13
     },
     {
      "level_mm": 70,
-     "p_ppm": 300186,
-     "opposite_seasons": 13
+     "p_ppm": 301522,
+     "opposite_seasons": 14
     },
     {
      "level_mm": 64,
-     "p_ppm": 406092,
+     "p_ppm": 404803,
      "opposite_seasons": 17
     },
     {
      "level_mm": 59,
-     "p_ppm": 510363,
-     "opposite_seasons": 16
+     "p_ppm": 506143,
+     "opposite_seasons": 14
     }
    ]
   },
@@ -1302,89 +1302,89 @@
    "peril": "drought",
    "offered": true,
    "seasons": 35,
-   "median_spread": 0.244,
+   "median_spread": 0.261,
    "seasons_over_threshold": {
     "1": 0,
-    "0.25": 15,
-    "0.4": 7,
+    "0.25": 18,
+    "0.4": 5,
     "0.5": 4,
     "0.75": 2
    },
    "per_level": [
     {
-     "level_mm": 316,
-     "p_ppm": 4959,
+     "level_mm": 314,
+     "p_ppm": 4937,
      "opposite_seasons": 3
     },
     {
-     "level_mm": 338,
-     "p_ppm": 9941,
+     "level_mm": 337,
+     "p_ppm": 10135,
      "opposite_seasons": 3
     },
     {
-     "level_mm": 352,
-     "p_ppm": 14805,
+     "level_mm": 351,
+     "p_ppm": 15013,
      "opposite_seasons": 4
     },
     {
-     "level_mm": 363,
-     "p_ppm": 19804,
+     "level_mm": 362,
+     "p_ppm": 20008,
+     "opposite_seasons": 5
+    },
+    {
+     "level_mm": 379,
+     "p_ppm": 30137,
      "opposite_seasons": 6
     },
     {
-     "level_mm": 380,
-     "p_ppm": 29984,
+     "level_mm": 392,
+     "p_ppm": 40166,
      "opposite_seasons": 6
     },
     {
-     "level_mm": 393,
-     "p_ppm": 40101,
+     "level_mm": 403,
+     "p_ppm": 50393,
      "opposite_seasons": 8
     },
     {
-     "level_mm": 404,
-     "p_ppm": 50444,
+     "level_mm": 424,
+     "p_ppm": 74803,
      "opposite_seasons": 8
     },
     {
-     "level_mm": 425,
-     "p_ppm": 75200,
-     "opposite_seasons": 11
-    },
-    {
-     "level_mm": 442,
-     "p_ppm": 100412,
+     "level_mm": 441,
+     "p_ppm": 99598,
      "opposite_seasons": 11
     },
     {
      "level_mm": 469,
-     "p_ppm": 150288,
-     "opposite_seasons": 13
+     "p_ppm": 150584,
+     "opposite_seasons": 12
     },
     {
      "level_mm": 491,
-     "p_ppm": 199512,
-     "opposite_seasons": 13
+     "p_ppm": 199162,
+     "opposite_seasons": 11
     },
     {
      "level_mm": 511,
-     "p_ppm": 250166,
+     "p_ppm": 249061,
      "opposite_seasons": 10
     },
     {
-     "level_mm": 529,
-     "p_ppm": 299686,
-     "opposite_seasons": 11
+     "level_mm": 530,
+     "p_ppm": 300596,
+     "opposite_seasons": 12
     },
     {
-     "level_mm": 563,
-     "p_ppm": 399925,
-     "opposite_seasons": 11
-    },
-    {
-     "level_mm": 596,
-     "p_ppm": 499956,
+     "level_mm": 564,
+     "p_ppm": 399426,
      "opposite_seasons": 9
+    },
+    {
+     "level_mm": 598,
+     "p_ppm": 500956,
+     "opposite_seasons": 11
     }
    ]
   },
@@ -1394,88 +1394,88 @@
    "peril": "flood",
    "offered": false,
    "seasons": 35,
-   "median_spread": 0.335,
+   "median_spread": 0.325,
    "seasons_over_threshold": {
     "1": 1,
-    "0.25": 23,
+    "0.25": 22,
     "0.4": 15,
-    "0.5": 11,
+    "0.5": 12,
     "0.75": 4
    },
    "per_level": [
     {
-     "level_mm": 125,
-     "p_ppm": 5114,
+     "level_mm": 126,
+     "p_ppm": 4961,
      "opposite_seasons": 0
     },
     {
-     "level_mm": 116,
-     "p_ppm": 10197,
+     "level_mm": 117,
+     "p_ppm": 9816,
      "opposite_seasons": 1
     },
     {
      "level_mm": 111,
-     "p_ppm": 14946,
-     "opposite_seasons": 2
+     "p_ppm": 15452,
+     "opposite_seasons": 3
     },
     {
-     "level_mm": 107,
-     "p_ppm": 20279,
-     "opposite_seasons": 4
+     "level_mm": 108,
+     "p_ppm": 19375,
+     "opposite_seasons": 3
     },
     {
      "level_mm": 102,
-     "p_ppm": 29653,
+     "p_ppm": 30414,
      "opposite_seasons": 6
     },
     {
      "level_mm": 98,
-     "p_ppm": 40124,
+     "p_ppm": 41009,
      "opposite_seasons": 7
     },
     {
      "level_mm": 95,
-     "p_ppm": 50278,
-     "opposite_seasons": 8
+     "p_ppm": 51251,
+     "opposite_seasons": 7
     },
     {
      "level_mm": 90,
-     "p_ppm": 72993,
+     "p_ppm": 74080,
      "opposite_seasons": 8
     },
     {
      "level_mm": 86,
-     "p_ppm": 97975,
+     "p_ppm": 99090,
      "opposite_seasons": 10
     },
     {
      "level_mm": 80,
-     "p_ppm": 150936,
+     "p_ppm": 151875,
      "opposite_seasons": 9
     },
     {
      "level_mm": 76,
-     "p_ppm": 199563,
+     "p_ppm": 200150,
      "opposite_seasons": 11
     },
     {
      "level_mm": 73,
-     "p_ppm": 244520,
+     "p_ppm": 244669,
      "opposite_seasons": 12
     },
     {
      "level_mm": 70,
-     "p_ppm": 297576,
+     "p_ppm": 297108,
      "opposite_seasons": 12
     },
     {
      "level_mm": 65,
-     "p_ppm": 404868,
-     "opposite_seasons": 17
+     "p_ppm": 402956,
+     "opposite_seasons": 16
     },
     {
      "level_mm": 61,
-     "p_ppm": 506403,
+     "p_ppm": 503043,
      "opposite_seasons": 19
     }
    ]
@@ -1486,10 +1486,10 @@
    "peril": "drought",
    "offered": true,
    "seasons": 35,
-   "median_spread": 0.161,
+   "median_spread": 0.158,
    "seasons_over_threshold": {
     "1": 0,
-    "0.25": 13,
+    "0.25": 12,
     "0.4": 7,
     "0.5": 4,
     "0.75": 1
@@ -1497,77 +1497,77 @@
    "per_level": [
     {
      "level_mm": 101,
-     "p_ppm": 5132,
+     "p_ppm": 5137,
      "opposite_seasons": 0
     },
     {
      "level_mm": 114,
-     "p_ppm": 9906,
+     "p_ppm": 9908,
      "opposite_seasons": 0
     },
     {
      "level_mm": 123,
-     "p_ppm": 14735,
+     "p_ppm": 14732,
      "opposite_seasons": 0
     },
     {
      "level_mm": 131,
-     "p_ppm": 20279,
-     "opposite_seasons": 1
+     "p_ppm": 20268,
+     "opposite_seasons": 0
     },
     {
      "level_mm": 142,
-     "p_ppm": 30093,
+     "p_ppm": 30066,
      "opposite_seasons": 2
     },
     {
      "level_mm": 151,
-     "p_ppm": 40206,
-     "opposite_seasons": 2
+     "p_ppm": 40160,
+     "opposite_seasons": 3
     },
     {
      "level_mm": 158,
-     "p_ppm": 49461,
+     "p_ppm": 49395,
      "opposite_seasons": 4
     },
     {
      "level_mm": 174,
-     "p_ppm": 75402,
+     "p_ppm": 75279,
      "opposite_seasons": 5
     },
     {
      "level_mm": 186,
-     "p_ppm": 99303,
+     "p_ppm": 99123,
      "opposite_seasons": 5
     },
     {
      "level_mm": 207,
-     "p_ppm": 149956,
+     "p_ppm": 149651,
      "opposite_seasons": 5
     },
     {
      "level_mm": 225,
-     "p_ppm": 201335,
+     "p_ppm": 200906,
      "opposite_seasons": 7
     },
     {
-     "level_mm": 240,
-     "p_ppm": 248682,
+     "level_mm": 241,
+     "p_ppm": 251413,
      "opposite_seasons": 5
     },
     {
      "level_mm": 255,
-     "p_ppm": 299078,
+     "p_ppm": 298430,
      "opposite_seasons": 4
     },
     {
      "level_mm": 284,
-     "p_ppm": 401152,
+     "p_ppm": 400312,
      "opposite_seasons": 6
     },
     {
      "level_mm": 312,
-     "p_ppm": 499690,
+     "p_ppm": 498712,
      "opposite_seasons": 9
     }
    ]
@@ -1578,89 +1578,89 @@
    "peril": "flood",
    "offered": true,
    "seasons": 35,
-   "median_spread": 0.274,
+   "median_spread": 0.267,
    "seasons_over_threshold": {
     "1": 0,
     "0.25": 18,
     "0.4": 13,
-    "0.5": 8,
-    "0.75": 3
+    "0.5": 7,
+    "0.75": 2
    },
    "per_level": [
     {
      "level_mm": 228,
-     "p_ppm": 5031,
+     "p_ppm": 5071,
      "opposite_seasons": 0
     },
     {
-     "level_mm": 207,
-     "p_ppm": 10152,
+     "level_mm": 208,
+     "p_ppm": 9889,
      "opposite_seasons": 1
     },
     {
      "level_mm": 195,
-     "p_ppm": 15149,
-     "opposite_seasons": 2
-    },
-    {
-     "level_mm": 187,
-     "p_ppm": 19768,
+     "p_ppm": 15247,
      "opposite_seasons": 3
     },
     {
-     "level_mm": 174,
-     "p_ppm": 30414,
+     "level_mm": 187,
+     "p_ppm": 19888,
+     "opposite_seasons": 3
+    },
+    {
+     "level_mm": 175,
+     "p_ppm": 29587,
      "opposite_seasons": 3
     },
     {
      "level_mm": 166,
-     "p_ppm": 39593,
+     "p_ppm": 39794,
      "opposite_seasons": 3
     },
     {
      "level_mm": 159,
-     "p_ppm": 49812,
+     "p_ppm": 50048,
      "opposite_seasons": 4
     },
     {
-     "level_mm": 146,
-     "p_ppm": 75999,
+     "level_mm": 147,
+     "p_ppm": 73890,
      "opposite_seasons": 8
     },
     {
-     "level_mm": 137,
-     "p_ppm": 101397,
+     "level_mm": 138,
+     "p_ppm": 98583,
      "opposite_seasons": 8
     },
     {
      "level_mm": 125,
-     "p_ppm": 147798,
+     "p_ppm": 148246,
      "opposite_seasons": 6
     },
     {
      "level_mm": 115,
-     "p_ppm": 200453,
+     "p_ppm": 200958,
      "opposite_seasons": 7
     },
     {
      "level_mm": 108,
-     "p_ppm": 246443,
+     "p_ppm": 246976,
      "opposite_seasons": 7
     },
     {
      "level_mm": 101,
-     "p_ppm": 300842,
-     "opposite_seasons": 5
+     "p_ppm": 301387,
+     "opposite_seasons": 6
     },
     {
      "level_mm": 90,
-     "p_ppm": 404099,
+     "p_ppm": 404614,
      "opposite_seasons": 8
     },
     {
      "level_mm": 81,
-     "p_ppm": 503526,
-     "opposite_seasons": 10
+     "p_ppm": 503963,
+     "opposite_seasons": 9
     }
    ]
   },
@@ -1670,88 +1670,88 @@
    "peril": "drought",
    "offered": true,
    "seasons": 35,
-   "median_spread": 0.134,
+   "median_spread": 0.116,
    "seasons_over_threshold": {
     "1": 0,
-    "0.25": 10,
+    "0.25": 11,
     "0.4": 2,
     "0.5": 0,
     "0.75": 0
    },
    "per_level": [
     {
-     "level_mm": 374,
-     "p_ppm": 5052,
+     "level_mm": 373,
+     "p_ppm": 4939,
      "opposite_seasons": 2
     },
     {
      "level_mm": 398,
-     "p_ppm": 9930,
+     "p_ppm": 9996,
      "opposite_seasons": 2
     },
     {
      "level_mm": 414,
-     "p_ppm": 14911,
+     "p_ppm": 15003,
      "opposite_seasons": 2
     },
     {
      "level_mm": 426,
-     "p_ppm": 19805,
+     "p_ppm": 19921,
      "opposite_seasons": 2
     },
     {
      "level_mm": 445,
-     "p_ppm": 30004,
+     "p_ppm": 30163,
      "opposite_seasons": 2
     },
     {
      "level_mm": 459,
-     "p_ppm": 39749,
-     "opposite_seasons": 3
+     "p_ppm": 39946,
+     "opposite_seasons": 4
     },
     {
      "level_mm": 471,
-     "p_ppm": 49805,
-     "opposite_seasons": 2
-    },
-    {
-     "level_mm": 495,
-     "p_ppm": 75142,
+     "p_ppm": 50038,
      "opposite_seasons": 3
     },
     {
-     "level_mm": 514,
-     "p_ppm": 100528,
-     "opposite_seasons": 5
+     "level_mm": 495,
+     "p_ppm": 75453,
+     "opposite_seasons": 3
     },
     {
-     "level_mm": 544,
-     "p_ppm": 150573,
+     "level_mm": 513,
+     "p_ppm": 99444,
+     "opposite_seasons": 4
+    },
+    {
+     "level_mm": 543,
+     "p_ppm": 149188,
      "opposite_seasons": 7
     },
     {
      "level_mm": 568,
-     "p_ppm": 199097,
+     "p_ppm": 199653,
      "opposite_seasons": 11
     },
     {
      "level_mm": 590,
-     "p_ppm": 249460,
+     "p_ppm": 250075,
      "opposite_seasons": 11
     },
     {
      "level_mm": 610,
-     "p_ppm": 299266,
-     "opposite_seasons": 11
+     "p_ppm": 299921,
+     "opposite_seasons": 10
     },
     {
-     "level_mm": 648,
-     "p_ppm": 400910,
+     "level_mm": 647,
+     "p_ppm": 398858,
      "opposite_seasons": 7
     },
     {
      "level_mm": 684,
-     "p_ppm": 500081,
+     "p_ppm": 500764,
      "opposite_seasons": 8
     }
    ]
@@ -1762,10 +1762,10 @@
    "peril": "flood",
    "offered": false,
    "seasons": 35,
-   "median_spread": 0.237,
+   "median_spread": 0.246,
    "seasons_over_threshold": {
     "1": 0,
-    "0.25": 16,
+    "0.25": 17,
     "0.4": 13,
     "0.5": 10,
     "0.75": 3
@@ -1773,78 +1773,78 @@
    "per_level": [
     {
      "level_mm": 214,
-     "p_ppm": 5027,
+     "p_ppm": 5045,
      "opposite_seasons": 1
     },
     {
      "level_mm": 198,
-     "p_ppm": 9835,
+     "p_ppm": 9869,
      "opposite_seasons": 1
     },
     {
      "level_mm": 188,
-     "p_ppm": 14943,
+     "p_ppm": 14996,
      "opposite_seasons": 1
     },
     {
      "level_mm": 181,
-     "p_ppm": 20012,
+     "p_ppm": 20082,
      "opposite_seasons": 1
     },
     {
      "level_mm": 171,
-     "p_ppm": 30326,
+     "p_ppm": 30432,
      "opposite_seasons": 1
     },
     {
      "level_mm": 164,
-     "p_ppm": 40505,
+     "p_ppm": 40645,
      "opposite_seasons": 4
     },
     {
      "level_mm": 159,
-     "p_ppm": 49754,
+     "p_ppm": 49925,
      "opposite_seasons": 5
     },
     {
      "level_mm": 149,
-     "p_ppm": 74800,
-     "opposite_seasons": 6
+     "p_ppm": 75053,
+     "opposite_seasons": 5
     },
     {
      "level_mm": 142,
-     "p_ppm": 99122,
+     "p_ppm": 99452,
      "opposite_seasons": 8
     },
     {
-     "level_mm": 131,
-     "p_ppm": 152832,
-     "opposite_seasons": 8
+     "level_mm": 132,
+     "p_ppm": 147495,
+     "opposite_seasons": 7
     },
     {
      "level_mm": 124,
-     "p_ppm": 199637,
+     "p_ppm": 200259,
      "opposite_seasons": 11
     },
     {
      "level_mm": 118,
-     "p_ppm": 249243,
+     "p_ppm": 249993,
      "opposite_seasons": 10
     },
     {
      "level_mm": 113,
-     "p_ppm": 298004,
-     "opposite_seasons": 8
+     "p_ppm": 298869,
+     "opposite_seasons": 9
     },
     {
      "level_mm": 104,
-     "p_ppm": 403573,
+     "p_ppm": 404644,
      "opposite_seasons": 8
     },
     {
      "level_mm": 97,
-     "p_ppm": 500369,
-     "opposite_seasons": 11
+     "p_ppm": 501572,
+     "opposite_seasons": 12
     }
    ]
   },
@@ -1854,89 +1854,89 @@
    "peril": "drought",
    "offered": false,
    "seasons": 35,
-   "median_spread": 0.342,
+   "median_spread": 0.229,
    "seasons_over_threshold": {
-    "1": 1,
-    "0.25": 22,
+    "1": 0,
+    "0.25": 17,
     "0.4": 16,
-    "0.5": 12,
-    "0.75": 4
+    "0.5": 15,
+    "0.75": 5
    },
    "per_level": [
     {
-     "level_mm": 1885,
-     "p_ppm": 4985,
+     "level_mm": 1839,
+     "p_ppm": 5004,
+     "opposite_seasons": 4
+    },
+    {
+     "level_mm": 1954,
+     "p_ppm": 9990,
+     "opposite_seasons": 5
+    },
+    {
+     "level_mm": 2029,
+     "p_ppm": 15008,
+     "opposite_seasons": 5
+    },
+    {
+     "level_mm": 2086,
+     "p_ppm": 20019,
      "opposite_seasons": 6
     },
     {
-     "level_mm": 1994,
-     "p_ppm": 9971,
+     "level_mm": 2172,
+     "p_ppm": 29941,
      "opposite_seasons": 6
     },
     {
-     "level_mm": 2065,
-     "p_ppm": 15002,
+     "level_mm": 2239,
+     "p_ppm": 39962,
      "opposite_seasons": 6
     },
     {
-     "level_mm": 2119,
-     "p_ppm": 20046,
+     "level_mm": 2295,
+     "p_ppm": 50081,
      "opposite_seasons": 6
     },
     {
-     "level_mm": 2200,
-     "p_ppm": 30002,
-     "opposite_seasons": 6
+     "level_mm": 2405,
+     "p_ppm": 75091,
+     "opposite_seasons": 9
     },
     {
-     "level_mm": 2263,
-     "p_ppm": 40063,
-     "opposite_seasons": 7
+     "level_mm": 2492,
+     "p_ppm": 100075,
+     "opposite_seasons": 12
     },
     {
-     "level_mm": 2315,
-     "p_ppm": 50102,
-     "opposite_seasons": 7
+     "level_mm": 2631,
+     "p_ppm": 149940,
+     "opposite_seasons": 13
     },
     {
-     "level_mm": 2417,
-     "p_ppm": 74877,
-     "opposite_seasons": 7
-    },
-    {
-     "level_mm": 2499,
-     "p_ppm": 100087,
-     "opposite_seasons": 10
-    },
-    {
-     "level_mm": 2629,
-     "p_ppm": 150199,
+     "level_mm": 2746,
+     "p_ppm": 200170,
      "opposite_seasons": 16
     },
     {
-     "level_mm": 2735,
-     "p_ppm": 200046,
-     "opposite_seasons": 17
+     "level_mm": 2847,
+     "p_ppm": 250254,
+     "opposite_seasons": 19
     },
     {
-     "level_mm": 2828,
-     "p_ppm": 249745,
-     "opposite_seasons": 21
+     "level_mm": 2939,
+     "p_ppm": 299885,
+     "opposite_seasons": 19
     },
     {
-     "level_mm": 2914,
-     "p_ppm": 299832,
-     "opposite_seasons": 20
+     "level_mm": 3112,
+     "p_ppm": 400167,
+     "opposite_seasons": 19
     },
     {
-     "level_mm": 3074,
-     "p_ppm": 400204,
-     "opposite_seasons": 22
-    },
-    {
-     "level_mm": 3228,
-     "p_ppm": 500089,
-     "opposite_seasons": 22
+     "level_mm": 3279,
+     "p_ppm": 500010,
+     "opposite_seasons": 19
     }
    ]
   },
@@ -1946,89 +1946,89 @@
    "peril": "flood",
    "offered": false,
    "seasons": 35,
-   "median_spread": 0.397,
+   "median_spread": 0.37,
    "seasons_over_threshold": {
-    "1": 0,
-    "0.25": 23,
-    "0.4": 17,
+    "1": 2,
+    "0.25": 22,
+    "0.4": 15,
     "0.5": 13,
-    "0.75": 7
+    "0.75": 9
    },
    "per_level": [
     {
-     "level_mm": 543,
-     "p_ppm": 4984,
-     "opposite_seasons": 1
-    },
-    {
-     "level_mm": 503,
-     "p_ppm": 9971,
+     "level_mm": 568,
+     "p_ppm": 4992,
      "opposite_seasons": 3
     },
     {
-     "level_mm": 479,
-     "p_ppm": 15100,
+     "level_mm": 525,
+     "p_ppm": 10000,
+     "opposite_seasons": 5
+    },
+    {
+     "level_mm": 500,
+     "p_ppm": 14962,
      "opposite_seasons": 6
     },
     {
-     "level_mm": 463,
-     "p_ppm": 19898,
+     "level_mm": 482,
+     "p_ppm": 19984,
      "opposite_seasons": 6
+    },
+    {
+     "level_mm": 457,
+     "p_ppm": 29825,
+     "opposite_seasons": 7
     },
     {
      "level_mm": 439,
-     "p_ppm": 30056,
+     "p_ppm": 39732,
      "opposite_seasons": 8
     },
     {
-     "level_mm": 422,
-     "p_ppm": 40190,
+     "level_mm": 424,
+     "p_ppm": 50395,
      "opposite_seasons": 8
     },
     {
-     "level_mm": 409,
-     "p_ppm": 50132,
-     "opposite_seasons": 9
-    },
-    {
-     "level_mm": 385,
-     "p_ppm": 75119,
+     "level_mm": 399,
+     "p_ppm": 74630,
      "opposite_seasons": 10
     },
     {
-     "level_mm": 368,
-     "p_ppm": 99647,
-     "opposite_seasons": 11
+     "level_mm": 380,
+     "p_ppm": 100173,
+     "opposite_seasons": 10
     },
     {
-     "level_mm": 343,
-     "p_ppm": 149706,
-     "opposite_seasons": 13
+     "level_mm": 353,
+     "p_ppm": 150873,
+     "opposite_seasons": 10
     },
     {
-     "level_mm": 325,
-     "p_ppm": 198939,
-     "opposite_seasons": 13
+     "level_mm": 334,
+     "p_ppm": 199540,
+     "opposite_seasons": 14
     },
     {
-     "level_mm": 310,
-     "p_ppm": 250217,
-     "opposite_seasons": 18
+     "level_mm": 318,
+     "p_ppm": 250618,
+     "opposite_seasons": 15
     },
     {
-     "level_mm": 298,
-     "p_ppm": 298712,
-     "opposite_seasons": 20
+     "level_mm": 305,
+     "p_ppm": 299682,
+     "opposite_seasons": 15
     },
     {
-     "level_mm": 277,
-     "p_ppm": 400315,
-     "opposite_seasons": 22
-    },
-    {
-     "level_mm": 260,
-     "p_ppm": 497097,
+     "level_mm": 283,
+     "p_ppm": 398871,
      "opposite_seasons": 21
+    },
+    {
+     "level_mm": 264,
+     "p_ppm": 499736,
+     "opposite_seasons": 20
     }
    ]
   },
@@ -2038,7 +2038,7 @@
    "peril": "drought",
    "offered": true,
    "seasons": 35,
-   "median_spread": 0.09,
+   "median_spread": 0.091,
    "seasons_over_threshold": {
     "1": 0,
     "0.25": 0,
@@ -2048,78 +2048,78 @@
    },
    "per_level": [
     {
-     "level_mm": 783,
-     "p_ppm": 5048,
+     "level_mm": 782,
+     "p_ppm": 4949,
      "opposite_seasons": 0
     },
     {
      "level_mm": 811,
-     "p_ppm": 10049,
+     "p_ppm": 10108,
      "opposite_seasons": 0
     },
     {
      "level_mm": 829,
-     "p_ppm": 15073,
-     "opposite_seasons": 2
+     "p_ppm": 15159,
+     "opposite_seasons": 1
     },
     {
      "level_mm": 842,
-     "p_ppm": 19858,
+     "p_ppm": 19969,
      "opposite_seasons": 3
     },
     {
      "level_mm": 863,
-     "p_ppm": 30119,
+     "p_ppm": 30280,
      "opposite_seasons": 2
     },
     {
      "level_mm": 878,
-     "p_ppm": 39720,
+     "p_ppm": 39924,
      "opposite_seasons": 3
     },
     {
      "level_mm": 891,
-     "p_ppm": 49809,
-     "opposite_seasons": 3
+     "p_ppm": 50058,
+     "opposite_seasons": 4
     },
     {
      "level_mm": 916,
-     "p_ppm": 74451,
-     "opposite_seasons": 5
+     "p_ppm": 74801,
+     "opposite_seasons": 6
     },
     {
      "level_mm": 936,
-     "p_ppm": 99662,
+     "p_ppm": 100106,
      "opposite_seasons": 5
     },
     {
      "level_mm": 967,
-     "p_ppm": 149151,
-     "opposite_seasons": 6
+     "p_ppm": 149759,
+     "opposite_seasons": 7
     },
     {
-     "level_mm": 993,
-     "p_ppm": 200463,
-     "opposite_seasons": 9
+     "level_mm": 992,
+     "p_ppm": 199077,
+     "opposite_seasons": 8
     },
     {
-     "level_mm": 1015,
-     "p_ppm": 250354,
-     "opposite_seasons": 9
+     "level_mm": 1014,
+     "p_ppm": 248833,
+     "opposite_seasons": 10
     },
     {
      "level_mm": 1035,
-     "p_ppm": 300131,
+     "p_ppm": 301099,
      "opposite_seasons": 9
     },
     {
      "level_mm": 1072,
-     "p_ppm": 400233,
+     "p_ppm": 401342,
      "opposite_seasons": 6
     },
     {
      "level_mm": 1107,
-     "p_ppm": 499268,
+     "p_ppm": 500445,
      "opposite_seasons": 11
     }
    ]
@@ -2130,7 +2130,7 @@
    "peril": "flood",
    "offered": true,
    "seasons": 35,
-   "median_spread": 0.225,
+   "median_spread": 0.213,
    "seasons_over_threshold": {
     "1": 0,
     "0.25": 16,
@@ -2141,77 +2141,77 @@
    "per_level": [
     {
      "level_mm": 212,
-     "p_ppm": 5024,
+     "p_ppm": 5023,
      "opposite_seasons": 1
     },
     {
      "level_mm": 195,
-     "p_ppm": 10203,
+     "p_ppm": 10204,
      "opposite_seasons": 2
     },
     {
      "level_mm": 186,
-     "p_ppm": 14832,
-     "opposite_seasons": 2
+     "p_ppm": 14835,
+     "opposite_seasons": 1
     },
     {
      "level_mm": 179,
-     "p_ppm": 19828,
+     "p_ppm": 19833,
      "opposite_seasons": 1
     },
     {
      "level_mm": 169,
-     "p_ppm": 29971,
+     "p_ppm": 29981,
      "opposite_seasons": 3
     },
     {
      "level_mm": 162,
-     "p_ppm": 39961,
+     "p_ppm": 39978,
      "opposite_seasons": 3
     },
     {
      "level_mm": 157,
-     "p_ppm": 49026,
+     "p_ppm": 49049,
      "opposite_seasons": 4
     },
     {
      "level_mm": 147,
-     "p_ppm": 73534,
+     "p_ppm": 73576,
      "opposite_seasons": 3
     },
     {
      "level_mm": 139,
-     "p_ppm": 101236,
-     "opposite_seasons": 3
+     "p_ppm": 101301,
+     "opposite_seasons": 4
     },
     {
      "level_mm": 129,
-     "p_ppm": 149705,
-     "opposite_seasons": 5
-    },
-    {
-     "level_mm": 121,
-     "p_ppm": 202783,
+     "p_ppm": 149815,
      "opposite_seasons": 6
     },
     {
+     "level_mm": 121,
+     "p_ppm": 202942,
+     "opposite_seasons": 7
+    },
+    {
      "level_mm": 115,
-     "p_ppm": 252697,
+     "p_ppm": 252903,
      "opposite_seasons": 8
     },
     {
      "level_mm": 110,
-     "p_ppm": 301660,
+     "p_ppm": 301911,
      "opposite_seasons": 11
     },
     {
      "level_mm": 102,
-     "p_ppm": 394532,
+     "p_ppm": 394863,
      "opposite_seasons": 11
     },
     {
      "level_mm": 94,
-     "p_ppm": 503999,
+     "p_ppm": 504408,
      "opposite_seasons": 13
     }
    ]
@@ -2222,89 +2222,89 @@
    "peril": "drought",
    "offered": false,
    "seasons": 35,
-   "median_spread": 0.222,
+   "median_spread": 0.235,
    "seasons_over_threshold": {
     "1": 0,
-    "0.25": 14,
-    "0.4": 4,
-    "0.5": 2,
+    "0.25": 16,
+    "0.4": 3,
+    "0.5": 1,
     "0.75": 0
    },
    "per_level": [
     {
-     "level_mm": 974,
-     "p_ppm": 5034,
+     "level_mm": 964,
+     "p_ppm": 4987,
      "opposite_seasons": 1
     },
     {
-     "level_mm": 1023,
-     "p_ppm": 10030,
+     "level_mm": 1014,
+     "p_ppm": 9970,
+     "opposite_seasons": 1
+    },
+    {
+     "level_mm": 1046,
+     "p_ppm": 14914,
      "opposite_seasons": 3
     },
     {
-     "level_mm": 1054,
-     "p_ppm": 14913,
-     "opposite_seasons": 4
+     "level_mm": 1071,
+     "p_ppm": 20013,
+     "opposite_seasons": 3
     },
     {
-     "level_mm": 1079,
-     "p_ppm": 20115,
+     "level_mm": 1108,
+     "p_ppm": 29988,
      "opposite_seasons": 5
     },
     {
-     "level_mm": 1115,
-     "p_ppm": 30022,
+     "level_mm": 1137,
+     "p_ppm": 40189,
      "opposite_seasons": 7
     },
     {
-     "level_mm": 1143,
-     "p_ppm": 40046,
-     "opposite_seasons": 8
+     "level_mm": 1160,
+     "p_ppm": 49977,
+     "opposite_seasons": 7
     },
     {
-     "level_mm": 1166,
-     "p_ppm": 50013,
+     "level_mm": 1207,
+     "p_ppm": 75213,
      "opposite_seasons": 9
     },
     {
-     "level_mm": 1212,
-     "p_ppm": 75208,
-     "opposite_seasons": 10
+     "level_mm": 1243,
+     "p_ppm": 99725,
+     "opposite_seasons": 8
     },
     {
-     "level_mm": 1248,
-     "p_ppm": 100268,
-     "opposite_seasons": 14
-    },
-    {
-     "level_mm": 1305,
-     "p_ppm": 150096,
+     "level_mm": 1302,
+     "p_ppm": 150166,
      "opposite_seasons": 13
     },
     {
-     "level_mm": 1352,
-     "p_ppm": 200397,
-     "opposite_seasons": 14
+     "level_mm": 1350,
+     "p_ppm": 200456,
+     "opposite_seasons": 12
     },
     {
-     "level_mm": 1393,
-     "p_ppm": 250439,
-     "opposite_seasons": 13
-    },
-    {
-     "level_mm": 1430,
-     "p_ppm": 299745,
+     "level_mm": 1392,
+     "p_ppm": 250615,
      "opposite_seasons": 15
     },
     {
-     "level_mm": 1500,
-     "p_ppm": 400492,
-     "opposite_seasons": 16
+     "level_mm": 1430,
+     "p_ppm": 300148,
+     "opposite_seasons": 14
     },
     {
-     "level_mm": 1567,
-     "p_ppm": 500558,
-     "opposite_seasons": 11
+     "level_mm": 1501,
+     "p_ppm": 400010,
+     "opposite_seasons": 12
+    },
+    {
+     "level_mm": 1570,
+     "p_ppm": 500642,
+     "opposite_seasons": 13
     }
    ]
   },
@@ -2314,89 +2314,89 @@
    "peril": "flood",
    "offered": false,
    "seasons": 35,
-   "median_spread": 0.316,
+   "median_spread": 0.325,
    "seasons_over_threshold": {
-    "1": 2,
-    "0.25": 22,
-    "0.4": 13,
-    "0.5": 9,
-    "0.75": 2
+    "1": 1,
+    "0.25": 20,
+    "0.4": 12,
+    "0.5": 8,
+    "0.75": 3
    },
    "per_level": [
     {
-     "level_mm": 201,
-     "p_ppm": 5083,
+     "level_mm": 207,
+     "p_ppm": 4960,
      "opposite_seasons": 1
     },
     {
-     "level_mm": 185,
-     "p_ppm": 10218,
+     "level_mm": 190,
+     "p_ppm": 10006,
      "opposite_seasons": 1
     },
     {
-     "level_mm": 176,
-     "p_ppm": 15119,
+     "level_mm": 180,
+     "p_ppm": 15103,
      "opposite_seasons": 1
     },
     {
-     "level_mm": 170,
-     "p_ppm": 19619,
+     "level_mm": 173,
+     "p_ppm": 20133,
      "opposite_seasons": 1
     },
     {
-     "level_mm": 160,
-     "p_ppm": 30238,
-     "opposite_seasons": 1
-    },
-    {
-     "level_mm": 153,
-     "p_ppm": 40865,
+     "level_mm": 163,
+     "p_ppm": 30309,
      "opposite_seasons": 2
     },
     {
-     "level_mm": 148,
-     "p_ppm": 50614,
+     "level_mm": 156,
+     "p_ppm": 40299,
      "opposite_seasons": 2
     },
     {
-     "level_mm": 139,
-     "p_ppm": 74148,
-     "opposite_seasons": 3
+     "level_mm": 151,
+     "p_ppm": 49342,
+     "opposite_seasons": 2
     },
     {
-     "level_mm": 132,
-     "p_ppm": 99394,
+     "level_mm": 141,
+     "p_ppm": 73717,
      "opposite_seasons": 4
     },
     {
-     "level_mm": 122,
-     "p_ppm": 149758,
-     "opposite_seasons": 8
+     "level_mm": 133,
+     "p_ppm": 101176,
+     "opposite_seasons": 4
+    },
+    {
+     "level_mm": 123,
+     "p_ppm": 149067,
+     "opposite_seasons": 6
     },
     {
      "level_mm": 115,
-     "p_ppm": 197844,
-     "opposite_seasons": 9
+     "p_ppm": 201370,
+     "opposite_seasons": 8
     },
     {
      "level_mm": 109,
-     "p_ppm": 249279,
-     "opposite_seasons": 12
+     "p_ppm": 250474,
+     "opposite_seasons": 11
     },
     {
      "level_mm": 104,
-     "p_ppm": 300179,
-     "opposite_seasons": 15
+     "p_ppm": 298599,
+     "opposite_seasons": 14
     },
     {
-     "level_mm": 96,
-     "p_ppm": 397540,
+     "level_mm": 95,
+     "p_ppm": 402473,
+     "opposite_seasons": 16
+    },
+    {
+     "level_mm": 88,
+     "p_ppm": 497525,
      "opposite_seasons": 18
-    },
-    {
-     "level_mm": 89,
-     "p_ppm": 497709,
-     "opposite_seasons": 20
     }
    ]
   },
@@ -2406,88 +2406,88 @@
    "peril": "drought",
    "offered": true,
    "seasons": 35,
-   "median_spread": 0.093,
+   "median_spread": 0.089,
    "seasons_over_threshold": {
     "1": 0,
-    "0.25": 6,
+    "0.25": 5,
     "0.4": 0,
     "0.5": 0,
     "0.75": 0
    },
    "per_level": [
     {
-     "level_mm": 955,
-     "p_ppm": 5031,
+     "level_mm": 954,
+     "p_ppm": 4966,
      "opposite_seasons": 0
     },
     {
      "level_mm": 1003,
-     "p_ppm": 9993,
+     "p_ppm": 10012,
      "opposite_seasons": 0
     },
     {
      "level_mm": 1034,
-     "p_ppm": 14952,
+     "p_ppm": 14978,
      "opposite_seasons": 0
     },
     {
      "level_mm": 1058,
-     "p_ppm": 20019,
+     "p_ppm": 20053,
      "opposite_seasons": 0
     },
     {
      "level_mm": 1094,
-     "p_ppm": 30072,
-     "opposite_seasons": 2
+     "p_ppm": 30118,
+     "opposite_seasons": 1
     },
     {
      "level_mm": 1121,
-     "p_ppm": 39879,
+     "p_ppm": 39936,
      "opposite_seasons": 3
     },
     {
      "level_mm": 1144,
-     "p_ppm": 49985,
+     "p_ppm": 50052,
      "opposite_seasons": 3
     },
     {
      "level_mm": 1189,
-     "p_ppm": 74982,
+     "p_ppm": 75071,
      "opposite_seasons": 6
     },
     {
      "level_mm": 1224,
-     "p_ppm": 99643,
+     "p_ppm": 99752,
      "opposite_seasons": 6
     },
     {
      "level_mm": 1281,
-     "p_ppm": 150152,
+     "p_ppm": 150291,
      "opposite_seasons": 5
     },
     {
      "level_mm": 1327,
-     "p_ppm": 200121,
+     "p_ppm": 200282,
      "opposite_seasons": 4
     },
     {
      "level_mm": 1367,
-     "p_ppm": 249631,
+     "p_ppm": 249809,
      "opposite_seasons": 4
     },
     {
      "level_mm": 1404,
-     "p_ppm": 299648,
+     "p_ppm": 299838,
      "opposite_seasons": 11
     },
     {
      "level_mm": 1473,
-     "p_ppm": 400445,
-     "opposite_seasons": 10
+     "p_ppm": 400647,
+     "opposite_seasons": 8
     },
     {
      "level_mm": 1539,
-     "p_ppm": 500493,
+     "p_ppm": 500692,
      "opposite_seasons": 9
     }
    ]
@@ -2498,10 +2498,10 @@
    "peril": "flood",
    "offered": false,
    "seasons": 35,
-   "median_spread": 0.187,
+   "median_spread": 0.199,
    "seasons_over_threshold": {
     "1": 0,
-    "0.25": 17,
+    "0.25": 16,
     "0.4": 13,
     "0.5": 8,
     "0.75": 2
@@ -2509,78 +2509,78 @@
    "per_level": [
     {
      "level_mm": 249,
-     "p_ppm": 4916,
+     "p_ppm": 4917,
      "opposite_seasons": 2
     },
     {
      "level_mm": 230,
-     "p_ppm": 10050,
+     "p_ppm": 10053,
      "opposite_seasons": 2
     },
     {
      "level_mm": 219,
-     "p_ppm": 15187,
-     "opposite_seasons": 2
+     "p_ppm": 15192,
+     "opposite_seasons": 3
     },
     {
      "level_mm": 212,
-     "p_ppm": 19737,
+     "p_ppm": 19745,
      "opposite_seasons": 3
     },
     {
      "level_mm": 201,
-     "p_ppm": 29750,
+     "p_ppm": 29765,
      "opposite_seasons": 6
     },
     {
      "level_mm": 193,
-     "p_ppm": 40032,
+     "p_ppm": 40054,
      "opposite_seasons": 6
     },
     {
      "level_mm": 187,
-     "p_ppm": 49956,
+     "p_ppm": 49985,
      "opposite_seasons": 6
     },
     {
      "level_mm": 176,
-     "p_ppm": 74704,
+     "p_ppm": 74752,
      "opposite_seasons": 8
     },
     {
      "level_mm": 168,
-     "p_ppm": 99702,
+     "p_ppm": 99771,
      "opposite_seasons": 9
     },
     {
      "level_mm": 156,
-     "p_ppm": 152317,
+     "p_ppm": 152431,
      "opposite_seasons": 10
     },
     {
      "level_mm": 148,
-     "p_ppm": 200318,
+     "p_ppm": 200474,
      "opposite_seasons": 11
     },
     {
      "level_mm": 141,
-     "p_ppm": 252625,
+     "p_ppm": 252826,
      "opposite_seasons": 10
     },
     {
      "level_mm": 136,
-     "p_ppm": 296516,
-     "opposite_seasons": 10
-    },
-    {
-     "level_mm": 126,
-     "p_ppm": 401367,
+     "p_ppm": 296753,
      "opposite_seasons": 11
     },
     {
-     "level_mm": 118,
-     "p_ppm": 500479,
+     "level_mm": 126,
+     "p_ppm": 401684,
      "opposite_seasons": 13
+    },
+    {
+     "level_mm": 118,
+     "p_ppm": 500858,
+     "opposite_seasons": 14
     }
    ]
   }
