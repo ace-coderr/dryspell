@@ -57,6 +57,8 @@ sol! {
     error ReleaseTooLarge();
     error VaultCallFailed();
     error MathOverflow();
+    /// the book and vault wiring can be set exactly once
+    error AlreadySet();
 
     event TableLoaded(uint256 indexed tableId, uint8 region, uint8 peril, uint256 points);
     event TableEnabled(uint256 indexed tableId, bool enabled);
@@ -90,6 +92,7 @@ pub enum EngineError {
     ReleaseTooLarge(ReleaseTooLarge),
     VaultCallFailed(VaultCallFailed),
     MathOverflow(MathOverflow),
+    AlreadySet(AlreadySet),
 }
 
 // The sol! error types do not implement Debug; tests need it for `unwrap`.
@@ -290,7 +293,8 @@ impl DryspellEngine {
             max_rate_ppm: conv(max_rate)?,
         };
         let util = conv(max_util)?;
-        if !p.is_valid() || util == 0 || util > 10_000 {
+        // utilisation is capped at 95% so the oracle fee paid at settlement can never push assets below exposure
+        if !p.is_valid() || util == 0 || util > 9_500 {
             return Err(EngineError::BadParams(BadParams {}));
         }
         self.margin_k_bps.set(k);
@@ -475,20 +479,28 @@ impl DryspellEngine {
 
     // ------------------------------------------------------------ owner admin
 
+    /// Set-once: the owner can never re-point the book after it is wired.
     pub fn set_book(&mut self, book: Address) -> Result<(), EngineError> {
         self.only_owner()?;
         if book == Address::ZERO {
             return Err(EngineError::ZeroAddress(ZeroAddress {}));
+        }
+        if self.book.get() != Address::ZERO {
+            return Err(EngineError::AlreadySet(AlreadySet {}));
         }
         self.book.set(book);
         self.vm().log(BookSet { book });
         Ok(())
     }
 
+    /// Set-once: the owner can never re-point the vault after it is wired.
     pub fn set_vault(&mut self, vault: Address) -> Result<(), EngineError> {
         self.only_owner()?;
         if vault == Address::ZERO {
             return Err(EngineError::ZeroAddress(ZeroAddress {}));
+        }
+        if self.vault.get() != Address::ZERO {
+            return Err(EngineError::AlreadySet(AlreadySet {}));
         }
         self.vault.set(vault);
         self.vm().log(VaultSet { vault });
@@ -698,6 +710,8 @@ mod contract_tests {
         assert!(matches!(ok(&mut c, 0, 8_000), Err(EngineError::BadParams(_))));
         assert!(matches!(ok(&mut c, 700_000, 0), Err(EngineError::BadParams(_))));
         assert!(matches!(ok(&mut c, 700_000, 10_001), Err(EngineError::BadParams(_))));
+        assert!(matches!(ok(&mut c, 700_000, 9_501), Err(EngineError::BadParams(_)))); // above the 95% bound
+        assert!(ok(&mut c, 700_000, 9_500).is_ok()); // the bound itself is allowed
         assert!(matches!(c.set_cap(0, 0, U256::from(10_001)), Err(EngineError::BadParams(_))));
         assert!(matches!(c.set_cap(0, 7, U256::from(1)), Err(EngineError::BadParams(_)))); // unknown peril
     }
@@ -827,6 +841,42 @@ mod contract_tests {
         let (levels, p, se) = c.table_points(id).unwrap();
         assert_eq!((levels, p, se), (vec![50, 90], vec![1_000, 3_000], vec![100, 100]));
         assert_eq!(c.table_info(id), (true, false, 0, 0));
+    }
+
+    #[test]
+    fn wiring_is_set_once() {
+        let vm = TestVM::new();
+        let mut c = setup(&vm);
+        assert_eq!(c.book(), addr(BOOK));
+        assert_eq!(c.vault(), addr(VAULT));
+        // the owner cannot re-point the book or the vault, not even to the same address
+        assert!(matches!(c.set_book(addr(9)), Err(EngineError::AlreadySet(_))));
+        assert!(matches!(c.set_book(addr(BOOK)), Err(EngineError::AlreadySet(_))));
+        assert!(matches!(c.set_vault(addr(9)), Err(EngineError::AlreadySet(_))));
+        assert!(matches!(c.set_vault(addr(VAULT)), Err(EngineError::AlreadySet(_))));
+        assert_eq!(c.book(), addr(BOOK));
+        assert_eq!(c.vault(), addr(VAULT));
+        // a zero address is still rejected first
+        let vm2 = TestVM::new();
+        let mut fresh = DryspellEngine::from(&vm2);
+        fresh.constructor(addr(OWNER)).unwrap();
+        vm2.set_sender(addr(OWNER));
+        assert!(matches!(fresh.set_book(Address::ZERO), Err(EngineError::ZeroAddress(_))));
+        assert!(matches!(fresh.set_vault(Address::ZERO), Err(EngineError::ZeroAddress(_))));
+        fresh.set_book(addr(1)).unwrap();
+        fresh.set_vault(addr(2)).unwrap();
+    }
+
+    #[test]
+    fn new_owner_cannot_repoint_wiring_either() {
+        let vm = TestVM::new();
+        let mut c = setup(&vm);
+        vm.set_sender(addr(OWNER));
+        c.transfer_ownership(addr(STRANGER)).unwrap();
+        vm.set_sender(addr(STRANGER));
+        c.accept_ownership().unwrap();
+        assert!(matches!(c.set_book(addr(STRANGER)), Err(EngineError::AlreadySet(_))));
+        assert!(matches!(c.set_vault(addr(STRANGER)), Err(EngineError::AlreadySet(_))));
     }
 
     #[test]

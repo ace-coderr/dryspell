@@ -18,6 +18,7 @@ interface IVaultAssets {
 /// Pricing:  premium = ceil(payout * rate / 1e6)
 ///           rate    = ceil((p + max(ceil(k * se), floor)) * (1 + loading))
 /// Solvency: per-(region, peril) and total exposure caps measured against the vault's totalAssets().
+/// Wiring: the book and vault addresses are set once and can never be re-pointed.
 contract DryspellEngineSol is IDryspellEngine {
     // ------------------------------------------------------------------ events
     event TableLoaded(uint256 indexed tableId, uint8 region, uint8 peril, uint256 points);
@@ -35,6 +36,7 @@ contract DryspellEngineSol is IDryspellEngine {
     uint256 internal constant PPM = 1_000_000;
     uint256 internal constant BPS = 10_000;
     uint256 internal constant MAX_POINTS = 32;
+    uint256 internal constant MAX_UTIL_BPS = 9_500;
     uint256 internal constant U128_MAX = type(uint128).max;
 
     struct Point {
@@ -209,14 +211,18 @@ contract DryspellEngineSol is IDryspellEngine {
     }
 
     // ------------------------------------------------------------------- owner
+    /// @notice wire the policy book. Set-once: the owner can never re-point it afterwards.
     function setBook(address book_) external onlyOwner {
         if (book_ == address(0)) revert ZeroAddress();
+        if (_book != address(0)) revert AlreadySet();
         _book = book_;
         emit BookSet(book_);
     }
 
+    /// @notice wire the capital vault. Set-once: the owner can never re-point it afterwards.
     function setVault(address vault_) external onlyOwner {
         if (vault_ == address(0)) revert ZeroAddress();
+        if (_vault != address(0)) revert AlreadySet();
         _vault = vault_;
         emit VaultSet(vault_);
     }
@@ -342,7 +348,8 @@ contract DryspellEngineSol is IDryspellEngine {
                 || maxRate > type(uint32).max || maxUtil > type(uint32).max
         ) revert BadParams();
         bool valid = maxRate > 0 && maxRate < PPM && loading <= 100_000 && k <= 1_000_000 && floorPpm < PPM;
-        if (!valid || maxUtil == 0 || maxUtil > BPS) revert BadParams();
+        // utilisation is capped at 95% so the oracle fee paid at settlement can never push assets below exposure
+        if (!valid || maxUtil == 0 || maxUtil > MAX_UTIL_BPS) revert BadParams();
         _marginKBps = k;
         _floorPpm = floorPpm;
         _loadingBps = loading;

@@ -88,4 +88,6 @@ interface IDryspellEngine {
     error VaultCallFailed();
 
     error MathOverflow();
+
+    error AlreadySet();
 }

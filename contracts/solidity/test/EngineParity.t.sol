@@ -29,7 +29,7 @@ contract EngineParityTest is Test {
         uint256 floorPpm = vm.parseJsonUint(json, string.concat(pb, ".floor"));
         uint256 loading = vm.parseJsonUint(json, string.concat(pb, ".loading"));
         uint256 maxRate = vm.parseJsonUint(json, string.concat(pb, ".maxRate"));
-        engine.setPricingParams(k, floorPpm, loading, maxRate, 10_000); // utilisation cap is irrelevant to quotes
+        engine.setPricingParams(k, floorPpm, loading, maxRate, 9_000); // utilisation cap is irrelevant to quotes
     }
 
     struct Cols {

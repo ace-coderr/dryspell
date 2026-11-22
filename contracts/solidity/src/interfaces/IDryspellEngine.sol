@@ -27,6 +27,8 @@ interface IDryspellEngine {
     error ReleaseTooLarge();
     error VaultCallFailed();
     error MathOverflow();
+    /// the book and vault wiring can be set exactly once
+    error AlreadySet();
 
     // ---- views
     /// @return "stylus" for the Rust/WASM engine, "solidity-fallback" for the EVM port

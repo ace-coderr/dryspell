@@ -105,6 +105,9 @@ contract EngineSolTest is Base {
         vm.expectRevert(IDryspellEngine.BadParams.selector);
         engine.setPricingParams(15_000, 2_000, 2_500, 700_000, 10_001);
         vm.expectRevert(IDryspellEngine.BadParams.selector);
+        engine.setPricingParams(15_000, 2_000, 2_500, 700_000, 9_501); // above the 95% utilisation bound
+        engine.setPricingParams(15_000, 2_000, 2_500, 700_000, 9_500); // the bound itself is allowed
+        vm.expectRevert(IDryspellEngine.BadParams.selector);
         engine.setPricingParams(15_000, 2_000, 100_001, 700_000, 8_000);
         vm.expectRevert(IDryspellEngine.BadParams.selector);
         engine.setPricingParams(uint256(type(uint32).max) + 1, 2_000, 2_500, 700_000, 8_000);
@@ -211,16 +214,63 @@ contract EngineSolTest is Base {
         lone.reserve(1, 1 * USD);
 
         // a vault that reverts, and one that reports an absurd balance
+        // wiring is set-once, so each failure mode gets its own engine
         address reverting = address(new RevertingVault());
         address huge = address(new HugeVault());
         vm.prank(owner);
         lone.setVault(reverting);
         vm.expectRevert(IDryspellEngine.VaultCallFailed.selector);
         lone.reserve(1, 1 * USD);
-        vm.prank(owner);
-        lone.setVault(huge);
+
+        DryspellEngineSol lone2 = new DryspellEngineSol(owner);
+        vm.startPrank(owner);
+        lone2.setBook(address(this));
+        lone2.loadTable(1, 0, 0, _arr2(10, 20), _arr2(1_000, 2_000), _arr2(100, 100));
+        lone2.setVault(huge);
+        vm.stopPrank();
         vm.expectRevert(IDryspellEngine.AmountTooLarge.selector);
-        lone.reserve(1, 1 * USD);
+        lone2.reserve(1, 1 * USD);
+    }
+
+    /// the owner can never re-point the engine's book or vault once they are set
+    function test_wiring_is_set_once() public {
+        assertEq(engine.book(), address(book));
+        assertEq(engine.vault(), address(vault));
+        vm.startPrank(owner);
+        vm.expectRevert(IDryspellEngine.AlreadySet.selector);
+        engine.setBook(stranger);
+        vm.expectRevert(IDryspellEngine.AlreadySet.selector);
+        engine.setBook(address(book)); // even setting the same address again is refused
+        vm.expectRevert(IDryspellEngine.AlreadySet.selector);
+        engine.setVault(stranger);
+        vm.expectRevert(IDryspellEngine.AlreadySet.selector);
+        engine.setVault(address(vault));
+        vm.stopPrank();
+        assertEq(engine.book(), address(book));
+        assertEq(engine.vault(), address(vault));
+        // a zero address is still rejected first
+        DryspellEngineSol fresh = new DryspellEngineSol(owner);
+        vm.startPrank(owner);
+        vm.expectRevert(IDryspellEngine.ZeroAddress.selector);
+        fresh.setBook(address(0));
+        vm.expectRevert(IDryspellEngine.ZeroAddress.selector);
+        fresh.setVault(address(0));
+        fresh.setBook(address(1));
+        fresh.setVault(address(2));
+        vm.stopPrank();
+    }
+
+    /// after a ownership change the NEW owner is equally unable to re-point the wiring
+    function test_new_owner_cannot_repoint_wiring_either() public {
+        vm.prank(owner);
+        engine.transferOwnership(stranger);
+        vm.startPrank(stranger);
+        engine.acceptOwnership();
+        vm.expectRevert(IDryspellEngine.AlreadySet.selector);
+        engine.setBook(stranger);
+        vm.expectRevert(IDryspellEngine.AlreadySet.selector);
+        engine.setVault(stranger);
+        vm.stopPrank();
     }
 
     function test_two_step_ownership() public {
