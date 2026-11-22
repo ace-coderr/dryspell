@@ -68,7 +68,7 @@ export function Layout() {
   }, [loc.pathname]);
   return (
     <>
-      <a className="skip" href="#main">Skip to content</a>
+      <button type="button" className="skip" onClick={() => { const el = document.getElementById("main"); el?.setAttribute("tabindex", "-1"); el?.focus(); el?.scrollIntoView(); }}>Skip to content</button>
       <div className="frame">
         <div className="inner">
           <div className="strip">

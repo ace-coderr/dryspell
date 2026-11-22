@@ -215,7 +215,7 @@ function RoundPanel({ round, policies, now, refetchPolicies }: { round: { roundI
 
         <div className="card reveal d2">
           <h3>Policies in this season</h3>
-          <table className="data">
+          <table className="data stack">
             <thead><tr><th>#</th><th>Trigger</th><th className="num">Payout</th><th>Now</th><th /></tr></thead>
             <tbody>
               {policies.map((p) => {
@@ -231,10 +231,10 @@ function RoundPanel({ round, policies, now, refetchPolicies }: { round: { roundI
                 const wouldPay = val === null ? null : p.peril === "drought" ? val <= p.trigger : val >= p.trigger;
                 return (
                   <tr key={p.id}>
-                    <td>{p.id}</td>
-                    <td><span className={`tag ${p.peril}`}>{p.peril}</span> {p.peril === "drought" ? "≤" : "≥"} {p.trigger} mm</td>
-                    <td className="num">{fmtUsd(p.payout, 0)}</td>
-                    <td>
+                    <td data-label="#">{p.id}</td>
+                    <td data-label="Trigger"><span className={`tag ${p.peril}`}>{p.peril}</span> {p.peril === "drought" ? "≤" : "≥"} {p.trigger} mm</td>
+                    <td className="num" data-label="Payout">{fmtUsd(p.payout, 0)}</td>
+                    <td data-label="Now">
                       {p.status === 2 ? <span className="tag ok">paid</span> : p.status === 3 ? <span className="tag dim">no payout</span> : p.status === 4 ? <span className="tag dim">refunded</span> : p.status === 5 ? <span className="tag warn">contested: resolver decides</span> : as?.contested ? <span className="tag warn" title="Sources on opposite sides of the trigger or too far apart: will go to the resolver">will be contested</span> : wouldPay === null ? "—" : <span className={`tag ${wouldPay ? "ok" : "dim"}`}>{wouldPay ? "on course to pay" : "not triggered"}</span>}
                       {as && (
                         <div className="muted" style={{ marginTop: 4 }}>
@@ -243,7 +243,7 @@ function RoundPanel({ round, policies, now, refetchPolicies }: { round: { roundI
                         </div>
                       )}
                     </td>
-                    <td>
+                    <td data-label="Action">
                       {p.status === 1 && (state === 3 || state === 4) && <button className="btn small" disabled={settle.status === "pending"} onClick={() => settle.run(p.id, state === 4)}>{state === 4 ? "Refund" : "Settle"}</button>}
                       {p.status === 5 && (
                         <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>

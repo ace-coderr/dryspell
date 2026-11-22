@@ -43,7 +43,7 @@ export default function Agents() {
           <ol style={{ paddingLeft: 20 }}>
             <li>Clone the repository and run <code>pnpm install</code>.</li>
             <li>Build the server: <code>pnpm --filter @dryspell/mcp build</code>.</li>
-            <li>Add it to your MCP client with the absolute path, or run <code>claude mcp add dryspell -- node /absolute/path/to/dryspell/mcp/dist/index.js</code>:</li>
+            <li>Add it to your MCP client with the absolute path:</li>
           </ol>
           <pre className="mono small" style={{ background: "var(--paper-2)", padding: 12, border: "1px solid var(--rule)", overflow: "auto" }}>{`{
   "mcpServers": {

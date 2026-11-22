@@ -119,17 +119,17 @@ export default function Backtest() {
               <div className="card reveal d1" style={{ marginTop: 22 }}>
                 <h3>Season by season</h3>
                 <div className="scroll-x" style={{ maxHeight: 520, overflow: "auto" }}>
-                  <table className="data">
+                  <table className="data stack">
                     <thead><tr><th>Year</th><th className="num">ERA5 (calibrated)</th><th className="num">POWER (calibrated)</th><th className="num">Spread</th><th>Outcome</th><th className="num">Net to buyer, cumulative</th></tr></thead>
                     <tbody>
                       {[...result.rows].reverse().map((r) => (
                         <tr key={r.year}>
-                          <td>{r.year}</td>
-                          <td className="num">{(r.as.eraX / 10).toFixed(1)} mm {r.as.eraSays ? "▲pay" : ""}</td>
-                          <td className="num">{(r.as.powX / 10).toFixed(1)} mm {r.as.powSays ? "▲pay" : ""}</td>
-                          <td className="num">{(r.as.spreadBps / 100).toFixed(0)}%</td>
-                          <td>{r.outcome === "paid" ? <span className="tag ok">paid {usd(payout)}</span> : r.outcome === "contested" ? <span className="tag warn" title={r.as.opposite ? "sources on opposite sides of the trigger" : "sources too far apart"}>contested{r.as.opposite ? " · opposite sides" : " · wide spread"}</span> : <span className="tag dim">no payout</span>}</td>
-                          <td className="num">{signed(r.cumLow)}{r.cumLow !== r.cumHigh ? ` … ${signed(r.cumHigh)}` : ""}</td>
+                          <td data-label="Year">{r.year}</td>
+                          <td className="num" data-label="ERA5">{(r.as.eraX / 10).toFixed(1)} mm {r.as.eraSays ? "▲pay" : ""}</td>
+                          <td className="num" data-label="POWER">{(r.as.powX / 10).toFixed(1)} mm {r.as.powSays ? "▲pay" : ""}</td>
+                          <td className="num" data-label="Spread">{(r.as.spreadBps / 100).toFixed(0)}%</td>
+                          <td data-label="Outcome">{r.outcome === "paid" ? <span className="tag ok">paid {usd(payout)}</span> : r.outcome === "contested" ? <span className="tag warn" title={r.as.opposite ? "sources on opposite sides of the trigger" : "sources too far apart"}>contested{r.as.opposite ? " · opposite sides" : " · wide spread"}</span> : <span className="tag dim">no payout</span>}</td>
+                          <td className="num" data-label="Net to buyer">{signed(r.cumLow)}{r.cumLow !== r.cumHigh ? ` … ${signed(r.cumHigh)}` : ""}</td>
                         </tr>
                       ))}
                     </tbody>

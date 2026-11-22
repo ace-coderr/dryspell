@@ -155,7 +155,7 @@ export default function Builder() {
         <h1 className="reveal d1">When the rain data crosses the line, <em>you get paid.</em></h1>
         <p className="sub reveal d2">Pick a place, a peril and a payout. The price is worked out on-chain from 35 years of real rainfall, and the payout is released by the contract when the data crosses your trigger. No claim form. No adjuster.</p>
         <div className="hero-actions reveal d3">
-          <a className="btn" href="#builder">Build your cover</a>
+          <button className="btn" onClick={() => document.getElementById("builder")?.scrollIntoView({ behavior: "smooth" })}>Build your cover</button>
           <Link className="btn ghost nochev" to="/map">See how it is priced</Link>
         </div>
       </section>

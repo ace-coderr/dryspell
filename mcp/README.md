@@ -17,13 +17,9 @@ pnpm --filter @dryspell/mcp build
 
 Add it to your MCP client with the **absolute** path to the built file.
 
-Claude Code:
+Clients with a command-line installer take the same command and arguments, for example `<client> mcp add dryspell -- node /absolute/path/to/dryspell/mcp/dist/index.js`.
 
-```
-claude mcp add dryspell -- node /absolute/path/to/dryspell/mcp/dist/index.js
-```
-
-Claude Desktop, Cursor and other clients (JSON config):
+Desktop clients and editors (JSON config):
 
 ```json
 {

@@ -45,7 +45,7 @@ export default function Ledger() {
             </Empty>
           ) : (
             <div className="card scroll-x reveal d2" style={{ padding: 0 }}>
-              <table className="data">
+              <table className="data stack">
                 <thead>
                   <tr><th>#</th><th>Cover</th><th>Peril &amp; trigger</th><th className="num">Premium</th><th className="num">Payout</th><th>Status</th><th>Transactions</th></tr>
                 </thead>
@@ -54,17 +54,17 @@ export default function Ledger() {
                     const s = seasonByLocSeasonId(r.locSeasonId);
                     return (
                       <tr key={r.id}>
-                        <td>{r.id}</td>
-                        <td>
+                        <td data-label="#">{r.id}</td>
+                        <td data-label="Cover">
                           <b style={{ fontFamily: "var(--serif)", fontSize: "1rem" }}>{place(r)}</b> {r.replay && <ReplayTag />}
                           <div className="muted">{r.year} · holder <a href={explorerAddress(r.holder)} target="_blank" rel="noreferrer">{short(r.holder)}</a></div>
                           {s && <div className="muted">bought {fmtDate(r.purchasedAt)}</div>}
                         </td>
-                        <td><span className={`tag ${r.peril}`}>{r.peril}</span> {r.peril === "drought" ? "≤" : "≥"} {r.trigger} mm{r.settlementX2 !== undefined && <div className="muted">settled at {(Number(r.settlementX2) / 20).toFixed(1)} mm</div>}</td>
-                        <td className="num">{fmtUsd(r.premium)}</td>
-                        <td className="num">{fmtUsd(r.payout)}</td>
-                        <td><span className={`tag ${r.status === 2 ? "ok" : r.status === 1 || r.status === 5 ? "warn" : "dim"}`}>{STATUS[r.status]}</span>{r.contested && <div className="muted" title="The two weather sources fell on opposite sides of the trigger or differ by more than the allowed spread, so the resolver decides.">ERA5 {(Number(r.contested.era5X) / 10).toFixed(1)} mm vs POWER {(Number(r.contested.powerX) / 10).toFixed(1)} mm · {(Number(r.contested.spreadBps) / 100).toFixed(0)}% apart{r.contested.oppositeSides ? " · opposite sides" : ""}</div>}</td>
-                        <td>
+                        <td data-label="Peril & trigger"><span className={`tag ${r.peril}`}>{r.peril}</span> {r.peril === "drought" ? "≤" : "≥"} {r.trigger} mm{r.settlementX2 !== undefined && (r.settlementX2 > 0n ? <div className="muted">settled at {(Number(r.settlementX2) / 20).toFixed(1)} mm</div> : <div className="muted">ruled by the resolver</div>)}</td>
+                        <td className="num" data-label="Premium">{fmtUsd(r.premium)}</td>
+                        <td className="num" data-label="Payout">{fmtUsd(r.payout)}</td>
+                        <td data-label="Status"><span className={`tag ${r.status === 2 ? "ok" : r.status === 1 || r.status === 5 ? "warn" : "dim"}`}>{STATUS[r.status]}</span>{r.contested && <div className="muted" title="The two weather sources fell on opposite sides of the trigger or differ by more than the allowed spread, so the resolver decides.">ERA5 {(Number(r.contested.era5X) / 10).toFixed(1)} mm vs POWER {(Number(r.contested.powerX) / 10).toFixed(1)} mm · {(Number(r.contested.spreadBps) / 100).toFixed(0)}% apart{r.contested.oppositeSides ? " · opposite sides" : ""}</div>}</td>
+                        <td data-label="Transactions">
                           {r.buyTx ? <a href={explorerTx(r.buyTx)} target="_blank" rel="noreferrer">buy</a> : <span className="muted">buy</span>}
                           {r.settleTx && <> · <a href={explorerTx(r.settleTx)} target="_blank" rel="noreferrer">{r.status === 4 ? "refund" : "payout"}</a></>}
                         </td>

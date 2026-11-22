@@ -314,3 +314,17 @@ footer .f-bar { border-top: 1px solid var(--line); padding: 18px 0 26px; font-si
 .page-head + * { margin-top: 44px; }
 main > .wrap:not(.nopad) { padding-bottom: 72px; }
 @media (max-width: 640px) { .page-head::after { height: 26px; margin-top: 30px; } .page-head + * { margin-top: 30px; } }
+
+/* tables that become stacked cards on phones (ledger, triggers, backtest) */
+@media (max-width: 700px) {
+  .card.scroll-x { overflow-x: visible; padding: 0; background: transparent; border: 0; }
+  table.data.stack, table.data.stack tbody, table.data.stack tr, table.data.stack td { display: block; width: 100%; }
+  table.data.stack thead { display: none; }
+  table.data.stack tr { border: 1px solid var(--line-strong); border-radius: 10px; padding: 6px 4px; margin: 0 0 14px; background: var(--panel); }
+  table.data.stack tr:hover td { background: transparent; }
+  table.data.stack td { border: 0; border-bottom: 1px solid var(--line); padding: 10px 12px; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; text-align: right; }
+  table.data.stack td:last-child { border-bottom: 0; }
+  table.data.stack td::before { content: attr(data-label); font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); text-align: left; flex: none; padding-top: 3px; }
+  table.data.stack td > * { text-align: right; }
+  table.data.stack td.num { text-align: right; }
+}
