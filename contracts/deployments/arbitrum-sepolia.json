@@ -28,5 +28,12 @@
       "label": "Replay: Garissa short rains 2025, drought, trigger 47 mm, payout 500 tUSD",
       "tx": "0xb3afe034a6f41f5ccf8d618ae92d935c875cd0c2a93bc9e927765614758018f9"
     }
-  ]
+  ],
+  "verified": true,
+  "verifiedOn": "Arbiscan (Etherscan V2), 2026-11-22",
+  "replayRound": {
+    "roundId": 2033641,
+    "label": "Replay: Garissa short rains 2025",
+    "proposeTx": "0x2f13d241dacd7614076693e1fe33e98bf8dfcba46e5cce95e77841cccaf09ab0"
+  }
 }
