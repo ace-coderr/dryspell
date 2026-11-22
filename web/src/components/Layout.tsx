@@ -4,7 +4,6 @@ import { useAccount, useConnect, useDisconnect, useSwitchChain } from "wagmi";
 import { addr, chain, deployment, explorerAddress } from "../lib/chain";
 import { useEngineKind } from "../lib/hooks";
 import { short } from "../lib/format";
-import { SkyBackdrop } from "./Sky";
 
 const links = [
   ["/", "Buy cover"],
@@ -69,7 +68,6 @@ export function Layout() {
   }, [loc.pathname]);
   return (
     <>
-      <SkyBackdrop />
       <a className="skip" href="#main">Skip to content</a>
       <div className="frame">
         <div className="inner">
@@ -111,37 +109,57 @@ export function Layout() {
 
 function Footer() {
   const { data } = useEngineKind();
+  const ext = { target: "_blank", rel: "noreferrer" } as const;
   return (
     <footer>
       <div className="band" />
       <div className="wrap">
-        <div className="row">
-          <Link to="/" className="brand" aria-label="Dryspell home">
-            <Logo /> Dryspell
-          </Link>
+        <div className="f-top">
+          <div className="f-brand">
+            <Link to="/" className="brand" aria-label="Dryspell home">
+              <Logo /> Dryspell
+            </Link>
+            <p>Rain-based cover for farms and communities: priced on-chain, paid out automatically when real weather data crosses the trigger.</p>
+          </div>
           <EngineBadge />
         </div>
-        <div className="links">
-          <b>Quick links:</b>
-          {links.map(([to, label]) => (
-            <Link key={to} to={to}>{label}</Link>
-          ))}
+        <div className="f-cols">
+          <div>
+            <h4>Product</h4>
+            <ul>
+              {links.map(([to, label]) => (
+                <li key={to}>
+                  <Link to={to}>{label}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h4>Contracts (v{deployment.version})</h4>
+            <ul>
+              <li><a href={explorerAddress(addr.book)} {...ext}>PolicyBook</a></li>
+              <li><a href={explorerAddress(addr.vault)} {...ext}>UnderwriterVault</a></li>
+              <li><a href={explorerAddress(addr.oracle)} {...ext}>WeatherOracle</a></li>
+              <li><a href={explorerAddress(addr.engine)} {...ext}>Engine ({data === "stylus" ? "Stylus" : "Solidity fallback"})</a></li>
+              <li><a href={explorerAddress(addr.token)} {...ext}>TestUSD</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Data</h4>
+            <ul>
+              <li>
+                <a href="https://open-meteo.com/" {...ext}>Open-Meteo</a>
+                <span>Weather data by Open-Meteo.com, CC BY 4.0 · ERA5 © Copernicus Climate Change Service</span>
+              </li>
+              <li><a href="https://power.larc.nasa.gov/" {...ext}>NASA POWER</a></li>
+              <li><a href="https://github.com/ace-coderr/dryspell" {...ext}>Source on GitHub</a></li>
+            </ul>
+          </div>
         </div>
-        <div className="fine">
-          <span>
-            Weather data by <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">Open-Meteo.com</a> (CC BY 4.0, ERA5 © Copernicus) and <a href="https://power.larc.nasa.gov/" target="_blank" rel="noreferrer">NASA POWER</a> · <a href="https://github.com/ace-coderr/dryspell" target="_blank" rel="noreferrer">Source</a>
-          </span>
-          <span>© 2026 Dryspell. Testnet only, TestUSD has no value.</span>
+        <div className="f-bar">
+          <span>© 2026 Dryspell</span>
+          <span>Testnet only, TestUSD has no value</span>
         </div>
-        <div className="addr">
-          <a href={explorerAddress(addr.book)} target="_blank" rel="noreferrer">PolicyBook</a>
-          <a href={explorerAddress(addr.vault)} target="_blank" rel="noreferrer">Vault</a>
-          <a href={explorerAddress(addr.oracle)} target="_blank" rel="noreferrer">Oracle</a>
-          <a href={explorerAddress(addr.engine)} target="_blank" rel="noreferrer">Engine ({data === "stylus" ? "Stylus" : "Solidity fallback"})</a>
-          <a href={explorerAddress(addr.token)} target="_blank" rel="noreferrer">TestUSD</a>
-          <span>deployment v{deployment.version}</span>
-        </div>
-        <div style={{ height: 22 }} />
       </div>
     </footer>
   );

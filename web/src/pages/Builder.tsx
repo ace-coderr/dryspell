@@ -161,7 +161,7 @@ export default function Builder() {
       </section>
       <div className="band" />
       <section className="sky-panel" id="builder">
-        <SkyArt variant="drought" seed={9} cell={5} speed={0.025} />
+        <SkyArt variant="drought" seed={9} cell={3} speed={0.01} />
         <div className="panel-inner">
           <span className="panel-tag">LIVE · QUOTED BY THE DEPLOYED v3 CONTRACT</span>
           <div style={{ marginTop: 10 }}>

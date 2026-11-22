@@ -26,7 +26,7 @@ function Feature({ to, variant, seed, wide, title, text, children }: { to: strin
   return (
     <Link to={to} className={`feature${wide ? " wide" : ""}`}>
       <div className="sky">
-        <SkyArt variant={variant} seed={seed} cell={4} speed={0.03} />
+        <SkyArt variant={variant} seed={seed} cell={3} speed={0.012} />
         {children}
       </div>
       <div className="body">
@@ -98,7 +98,7 @@ export function Features() {
 export function CtaBand() {
   return (
     <section className="cta-band" aria-label="Get started">
-      <SkyArt variant="gray" seed={7} cell={4} speed={0.012} landscape />
+      <SkyArt variant="gray" seed={7} cell={3} speed={0.006} landscape />
       <div className="wrap" style={{ width: "100%" }}>
         <h2>Cover the season before it starts.</h2>
         <div className="hero-actions">

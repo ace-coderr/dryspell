@@ -18,10 +18,13 @@ interface Palette {
 }
 
 const PALETTES: Record<SkyVariant, Palette> = {
-  drought: { skyTop: [74, 30, 56], skyMid: [226, 96, 58], skyBottom: [255, 170, 92], cloudLight: [255, 226, 176], cloudMid: [255, 176, 112], cloudDark: [206, 88, 66] },
-  flood: { skyTop: [10, 32, 44], skyMid: [20, 100, 110], skyBottom: [56, 168, 170], cloudLight: [196, 230, 228], cloudMid: [84, 146, 152], cloudDark: [26, 58, 72] },
-  mixed: { skyTop: [44, 104, 112], skyMid: [82, 148, 144], skyBottom: [128, 184, 170], cloudLight: [255, 216, 128], cloudMid: [228, 164, 74], cloudDark: [128, 98, 82] },
-  gray: { skyTop: [26, 26, 28], skyMid: [58, 58, 60], skyBottom: [96, 96, 98], cloudLight: [176, 176, 176], cloudMid: [118, 118, 120], cloudDark: [58, 58, 60], rock: [[22, 22, 24], [58, 58, 60]] },
+  // deep ember: brown-orange, no highlights
+  drought: { skyTop: [22, 14, 14], skyMid: [58, 30, 22], skyBottom: [96, 52, 30], cloudLight: [128, 78, 48], cloudMid: [92, 52, 34], cloudDark: [58, 34, 26] },
+  // deep slate-teal
+  flood: { skyTop: [10, 19, 23], skyMid: [18, 44, 50], skyBottom: [30, 72, 76], cloudLight: [66, 108, 110], cloudMid: [40, 78, 84], cloudDark: [22, 48, 56] },
+  // slate with a muted amber trace
+  mixed: { skyTop: [15, 26, 30], skyMid: [30, 56, 58], skyBottom: [56, 80, 74], cloudLight: [112, 96, 64], cloudMid: [76, 70, 52], cloudDark: [42, 48, 44] },
+  gray: { skyTop: [18, 18, 19], skyMid: [40, 40, 42], skyBottom: [66, 66, 68], cloudLight: [104, 104, 106], cloudMid: [72, 72, 74], cloudDark: [42, 42, 44], rock: [[16, 16, 17], [44, 44, 46]] },
 };
 
 const hash = (x: number, y: number, s: number) => {
@@ -66,7 +69,7 @@ function render(ctx: CanvasRenderingContext2D, w: number, h: number, t: number, 
     for (let x = 0; x < w; x++) {
       const nx = (x / w) * 3.2 * aspect + t;
       const ny = fy * 3.2;
-      const dither = (BAYER[(y & 3) * 4 + (x & 3)] / 16 - 0.5) * 0.2;
+      const dither = (BAYER[(y & 3) * 4 + (x & 3)] / 16 - 0.5) * 0.11;
       let col: RGB = sky;
       const d = fbm(nx, ny, seed) + dither - (landscape ? 0.02 : 0);
       if (d > 0.66) col = p.cloudLight;
@@ -142,11 +145,3 @@ export function SkyArt({ variant = "drought", seed = 1, cell = 4, speed = 0.05, 
   return <canvas ref={ref} className={className} aria-hidden />;
 }
 
-/** the page backdrop behind the framed card: a drifting sunset */
-export function SkyBackdrop() {
-  return (
-    <div className="sky-backdrop" aria-hidden>
-      <SkyArt variant="drought" seed={3} cell={7} speed={0.018} className="" />
-    </div>
-  );
-}
